@@ -1,0 +1,17 @@
+[build]
+  # This matches your package.json script
+  command = "npm run build"
+  # This tells Netlify where your built files will be
+  publish = "dist"
+
+# This fixes the "White Screen" / 404 Refresh Error
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# This ensures users always see your latest updates immediately
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
