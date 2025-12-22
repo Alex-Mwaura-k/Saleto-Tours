@@ -36,27 +36,37 @@ const FeaturedSafaris = ({ packages }) => {
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Location */}
-                <div className="flex items-center text-gray-500 text-sm mb-2">
-                  <FaMapMarkerAlt className="mr-2 text-[#0672CD]" />
-                  {pkg.location}
+              {/* Content Container */}
+              <div className="p-5 flex flex-col flex-grow">
+                {/* 1. LOCATION ROW (Both Text & Icon on the RIGHT) */}
+                <div className="flex items-center justify-end text-[#0672CD] text-sm mb-2 font-medium">
+                  {/* Text first */}
+                  <span className="mr-1">{pkg.location}</span>
+                  {/* Icon last (far right) */}
+                  <FaMapMarkerAlt />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
+                {/* 2. TITLE */}
+                <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight">
                   {pkg.title}
                 </h3>
 
-                {/* Duration */}
-                <div className="flex items-center text-gray-600 text-sm mb-6">
+                {/* 3. DESCRIPTION (Max 3 lines) */}
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">
+                  {pkg.description}
+                </p>
+
+                {/* Spacer to push button down */}
+                <div className="mt-auto"></div>
+
+                {/* 4. DURATION (Clock) */}
+                <div className="flex items-center text-gray-500 text-sm mb-4 border-t border-gray-100 pt-3">
                   <FaClock className="mr-2 text-[#FF5733]" />
-                  {pkg.duration}
+                  <span className="font-medium">{pkg.duration}</span>
                 </div>
 
                 {/* View Details Button */}
-                <button className="mt-auto w-full flex items-center justify-center space-x-2 border border-[#0672CD] text-[#0672CD] py-2 rounded-lg hover:bg-[#0672CD] hover:text-white transition duration-300 font-medium">
+                <button className="w-full flex items-center justify-center space-x-2 border border-[#0672CD] text-[#0672CD] py-2 rounded-lg hover:bg-[#0672CD] hover:text-white transition duration-300 font-medium">
                   <span>View Details</span>
                   <FaArrowRight className="text-sm" />
                 </button>
