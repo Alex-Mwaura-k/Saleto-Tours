@@ -22,7 +22,10 @@ const Hero = ({ title, subtitle, backgroundImage }) => {
   }, []);
 
   return (
-    <div className="relative h-[calc(100dvh-4rem)] flex items-center justify-center text-white bg-gray-900 overflow-hidden">
+    // UPDATED HEIGHT:
+    // Mobile: h-[65vh] (65% of screen height)
+    // Desktop: lg:h-[calc(100dvh-4rem)] (Full height minus navbar)
+    <div className="relative h-[65vh] lg:h-[calc(100dvh-4rem)] flex items-center justify-center text-white bg-gray-900 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -37,9 +40,7 @@ const Hero = ({ title, subtitle, backgroundImage }) => {
 
       {/* Content Container */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center h-full">
-        {/* Main Title: UPDATED SIZES */}
-        {/* changed text-4xl to text-3xl for mobile */}
-        {/* added sm:text-4xl for larger phones */}
+        {/* Main Title */}
         <h1 className="font-['Playfair_Display'] text-3xl sm:text-4xl md:text-6xl font-bold mb-1 tracking-tight drop-shadow-lg animate-fade-in-up leading-tight">
           {title}
         </h1>
@@ -48,7 +49,6 @@ const Hero = ({ title, subtitle, backgroundImage }) => {
         <div className="h-10 md:h-14 mb-3 flex items-center justify-center">
           <p
             key={currentTextIndex}
-            // Slightly smaller on mobile (text-xl) to match the new heading size balance
             className="font-['Playfair_Display'] text-xl sm:text-2xl md:text-4xl text-[#FF5733] font-medium animate-fade-in-up"
           >
             {rotatingTexts[currentTextIndex]}
@@ -69,6 +69,7 @@ const Hero = ({ title, subtitle, backgroundImage }) => {
       </div>
 
       {/* Scroll Indicator */}
+      {/* Removed 'hidden lg:flex' so it now shows on MOBILE too */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center text-gray-300 animate-pulse">
         <span className="text-xs md:text-sm uppercase tracking-widest mb-2 opacity-80">
           Scroll to explore
