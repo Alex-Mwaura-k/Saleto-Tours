@@ -9,6 +9,10 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg}"],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
+      },
       manifest: {
         name: "Saleto",
         short_name: "Saleto Tours",
