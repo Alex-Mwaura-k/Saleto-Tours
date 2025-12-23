@@ -105,7 +105,7 @@ const Navbar = () => {
       >
         <div className="p-5 flex flex-col h-full">
           <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
-            <h2 className="text-2xl font-bold text-[#FF5733]">Menu</h2>
+            <h2 className="text-2xl font-bold text-[#0672CD]">Menu</h2>
             <button
               onClick={() => setIsOpen(false)}
               className="text-2xl text-gray-700 focus:outline-none transition-transform duration-300 hover:rotate-90 active:rotate-180"
