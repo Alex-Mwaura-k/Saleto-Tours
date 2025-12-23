@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import InstallBanner from "./components/InstallBanner";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ContactFab from "./components/ContactFab"; // Import here
@@ -12,6 +13,7 @@ function App() {
       {/* Added 'relative' to ensure z-index layering works correctly contextually */}
       <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative">
         <Navbar />
+        <InstallBanner />
 
         <div className="flex-grow">
           <Routes>

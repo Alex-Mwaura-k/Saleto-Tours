@@ -95,6 +95,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email"
+                id="cEmail"
                 className="bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-[#FF5733] w-full"
               />
               <button className="bg-[#FF5733] hover:bg-[#E64A19] text-white px-4 py-2 rounded-r-md transition font-bold">
