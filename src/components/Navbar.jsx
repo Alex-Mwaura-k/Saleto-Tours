@@ -49,15 +49,12 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     to={link.path}
-                    // REMOVED 'pb-1' so text stays perfectly centered
                     className={`relative group transition duration-300 ${
                       isActive ? "text-[#FF5733]" : "hover:text-[#FF5733]"
                     }`}
                   >
                     {link.name}
-
                     {/* ANIMATED LINE */}
-                    {/* Changed 'bottom-0' to '-bottom-1.5' to push line DOWN away from text */}
                     <span
                       className={`absolute left-0 -bottom-1.5 h-[2px] bg-[#FF5733] transition-all duration-300 ease-in-out ${
                         isActive ? "w-full" : "w-0 group-hover:w-full"
@@ -88,9 +85,10 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* MOBILE DRAWER (Unchanged) */}
+      {/* MOBILE DRAWER OVERLAY */}
+      {/* UPDATED: Changed z-50 to z-[999] */}
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-50 lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[999] lg:hidden transition-opacity duration-300 ${
           isOpen
             ? "opacity-100 visible"
             : "opacity-0 invisible pointer-events-none"
@@ -98,8 +96,10 @@ const Navbar = () => {
         onClick={() => setIsOpen(false)}
       ></div>
 
+      {/* MOBILE DRAWER CONTENT */}
+      {/* UPDATED: Changed z-50 to z-[999] */}
       <div
-        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-white z-50 shadow-2xl lg:hidden transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-white z-[999] shadow-2xl lg:hidden transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

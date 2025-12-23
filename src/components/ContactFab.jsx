@@ -31,7 +31,7 @@ const ContactFab = () => {
     // 3. Attach the 'ref' to the main container div
     <div
       ref={fabRef}
-      className="fixed bottom-8 left-0 pl-2 md:left-[30px] md:pl-0 z-[9999] flex flex-col items-start gap-2"
+      className="fixed bottom-8 left-0 pl-2 md:left-[30px] md:pl-0 z-[998] flex flex-col items-start gap-2"
     >
       {/* 1. OPTIONS CONTAINER */}
       <div

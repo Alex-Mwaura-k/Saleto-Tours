@@ -28,7 +28,7 @@ const ScrollToTop = () => {
     <div
       // Mobile: 'right-0 pr-2' (Flush to edge)
       // Desktop: 'md:right-[30px] md:pr-0' (Exactly 30px from margin)
-      className={`fixed bottom-8 right-0 pr-2 md:right-[30px] md:pr-0 z-[9999] transition-all duration-500 ease-in-out ${
+      className={`fixed bottom-8 right-0 pr-2 md:right-[30px] md:pr-0 z-[998] transition-all duration-500 ease-in-out ${
         isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-10 pointer-events-none"
