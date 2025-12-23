@@ -26,7 +26,6 @@ const ScrollToTop = () => {
 
   return (
     <div
-      // UPDATED:
       // Mobile: 'right-0 pr-2' (Flush to edge)
       // Desktop: 'md:right-[30px] md:pr-0' (Exactly 30px from margin)
       className={`fixed bottom-8 right-0 pr-2 md:right-[30px] md:pr-0 z-[9999] transition-all duration-500 ease-in-out ${
@@ -38,7 +37,9 @@ const ScrollToTop = () => {
       <button
         type="button"
         onClick={scrollToTop}
-        className="p-3 rounded-full shadow-2xl text-white bg-[#FF5733] hover:bg-[#E64A19] hover:scale-110 transition-transform duration-300 focus:outline-none ring-2 ring-white"
+        // REMOVED: hover:scale-110 and transition-transform
+        // ADDED: transition-colors (to smooth the background color change)
+        className="p-3 rounded-full shadow-2xl text-white bg-[#FF5733] hover:bg-[#E64A19] transition-colors duration-300 focus:outline-none ring-2 ring-white"
         aria-label="Scroll to top"
       >
         <FaArrowUp className="text-xl" />

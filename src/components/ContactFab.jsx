@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaWhatsapp, FaPhoneAlt, FaCommentDots, FaTimes } from "react-icons/fa";
 
 const ContactFab = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const fabRef = useRef(null); // 1. Create a reference for this component
 
   const phoneNumber = "+254700000000";
   const whatsappNumber = "254700000000";
   const whatsappMessage = "Hello! I am interested in booking a safari.";
 
+  // 2. Effect to handle clicks outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // If the menu is open AND the click target is NOT inside this component
+      if (isOpen && fabRef.current && !fabRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Attach the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up the listener when component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="fixed bottom-8 left-0 pl-2 md:left-[30px] md:pl-0 z-[9999] flex flex-col items-start gap-2">
+    // 3. Attach the 'ref' to the main container div
+    <div
+      ref={fabRef}
+      className="fixed bottom-8 left-0 pl-2 md:left-[30px] md:pl-0 z-[9999] flex flex-col items-start gap-2"
+    >
       {/* 1. OPTIONS CONTAINER */}
       <div
         className={`
@@ -53,10 +76,9 @@ const ContactFab = () => {
         `}
         aria-label="Contact Options"
       >
-        {/* ONLINE STATUS INDICATOR (Green Blinking Dot) */}
-        {/* UPDATED: Changed from '-mt-1 -mr-1' to 'top-1 right-1' to push it INSIDE the button */}
+        {/* ONLINE STATUS INDICATOR */}
         {!isOpen && (
-          <span className="absolute top-.5 right-1 flex h-3 w-3">
+          <span className="absolute top-1 right-1 flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-white"></span>
           </span>
