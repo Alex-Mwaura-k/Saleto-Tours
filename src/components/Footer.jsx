@@ -11,7 +11,7 @@ const Footer = () => {
           {/* REMOVED 'text-center' - Text is now Left Aligned by default */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-2xl font-['Playfair_Display'] font-bold text-white mb-4">
-              Seleto Tours
+              Saleto Tours
             </h3>
             <p className="text-sm leading-relaxed mb-4 text-gray-400">
               Going beyond the maps to bring you the authentic spirit of Africa.
@@ -77,7 +77,7 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>Nairobi, Kenya</li>
-              <li>info@seletotours.com</li>
+              <li>info@saletotours.com</li>
               <li>+254 700 000 000</li>
             </ul>
           </div>
