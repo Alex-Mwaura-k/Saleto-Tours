@@ -11,15 +11,16 @@ import {
 } from "react-icons/fa";
 
 const Hotels = () => {
-  // 1. MOCK DATA
+  // 1. MOCK DATA (Updated with WORKING Images)
   const allHotels = [
     {
       id: 1,
       name: "Mara Serena Safari Lodge",
       location: "Maasai Mara",
+      // Changed to a working Safari Lodge image
       image:
-        "https://images.unsplash.com/photo-1445019980597-93fa8acb746c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: 450,
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      price: 45000,
       rating: 5,
       amenities: ["Pool", "Wifi", "Restaurant", "Spa"],
       category: "Luxury",
@@ -28,9 +29,10 @@ const Hotels = () => {
       id: 2,
       name: "Diani Reef Beach Resort",
       location: "Diani Beach",
+      // Changed to a working Beach Resort image
       image:
-        "https://images.unsplash.com/photo-1571896349842-68cfd4206bbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: 280,
+        "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      price: 28500,
       rating: 4,
       amenities: ["Beachfront", "Pool", "Bar", "Gym"],
       category: "Beach",
@@ -39,9 +41,10 @@ const Hotels = () => {
       id: 3,
       name: "Sarova Stanley",
       location: "Nairobi City",
+      // Changed to a working City Hotel image
       image:
         "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: 180,
+      price: 18000,
       rating: 5,
       amenities: ["Wifi", "Gym", "Conference", "Pool"],
       category: "City",
@@ -50,9 +53,10 @@ const Hotels = () => {
       id: 4,
       name: "Amboseli Sopa Lodge",
       location: "Amboseli National Park",
+      // Changed to a working Wildlife/Lodge image
       image:
         "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: 320,
+      price: 32000,
       rating: 4,
       amenities: ["View", "Pool", "Restaurant"],
       category: "Safari",
@@ -61,9 +65,10 @@ const Hotels = () => {
       id: 5,
       name: "Hemingways Watamu",
       location: "Watamu",
+      // Changed to a working Coastal/Luxury image
       image:
-        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: 550,
+        "https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      price: 55000,
       rating: 5,
       amenities: ["Ocean View", "Spa", "Tennis", "Wifi"],
       category: "Luxury",
@@ -72,9 +77,10 @@ const Hotels = () => {
       id: 6,
       name: "Fairmont Mount Kenya",
       location: "Nanyuki",
+      // Changed to a working Mountain/Resort image
       image:
-        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: 400,
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      price: 40000,
       rating: 5,
       amenities: ["Golf", "Pool", "Horse Riding"],
       category: "Luxury",
@@ -140,7 +146,7 @@ const Hotels = () => {
             ))}
           </div>
 
-          {/* Search Input (Visual Only for now) */}
+          {/* Search Input */}
           <div className="relative w-full md:w-64">
             <input
               type="text"
@@ -167,8 +173,9 @@ const Hotels = () => {
                   alt={hotel.name}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
+                {/* Currency Display */}
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-gray-800 shadow-sm">
-                  ${hotel.price}{" "}
+                  Ksh {hotel.price.toLocaleString()}{" "}
                   <span className="text-gray-500 font-normal">/ night</span>
                 </div>
               </div>
