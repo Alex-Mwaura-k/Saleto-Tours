@@ -10,14 +10,14 @@ import {
 } from "react-icons/fa";
 
 const Packages = () => {
-  // 1. MOCK DATA
+  // 1. MOCK DATA (Updated with Ksh Prices)
   const allPackages = [
     {
       id: 1,
       title: "Maasai Mara Migration Safari",
       location: "Maasai Mara",
       duration: "3 Days / 2 Nights",
-      price: 450,
+      price: 45000,
       image:
         "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Popular",
@@ -28,7 +28,7 @@ const Packages = () => {
       title: "Amboseli Elephant Adventure",
       location: "Amboseli National Park",
       duration: "3 Days / 2 Nights",
-      price: 380,
+      price: 38000,
       image:
         "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Family",
@@ -39,9 +39,10 @@ const Packages = () => {
       title: "Bush & Beach Experience",
       location: "Tsavo & Diani",
       duration: "5 Days / 4 Nights",
-      price: 750,
+      price: 75000,
+      // 👇 CHANGED IMAGE to a better beach shot
       image:
-        "https://images.unsplash.com/photo-1590523278135-9598f482bd9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Honeymoon",
       highlights: ["SGR Transfer", "Beach Resort", "Private Safari"],
     },
@@ -50,7 +51,7 @@ const Packages = () => {
       title: "Ultimate Kenya Explorer",
       location: "Nakuru, Naivasha, Mara",
       duration: "7 Days / 6 Nights",
-      price: 1200,
+      price: 120000,
       image:
         "https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Adventure",
@@ -61,7 +62,7 @@ const Packages = () => {
       title: "Samburu Wilderness Retreat",
       location: "Samburu National Reserve",
       duration: "3 Days / 2 Nights",
-      price: 520,
+      price: 52000,
       image:
         "https://images.unsplash.com/photo-1551009175-8a68da93d5f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Adventure",
@@ -72,7 +73,7 @@ const Packages = () => {
       title: "Nairobi City Excursion",
       location: "Nairobi",
       duration: "1 Day Tour",
-      price: 100,
+      price: 10000,
       image:
         "https://images.unsplash.com/photo-1489396160836-2c99c977e970?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Short Trip",
@@ -164,7 +165,7 @@ const Packages = () => {
 
                 {/* Price Badge */}
                 <div className="absolute bottom-0 right-0 bg-[#FF5733] text-white px-4 py-2 rounded-tl-xl font-bold">
-                  ${pkg.price}{" "}
+                  Ksh {pkg.price.toLocaleString()}{" "}
                   <span className="text-xs font-normal opacity-90">
                     / person
                   </span>
