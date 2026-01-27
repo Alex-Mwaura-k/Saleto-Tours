@@ -89,3 +89,17 @@
 .delay-200 {
   animation-delay: 0.2s;
 }
+
+/* --- NEW ADDITION FOR CAROUSEL --- */
+@keyframes carouselMove {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    transform: scale(1.15) translateX(-3%);
+  }
+}
+
+.animate-carousel-move {
+  animation: carouselMove 15s linear infinite;
+}

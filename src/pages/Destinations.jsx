@@ -5,6 +5,7 @@ import {
   FaMapMarkerAlt,
   FaExternalLinkAlt,
   FaSearch,
+  FaChevronDown,
 } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
 
@@ -33,10 +34,13 @@ const Destinations = () => {
     return matchesCategory && matchesSearch && matchesPrice;
   });
 
+  // Extract unique categories for the dropdown
+  const categories = ["Park", "Beach", "Mountain", "Lake"];
+
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
+    <div className="bg-gray-50 min-h-screen pb-20 font-sans">
       {/* HERO HEADER */}
-      <div className="bg-gray-900 text-white py-16 md:py-24 relative overflow-hidden">
+      <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -48,7 +52,7 @@ const Destinations = () => {
             <Link to="/" className="hover:text-[#FF5733] transition-colors">
               Home
             </Link>
-            <FaChevronRight className="mx-2 text-xs" />
+            <span className="mx-2">/</span>
             <span className="text-white font-medium">Destinations</span>
           </nav>
         </div>
@@ -56,49 +60,49 @@ const Destinations = () => {
 
       {/* FILTER & SEARCH BAR */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
-        <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col gap-6">
-          {/* Top Row: Categories & Search */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Categories */}
-            <div className="flex overflow-x-auto pb-2 md:pb-0 w-full md:w-auto gap-2 no-scrollbar">
-              {["All", "Park", "Beach", "Mountain", "Lake"].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setFilter(cat)}
-                  className={`px-6 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 ${
-                    filter === cat
-                      ? "bg-[#FF5733] text-white shadow-md"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
+        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
+          {/* Main Flex Container: Justify Between spreads the 3 groups apart */}
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            {/* GROUP 1: LEFT (All Button + Dropdown together) */}
+            <div className="flex items-center gap-3 w-full lg:w-auto">
+              <button
+                onClick={() => setFilter("All")}
+                className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 shadow-sm shrink-0 ${
+                  filter === "All"
+                    ? "bg-[#FF5733] text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                All
+              </button>
+
+              <div className="relative w-full lg:w-48">
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2.5 px-4 pr-8 rounded-full text-sm font-medium focus:outline-none focus:border-[#FF5733] cursor-pointer"
                 >
-                  {cat}
-                </button>
-              ))}
+                  <option value="All">Location</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                  <FaChevronDown className="text-xs" />
+                </div>
+              </div>
             </div>
 
-            {/* Search Input */}
-            <div className="relative w-full md:w-64">
-              <input
-                type="text"
-                placeholder="Find a place..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-1 focus:ring-[#FF5733]"
-              />
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs" />
-            </div>
-          </div>
-
-          {/* Bottom Row: Price Filter Slider */}
-          <div className="border-t border-gray-100 pt-4">
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <span className="text-sm font-bold text-gray-700 whitespace-nowrap">
-                Max Price:{" "}
+            {/* GROUP 2: CENTER (Price Range) */}
+            <div className="flex flex-col w-full lg:w-64 px-2">
+              <div className="flex justify-between text-xs font-bold text-gray-500 mb-1.5">
+                <span>Max Price</span>
                 <span className="text-[#FF5733]">
-                  Ksh {priceRange.toLocaleString()}
+                  {priceRange.toLocaleString()}
                 </span>
-              </span>
-
+              </div>
               <input
                 type="range"
                 min="0"
@@ -106,8 +110,20 @@ const Destinations = () => {
                 step="1000"
                 value={priceRange}
                 onChange={(e) => setPriceRange(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FF5733]"
+                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FF5733]"
               />
+            </div>
+
+            {/* GROUP 3: RIGHT (Search Input) */}
+            <div className="relative w-full lg:w-64">
+              <input
+                type="text"
+                placeholder="Search places..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-1 focus:ring-[#FF5733]"
+              />
+              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs" />
             </div>
           </div>
         </div>
@@ -168,7 +184,7 @@ const Destinations = () => {
           {/* No Results Message */}
           {filteredDestinations.length === 0 && (
             <div className="col-span-full text-center py-20 text-gray-500">
-              <p className="text-xl">
+              <p className="text-xl mb-4">
                 No destinations found matching your filters.
               </p>
               <button
@@ -177,9 +193,9 @@ const Destinations = () => {
                   setFilter("All");
                   setPriceRange(highestPrice);
                 }}
-                className="mt-4 text-[#FF5733] font-bold hover:underline"
+                className="bg-[#111827] text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-[#FF5733] transition-colors"
               >
-                Clear All Filters
+                Reset Filters
               </button>
             </div>
           )}

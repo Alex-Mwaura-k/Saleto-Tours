@@ -1,6 +1,7 @@
 import React from "react";
 import Hero from "../components/Hero";
 import FeaturedSafaris from "../components/FeaturedSafaris";
+import HomeAboutSection from "../components/HomeAboutSection";
 
 const Home = () => {
   const mockPackages = [
@@ -57,6 +58,7 @@ const Home = () => {
         backgroundImage="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
       />
       <FeaturedSafaris packages={mockPackages} />
+      <HomeAboutSection />
     </div>
   );
 };

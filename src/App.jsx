@@ -10,7 +10,9 @@ import Loader from "./components/Loader";
 // Pages
 import Home from "./pages/Home";
 import Destinations from "./pages/Destinations";
+import DestinationDetails from "./pages/DestinationDetails";
 import Packages from "./pages/Packages";
+import PackageDetails from "./pages/PackageDetails"; // 👈 IMPORT THIS
 import Hotels from "./pages/Hotels";
 import HotelDetails from "./pages/HotelDetails";
 import Blogs from "./pages/Blogs";
@@ -33,15 +35,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* 1. FIXED ELEMENTS */}
       <ScrollToTop />
       <ContactFab />
 
-      {/* 2. NAVBAR MOVED HERE (Outside the animated div so 'sticky' works) */}
       <Navbar />
 
-      {/* 3. ANIMATED PAGE CONTENT */}
-      {/* The Navbar is removed from inside here so its position isn't affected by transforms */}
       <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative animate-fade-in-up overflow-x-hidden">
         <InstallBanner />
 
@@ -49,7 +47,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/destinations" element={<Destinations />} />
+            <Route path="/destinations/:id" element={<DestinationDetails />} />
             <Route path="/packages" element={<Packages />} />
+            <Route path="/packages/:id" element={<PackageDetails />} />{" "}
+            {/* 👈 ADD THIS ROUTE */}
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/hotels/:id" element={<HotelDetails />} />
             <Route path="/blogs" element={<Blogs />} />
