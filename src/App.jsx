@@ -33,14 +33,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* Fixed elements outside the animated div */}
+      {/* 1. FIXED ELEMENTS */}
       <ScrollToTop />
       <ContactFab />
 
-      {/* Main animated content */}
-      {/* ADDED 'overflow-x-hidden' HERE 👇 to fix the horizontal scroll issue */}
+      {/* 2. NAVBAR MOVED HERE (Outside the animated div so 'sticky' works) */}
+      <Navbar />
+
+      {/* 3. ANIMATED PAGE CONTENT */}
+      {/* The Navbar is removed from inside here so its position isn't affected by transforms */}
       <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative animate-fade-in-up overflow-x-hidden">
-        <Navbar />
         <InstallBanner />
 
         <div className="flex-grow">

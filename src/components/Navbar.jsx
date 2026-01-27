@@ -17,6 +17,11 @@ const Navbar = () => {
     { name: "Contact Us", path: "/contact" },
   ];
 
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -29,6 +34,9 @@ const Navbar = () => {
 
   return (
     <>
+      {/* NOTE: For 'sticky' to work, this component must be OUTSIDE 
+        any parent div that has an animation/transform (see App.jsx fix below).
+      */}
       <nav className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -54,7 +62,6 @@ const Navbar = () => {
                     }`}
                   >
                     {link.name}
-                    {/* ANIMATED LINE */}
                     <span
                       className={`absolute left-0 -bottom-1.5 h-[2px] bg-[#FF5733] transition-all duration-300 ease-in-out ${
                         isActive ? "w-full" : "w-0 group-hover:w-full"
@@ -86,7 +93,6 @@ const Navbar = () => {
       </nav>
 
       {/* MOBILE DRAWER OVERLAY */}
-      {/* UPDATED: Changed z-50 to z-[999] */}
       <div
         className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[999] lg:hidden transition-opacity duration-300 ${
           isOpen
@@ -97,14 +103,14 @@ const Navbar = () => {
       ></div>
 
       {/* MOBILE DRAWER CONTENT */}
-      {/* UPDATED: Changed z-50 to z-[999] */}
       <div
         className={`fixed top-0 right-0 h-full w-[75%] max-w-[300px] bg-white z-[999] shadow-2xl lg:hidden transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-5 flex flex-col h-full">
-          <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+        {/* ADDED 'overflow-y-auto' HERE to fix the cut-off button */}
+        <div className="p-5 flex flex-col h-full overflow-y-auto">
+          <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4 shrink-0">
             <h2 className="text-2xl font-bold text-[#0672CD]">Menu</h2>
             <button
               onClick={() => setIsOpen(false)}
@@ -114,7 +120,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex flex-col space-y-4 font-medium text-gray-700 text-lg">
+          <div className="flex flex-col space-y-4 font-medium text-gray-700 text-lg shrink-0">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -132,7 +138,7 @@ const Navbar = () => {
             })}
           </div>
 
-          <div className="mt-auto mb-4">
+          <div className="mt-auto mb-4 pt-8 shrink-0">
             <button className="w-full bg-[#0672CD] text-white px-6 py-3 rounded-full hover:bg-[#045bb5] transition shadow-md font-semibold">
               Book Safari Now
             </button>
