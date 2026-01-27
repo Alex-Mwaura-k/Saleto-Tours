@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 import Destinations from "./pages/Destinations";
 import Packages from "./pages/Packages";
 import Hotels from "./pages/Hotels";
-import HotelDetails from "./pages/HotelDetails"; // 👈 ADDED IMPORT
+import HotelDetails from "./pages/HotelDetails";
 import Blogs from "./pages/Blogs";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -38,7 +38,8 @@ function App() {
       <ContactFab />
 
       {/* Main animated content */}
-      <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative animate-fade-in-up">
+      {/* ADDED 'overflow-x-hidden' HERE 👇 to fix the horizontal scroll issue */}
+      <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative animate-fade-in-up overflow-x-hidden">
         <Navbar />
         <InstallBanner />
 
@@ -47,10 +48,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/packages" element={<Packages />} />
-            {/* Hotels Routes */}
             <Route path="/hotels" element={<Hotels />} />
-            <Route path="/hotels/:id" element={<HotelDetails />} />{" "}
-            {/* 👈 ADDED ROUTE */}
+            <Route path="/hotels/:id" element={<HotelDetails />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
