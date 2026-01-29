@@ -16,6 +16,7 @@ import PackageDetails from "./pages/PackageDetails"; // 👈 IMPORT THIS
 import Hotels from "./pages/Hotels";
 import HotelDetails from "./pages/HotelDetails";
 import Blogs from "./pages/Blogs";
+import BlogDetails from "./pages/BlogDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 
@@ -54,6 +55,7 @@ function App() {
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/hotels/:id" element={<HotelDetails />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
