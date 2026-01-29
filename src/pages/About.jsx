@@ -54,13 +54,13 @@ const About = () => {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-12 font-sans">
-      {/* 1. HERO HEADER (Kept Spacious as requested) */}
-      <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
+    <div className="bg-gray-50 min-h-screen pb-8 font-sans">
+      {/* 1. HERO HEADER */}
+      <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
-            About Saleto Tours
+          <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
+            About Us
           </h1>
           <nav className="flex items-center text-sm md:text-base text-gray-400">
             <Link to="/" className="hover:text-[#FF5733] transition-colors">
@@ -72,26 +72,27 @@ const About = () => {
         </div>
       </div>
 
-      {/* 2. OUR STORY & VISION (Kept Spacious as requested) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+      {/* 2. OUR STORY & VISION */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           {/* Image Side */}
           <div className="w-full lg:w-1/2 relative group">
-            <div className="absolute top-4 -left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 group-hover:-left-6"></div>
-            {/* BLINK ANIMATION */}
+            {/* UPDATED BORDER LOGIC: Mobile = below (left-0 top-4), Desktop = left (-left-4) */}
+            <div className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"></div>
+
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
               alt="Safari Guide"
-              className="relative z-10 rounded-2xl shadow-xl w-full h-[400px] object-cover animate-blink-grayscale"
+              className="relative z-10 rounded-2xl shadow-xl w-full h-[300px] md:h-[400px] object-cover animate-blink-grayscale"
             />
           </div>
 
           {/* Text Side */}
-          <div className="w-full lg:w-1/2 lg:pl-8">
+          <div className="w-full lg:w-1/2 lg:pl-4">
             <span className="text-[#FF5733] font-bold uppercase tracking-widest text-xs mb-2 block">
               Who We Are
             </span>
-            <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
+            <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
               Going Beyond the Maps to <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5733] to-orange-600">
                 Discover the Real Africa
@@ -120,8 +121,8 @@ const About = () => {
         </div>
       </div>
 
-      {/* 3. IMPACT INSIGHTS (Stats Bar) - SEPARATOR */}
-      <div className="bg-[#111827] text-white py-12 mt-20 relative overflow-hidden">
+      {/* 3. IMPACT INSIGHTS (Stats Bar) */}
+      <div className="bg-[#111827] text-white py-10 mt-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800">
@@ -161,8 +162,8 @@ const About = () => {
         </div>
       </div>
 
-      {/* 4. CORE VALUES (Reduced Spacing: py-12) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* 4. CORE VALUES */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         <div className="text-center mb-8">
           <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
             Our Core Values
@@ -211,8 +212,8 @@ const About = () => {
         </div>
       </div>
 
-      {/* 5. TEAM SPOTLIGHT (Reduced Spacing: py-12) */}
-      <div className="bg-gray-100 py-12">
+      {/* 5. TEAM SPOTLIGHT */}
+      <div className="bg-gray-100 py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-8">
             <div>
@@ -231,7 +232,7 @@ const About = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {team.map((member, idx) => (
               <div
                 key={idx}
@@ -258,8 +259,8 @@ const About = () => {
         </div>
       </div>
 
-      {/* 6. SAFARI INSIGHTS (Reduced Spacing: py-12) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* 6. SAFARI INSIGHTS */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-8 text-center">
           Safari Insights
         </h2>
@@ -287,7 +288,7 @@ const About = () => {
         </div>
       </div>
 
-      {/* 7. COMPACT CTA (Reduced Margin) */}
+      {/* 7. COMPACT CTA */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="bg-[#111827] rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>

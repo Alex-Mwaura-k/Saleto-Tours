@@ -127,7 +127,9 @@ const HomeAboutSection = () => {
 
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           <div className="w-full lg:w-1/2 relative group">
-            <div className="absolute top-4 -left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 group-hover:-left-6"></div>
+            {/* UPDATED: Mobile = below the image (top-4 left-0). Desktop = left of the image (top-4 -left-4) */}
+            <div className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"></div>
+
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
               alt="Safari Guide"
