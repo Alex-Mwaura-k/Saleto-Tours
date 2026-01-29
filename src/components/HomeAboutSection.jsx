@@ -7,30 +7,131 @@ import {
   FaUsers,
   FaAward,
   FaQuoteLeft,
+  FaMapMarkerAlt,
+  FaStar,
+  FaArrowRight,
+  FaClock,
+  FaSuitcase,
 } from "react-icons/fa";
 import CountUpNumber from "./CountUpNumber";
 
+const mockHotels = [
+  {
+    id: 1,
+    name: "Mara Serena Safari Lodge",
+    location: "Maasai Mara",
+    image:
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    price: 25000,
+    rating: 5,
+    amenities: [{ items: ["Pool", "WiFi", "Spa"] }],
+  },
+  {
+    id: 2,
+    name: "Sarova Salt Lick Game Lodge",
+    location: "Tsavo West",
+    image:
+      "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    price: 18500,
+    rating: 4,
+    amenities: [{ items: ["Restaurant", "Bar"] }],
+  },
+  {
+    id: 3,
+    name: "Hemingways Watamu",
+    location: "Watamu Coast",
+    image:
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    price: 32000,
+    rating: 5,
+    amenities: [{ items: ["Beach", "WiFi", "Gym"] }],
+  },
+];
+
+const mockTestimonials = [
+  {
+    id: 1,
+    name: "Jessica & Mark",
+    location: "United Kingdom",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    text: "The Maasai Mara migration safari was simply breathtaking. Saleto Tours handled everything flawlessly, from the airport pickup to the amazing lodge selection.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "David Chen",
+    location: "China",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    text: "I was looking for a custom photography trip and they delivered beyond expectations. The guide knew exactly where to find the leopards. Highly recommended!",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Sarah Johnson",
+    location: "USA",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    text: "A truly eco-conscious company. It felt good knowing our trip supported local conservation efforts. The Diani beach extension was the perfect ending.",
+    rating: 5,
+  },
+];
+
+const mockPackages = [
+  {
+    id: 1,
+    title: "Maasai Mara Migration Safari",
+    location: "Maasai Mara",
+    duration: "3 Days / 2 Nights",
+    price: 45000,
+    image:
+      "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Popular",
+  },
+  {
+    id: 2,
+    title: "Amboseli Elephant Adventure",
+    location: "Amboseli National Park",
+    duration: "3 Days / 2 Nights",
+    price: 38000,
+    image:
+      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Family",
+  },
+  {
+    id: 3,
+    title: "Bush & Beach Experience",
+    location: "Tsavo & Diani",
+    duration: "5 Days / 4 Nights",
+    price: 75000,
+    image:
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    category: "Honeymoon",
+  },
+];
+
 const HomeAboutSection = () => {
+  const featuredHotels = mockHotels.slice(0, 3);
+  const featuredPackages = mockPackages.slice(0, 3);
+
   return (
     <div className="bg-gray-50 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8 pt-8">
-          <span className="text-[#FF5733] font-bold tracking-widest uppercase text-sm">
+          <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
             About Us
           </span>
-          <h2 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+          <h2 className="text-2xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
             Discover Saleto Tours
           </h2>
-          <div className="w-24 h-1 bg-[#FF5733] mt-4 rounded-full"></div>
+          <div className="w-20 h-1 bg-[#FF5733] mt-4 rounded-full"></div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           <div className="w-full lg:w-1/2 relative group">
             <div className="absolute top-4 -left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 group-hover:-left-6"></div>
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
               alt="Safari Guide"
-              className="relative z-10 rounded-2xl shadow-xl w-full h-[450px] object-cover animate-blink-grayscale"
+              className="relative z-10 rounded-2xl shadow-xl w-full h-[300px] md:h-[450px] object-cover animate-blink-grayscale"
             />
           </div>
 
@@ -38,7 +139,7 @@ const HomeAboutSection = () => {
             <span className="text-[#FF5733] font-bold uppercase tracking-widest text-xs mb-2 block">
               Who We Are
             </span>
-            <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
+            <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
               Going Beyond the Maps to <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5733] to-orange-600">
                 Discover the Real Africa
@@ -75,7 +176,8 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      <div className="bg-[#111827] text-white py-12 mt-20 relative overflow-hidden">
+      {/* STATS */}
+      <div className="bg-[#111827] text-white py-10 mt-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800">
@@ -115,8 +217,9 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-8">
+      {/* CORE VALUES */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="text-center mb-6">
           <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
             Our Core Values
           </span>
@@ -161,6 +264,244 @@ const HomeAboutSection = () => {
               </p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* HOTELS */}
+      <div className="bg-white pt-10 pb-6 md:py-12 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-6">
+            <div className="w-full md:w-auto">
+              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+                Luxury Accommodation
+              </span>
+              <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+                Top Rated Stays
+              </h2>
+            </div>
+            <Link to="/hotels" className="hidden md:block">
+              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+                View All Hotels <FaArrowRight className="text-xs" />
+              </button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredHotels.map((hotel) => (
+              <Link
+                key={hotel.id}
+                to={`/hotels/${hotel.id}`}
+                className="block group"
+              >
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={hotel.image}
+                      alt={hotel.name}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-gray-800 shadow-sm">
+                      KES {hotel.price.toLocaleString()}
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900 font-['Playfair_Display'] leading-tight mb-1 group-hover:text-[#FF5733] transition-colors">
+                          {hotel.name}
+                        </h3>
+                        <div className="flex items-center text-gray-500 text-xs">
+                          <FaMapMarkerAlt className="mr-1 text-[#FF5733]" />
+                          {hotel.location}
+                        </div>
+                      </div>
+                      <div className="flex bg-orange-50 px-1.5 py-1 rounded h-fit">
+                        <FaStar className="text-xs text-yellow-400" />
+                        <span className="text-xs font-bold text-yellow-700 ml-1">
+                          {hotel.rating}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-6 mt-2">
+                      {hotel.amenities && hotel.amenities.length > 0 ? (
+                        hotel.amenities
+                          .flatMap((cat) => cat.items)
+                          .slice(0, 3)
+                          .map((am, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
+                            >
+                              {am}
+                            </span>
+                          ))
+                      ) : (
+                        <span className="text-[10px] text-gray-400">
+                          Amenities available
+                        </span>
+                      )}
+                      <span className="text-[10px] text-gray-400 px-1">
+                        + more
+                      </span>
+                    </div>
+
+                    <div className="mt-auto">
+                      <button className="w-full py-2.5 bg-[#111827] text-white border-2 border-[#111827] rounded-lg font-bold text-sm hover:bg-transparent hover:text-[#111827] transition-all duration-300">
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 md:hidden text-center">
+            <Link to="/hotels">
+              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+                View All Hotels
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* PACKAGES */}
+      <div className="bg-gray-50 pt-10 pb-6 md:py-12 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-6">
+            <div className="w-full md:w-auto">
+              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+                Unforgettable Adventures
+              </span>
+              <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+                Popular Safari Packages
+              </h2>
+            </div>
+            <Link to="/packages" className="hidden md:block">
+              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+                View All Packages <FaArrowRight className="text-xs" />
+              </button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredPackages.map((pkg) => (
+              <Link
+                to={`/packages/${pkg.id}`}
+                key={pkg.id}
+                className="block h-full group"
+              >
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-gray-100">
+                  <div className="relative h-60 overflow-hidden">
+                    <img
+                      src={pkg.image}
+                      alt={pkg.title}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    />
+
+                    <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                      {pkg.category}
+                    </div>
+
+                    <div className="absolute bottom-0 right-0 bg-[#FF5733] text-white px-4 py-2 rounded-tl-xl font-bold">
+                      Ksh {pkg.price.toLocaleString()}{" "}
+                      <span className="text-xs font-normal opacity-90">
+                        / person
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 font-['Playfair_Display'] mb-3 group-hover:text-[#FF5733] transition-colors">
+                        {pkg.title}
+                      </h3>
+
+                      <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
+                        <div className="flex items-center gap-1.5">
+                          <FaClock className="text-[#FF5733]" />
+                          {pkg.duration}
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <FaMapMarkerAlt className="text-[#FF5733]" />
+                          {pkg.location}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="w-full py-3 bg-gray-50 text-gray-900 font-bold rounded-lg hover:bg-[#111827] hover:text-white transition-all duration-300 border border-gray-200 hover:border-[#111827] flex items-center justify-center gap-2 group-hover:shadow-lg">
+                      <FaSuitcase className="text-[#FF5733] group-hover:text-white transition-colors" />
+                      View Details
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 md:hidden text-center">
+            <Link to="/packages">
+              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+                View All Packages
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* TESTIMONIALS */}
+      <div className="bg-white py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+              Guest Stories
+            </span>
+            <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+              Memories Made in Africa
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {mockTestimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow duration-300 relative"
+              >
+                <FaQuoteLeft className="text-4xl text-gray-200 absolute top-6 right-6" />
+
+                <div className="flex items-center gap-1 text-yellow-400 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <FaStar key={i} className="text-sm" />
+                  ))}
+                </div>
+
+                <p className="text-gray-600 italic leading-relaxed mb-6 text-sm relative z-10">
+                  "{testimonial.text}"
+                </p>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-white border border-gray-200">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-sm">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-xs text-[#FF5733] font-bold uppercase tracking-wider">
+                      {testimonial.location}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -7,26 +7,26 @@ const FeaturedSafaris = () => {
   const featuredDestinations = destinationsData.slice(0, 4);
 
   return (
-    <div className="pt-16 pb-0 bg-gray-50">
+    <div className="pt-10 pb-0 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="font-['Playfair_Display'] text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10">
+          <h2 className="font-['Playfair_Display'] text-2xl md:text-4xl font-bold text-gray-900 mb-4">
             Featured Destinations
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-600 max-w-2xl mx-auto text-base">
             Hand-picked adventures designed to give you the best experience of
             the wild.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {featuredDestinations.map((dest, index) => (
             <Link
               to={`/destinations/${dest.id}`}
               key={dest.id}
               className={index === 3 ? "hidden md:block" : "block"}
             >
-              <div className="group relative h-96 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+              <div className="group relative h-80 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
                 <img
                   src={dest.image}
                   alt={dest.title}
@@ -40,21 +40,21 @@ const FeaturedSafaris = () => {
                     {dest.category}
                   </span>
 
-                  <h3 className="text-xl font-bold text-white font-['Playfair_Display'] mb-2">
+                  <h3 className="text-lg font-bold text-white font-['Playfair_Display'] mb-2">
                     {dest.title}
                   </h3>
 
-                  <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                  <p className="text-gray-300 text-xs mb-4 line-clamp-2">
                     {dest.description}
                   </p>
 
-                  <div className="flex items-center text-[#FF5733] text-sm font-bold">
-                    Explore <FaExternalLinkAlt className="ml-2 text-xs" />
+                  <div className="flex items-center text-[#FF5733] text-xs font-bold">
+                    Explore <FaExternalLinkAlt className="ml-2 text-[10px]" />
                   </div>
                 </div>
 
                 <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm p-2 rounded-full text-white">
-                  <FaMapMarkerAlt />
+                  <FaMapMarkerAlt className="text-sm" />
                 </div>
 
                 {dest.price && (
@@ -71,7 +71,7 @@ const FeaturedSafaris = () => {
 
         <div className="text-center">
           <Link to="/destinations">
-            <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors duration-300 transform">
+            <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors duration-300 transform text-sm">
               View All Destinations
             </button>
           </Link>
