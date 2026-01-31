@@ -808,7 +808,7 @@ const HomeAboutSection = () => {
                     <input
                       type="text"
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
-                      placeholder="John Doe"
+                      placeholder="First Last"
                     />
                   </div>
                   <div>
