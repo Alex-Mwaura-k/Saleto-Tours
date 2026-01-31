@@ -12,6 +12,14 @@ import {
   FaArrowRight,
   FaClock,
   FaSuitcase,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaPaperPlane,
+  FaWhatsapp,
+  FaInstagram,
+  FaFacebookF,
+  FaCalendarAlt,
+  FaUser,
 } from "react-icons/fa";
 import CountUpNumber from "./CountUpNumber";
 
@@ -108,12 +116,70 @@ const mockPackages = [
   },
 ];
 
+const teamMembers = [
+  {
+    name: "David K.",
+    role: "Head Guide",
+    image:
+      "https://images.unsplash.com/photo-1531384441138-2736e62e0919?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Sarah M.",
+    role: "Travel Planner",
+    image:
+      "https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "James O.",
+    role: "Conservationist",
+    image:
+      "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+  },
+];
+
+const recentBlogs = [
+  {
+    id: 1,
+    title: "The Great Wildebeest Migration: A Complete Guide",
+    image:
+      "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    date: "Dec 24, 2024",
+    author: "Saleto Team",
+    excerpt:
+      "Witness the greatest show on earth. Learn the best times to visit the Maasai Mara.",
+    category: "Wildlife",
+  },
+  {
+    id: 2,
+    title: "Top 5 Luxury Lodges in Amboseli",
+    image:
+      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    date: "Dec 18, 2024",
+    author: "Sarah Jenkins",
+    excerpt:
+      "Experience the shadow of Mount Kilimanjaro in style. We review the top accommodations.",
+    category: "Accommodation",
+  },
+  {
+    id: 3,
+    title: "Packing List for Your First Safari",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    date: "Nov 30, 2024",
+    author: "Saleto Team",
+    excerpt:
+      "From neutral colors to camera gear, here is the ultimate checklist for your adventure.",
+    category: "Travel Tips",
+  },
+];
+
 const HomeAboutSection = () => {
   const featuredHotels = mockHotels.slice(0, 3);
   const featuredPackages = mockPackages.slice(0, 3);
 
   return (
     <div className="bg-gray-50 font-sans">
+      {/* 1. ABOUT INTRO */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8 pt-8">
           <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
@@ -127,9 +193,7 @@ const HomeAboutSection = () => {
 
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           <div className="w-full lg:w-1/2 relative group">
-            {/* UPDATED: Mobile = below the image (top-4 left-0). Desktop = left of the image (top-4 -left-4) */}
             <div className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"></div>
-
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
               alt="Safari Guide"
@@ -178,7 +242,7 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* STATS */}
+      {/* 2. STATS */}
       <div className="bg-[#111827] text-white py-10 mt-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -219,7 +283,7 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* CORE VALUES */}
+      {/* 3. CORE VALUES */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="text-center mb-6">
           <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
@@ -269,7 +333,7 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* HOTELS */}
+      {/* 4. HOTELS */}
       <div className="bg-white pt-10 pb-6 md:py-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
@@ -370,7 +434,7 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* PACKAGES */}
+      {/* 5. PACKAGES */}
       <div className="bg-gray-50 pt-10 pb-6 md:py-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
@@ -454,7 +518,7 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* TESTIMONIALS */}
+      {/* 6. TESTIMONIALS */}
       <div className="bg-white py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -503,6 +567,299 @@ const HomeAboutSection = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 7. RECENT BLOGS */}
+      <div className="bg-gray-50 py-10 md:py-12 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-6">
+            <div className="w-full md:w-auto">
+              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+                Travel Inspiration
+              </span>
+              <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+                Latest Stories
+              </h2>
+            </div>
+            <Link to="/blogs" className="hidden md:block">
+              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+                Read All Blogs <FaArrowRight className="text-xs" />
+              </button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {recentBlogs.map((post) => (
+              <Link
+                to={`/blogs/${post.id}`}
+                key={post.id}
+                className="group block h-full"
+              >
+                <article className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-gray-100">
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4 bg-[#FF5733] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">
+                      {post.category}
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex items-center text-xs text-gray-500 mb-3 space-x-4">
+                      <div className="flex items-center">
+                        <FaCalendarAlt className="mr-1.5 text-[#FF5733]" />
+                        {post.date}
+                      </div>
+                      <div className="flex items-center">
+                        <FaUser className="mr-1.5 text-[#FF5733]" />
+                        {post.author}
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#FF5733] transition-colors font-['Playfair_Display']">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
+                      {post.excerpt}
+                    </p>
+
+                    <span className="inline-flex items-center text-[#FF5733] font-semibold text-sm group-hover:underline mt-auto">
+                      Read More <FaArrowRight className="ml-2 text-xs" />
+                    </span>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 md:hidden text-center">
+            <Link to="/blogs">
+              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+                Read All Blogs
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 8. TEAM MEMBERS */}
+      <div className="bg-white py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8">
+            <div className="w-full md:w-auto">
+              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+                Our Experts
+              </span>
+              <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+                Meet The Team
+              </h2>
+            </div>
+            <Link to="/gallery" className="hidden md:block">
+              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+                View Full Team <FaArrowRight className="text-xs" />
+              </button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {teamMembers.map((member, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group border border-gray-100"
+              >
+                <div className="h-64 overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <h4 className="text-xl font-bold text-gray-900">
+                    {member.name}
+                  </h4>
+                  <p className="text-[#FF5733] text-xs font-bold uppercase tracking-wider mt-1">
+                    {member.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 md:hidden text-center">
+            <Link to="/gallery">
+              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+                View Full Team
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 9. CONTACT FORM & MAP */}
+      <div className="bg-gray-50 py-10 md:py-16 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+              Get In Touch
+            </span>
+            <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
+              Start Your Journey
+            </h2>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100 mb-8">
+            <div className="bg-[#111827] text-white p-8 md:w-2/5 flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#FF5733] opacity-10 rounded-tr-full"></div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-white opacity-5 rounded-bl-full"></div>
+
+              <div className="relative z-10">
+                <h3 className="text-xl md:text-2xl font-bold font-['Playfair_Display'] mb-4">
+                  Contact Info
+                </h3>
+                <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                  Have a question? We'd love to hear from you. Send us a message
+                  and we'll respond as soon as possible.
+                </p>
+
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="mt-1 w-8 h-8 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                      <FaPhoneAlt className="text-xs" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-sm text-white">Phone</h5>
+                      <p className="text-gray-400 text-sm mt-1">
+                        +254 700 000 000
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="mt-1 w-8 h-8 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                      <FaEnvelope className="text-xs" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-sm text-white">Email</h5>
+                      <p className="text-gray-400 text-sm mt-1">
+                        info@saletotours.com
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="mt-1 w-8 h-8 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                      <FaMapMarkerAlt className="text-xs" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-sm text-white">Location</h5>
+                      <p className="text-gray-400 text-sm mt-1">
+                        Saleto Plaza, Nairobi, Kenya
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 relative z-10">
+                <h5 className="font-bold text-xs mb-3 text-gray-300 uppercase tracking-wider">
+                  Follow Us
+                </h5>
+                <div className="flex space-x-3">
+                  <a
+                    href="#"
+                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                  >
+                    <FaFacebookF className="text-xs" />
+                  </a>
+                  <a
+                    href="#"
+                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                  >
+                    <FaInstagram className="text-xs" />
+                  </a>
+                  <a
+                    href="#"
+                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                  >
+                    <FaWhatsapp className="text-xs" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 md:p-10 md:w-3/5 bg-white">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 font-['Playfair_Display'] mb-6">
+                Send a Message
+              </h3>
+
+              <form className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                      placeholder="+254..."
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                    placeholder="john@example.com"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                    Message
+                  </label>
+                  <textarea
+                    rows="4"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors resize-none"
+                    placeholder="Tell us about your trip..."
+                  ></textarea>
+                </div>
+                <button className="w-full bg-[#FF5733] hover:bg-[#E64A19] text-white font-bold py-3.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 text-sm">
+                  Send Message <FaPaperPlane className="text-xs" />
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div className="w-full h-[350px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            <iframe
+              title="Nairobi Map"
+              src="https://maps.google.com/maps?q=Nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </div>
