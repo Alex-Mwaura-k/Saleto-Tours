@@ -70,7 +70,7 @@ const InstallBanner = () => {
       if (userDismissedRef.current) return;
 
       const scrollPosition = window.scrollY;
-      const threshold = window.innerHeight * 0.5;
+      const threshold = window.innerHeight * 1.2;
 
       if (scrollPosition > threshold) {
         setShowAnimation(false);
