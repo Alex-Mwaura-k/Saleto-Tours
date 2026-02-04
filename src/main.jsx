@@ -11,7 +11,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   // Stash the event so we can trigger it later inside InstallBanner
   window.deferredPrompt = e;
-  console.log("Initiate");
+  console.log("");
 });
 // 👆 END PWA FIX
 
