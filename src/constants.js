@@ -21,8 +21,8 @@ export const CONTACT_INFO = {
   email: "info@saletotours.com",
   careersEmail: "careers@saletotours.com",
   bookingEmail: "bookings@saletotours.com",
-  address: "Nairobi, Kenya",
-  office: "Delta Towers, Westlands, Nairobi",
+  address: "Narok, Kenya",
+  office: "Oloropil Towers, Westlands, Narok",
 };
 
 // --- MAP CONFIGURATION ---
