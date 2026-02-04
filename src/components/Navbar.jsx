@@ -2,20 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/logo.webp";
+import { NAV_LINKS, THEME } from "../constants"; // 👈 Import constants
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Destinations", path: "/destinations" },
-    { name: "Packages", path: "/packages" },
-    { name: "Hotels", path: "/hotels" },
-    { name: "Blogs", path: "/blogs" },
-    { name: "About", path: "/about" },
-    { name: "Contact Us", path: "/contact" },
-  ];
 
   // Close menu when route changes
   useEffect(() => {
@@ -34,9 +25,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* NOTE: For 'sticky' to work, this component must be OUTSIDE 
-        any parent div that has an animation/transform (see App.jsx fix below).
-      */}
       <nav className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -51,19 +39,22 @@ const Navbar = () => {
 
             {/* DESKTOP MENU */}
             <div className="hidden lg:flex flex-1 justify-center items-center space-x-8 font-medium text-gray-700">
-              {navLinks.map((link) => {
+              {NAV_LINKS.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`relative group transition duration-300 ${
-                      isActive ? "text-[#FF5733]" : "hover:text-[#FF5733]"
-                    }`}
+                    // Use style for dynamic color from constants
+                    style={{ color: isActive ? THEME.highlight : undefined }}
+                    className={`relative group transition duration-300 hover:opacity-80`}
+                    // Note: 'hover:text-[color]' is hard to do dynamically without CSS vars, so we use opacity for hover effect or standard class
                   >
                     {link.name}
                     <span
-                      className={`absolute left-0 -bottom-1.5 h-[2px] bg-[#FF5733] transition-all duration-300 ease-in-out ${
+                      // Use style for the underline background color
+                      style={{ backgroundColor: THEME.highlight }}
+                      className={`absolute left-0 -bottom-1.5 h-[2px] transition-all duration-300 ease-in-out ${
                         isActive ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                     ></span>
@@ -74,7 +65,16 @@ const Navbar = () => {
 
             {/* DESKTOP BUTTON */}
             <div className="hidden lg:flex flex-shrink-0">
-              <button className="bg-[#0672CD] text-white px-6 py-2 rounded-full hover:bg-[#045bb5] transition shadow-sm font-semibold">
+              <button
+                style={{ backgroundColor: THEME.primary }}
+                className="text-white px-6 py-2 rounded-full hover:brightness-110 transition shadow-sm font-semibold"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.primaryDark)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.primary)
+                }
+              >
                 Book Safari Now
               </button>
             </div>
@@ -108,10 +108,11 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* ADDED 'overflow-y-auto' HERE to fix the cut-off button */}
         <div className="p-5 flex flex-col h-full overflow-y-auto">
           <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4 shrink-0">
-            <h2 className="text-2xl font-bold text-[#0672CD]">Menu</h2>
+            <h2 className="text-2xl font-bold" style={{ color: THEME.primary }}>
+              Menu
+            </h2>
             <button
               onClick={() => setIsOpen(false)}
               className="text-2xl text-gray-700 focus:outline-none transition-transform duration-300 hover:rotate-90 active:rotate-180"
@@ -121,16 +122,15 @@ const Navbar = () => {
           </div>
 
           <div className="flex flex-col space-y-4 font-medium text-gray-700 text-lg shrink-0">
-            {navLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`transition border-b border-gray-50 pb-2 ${
-                    isActive ? "text-[#FF5733]" : "hover:text-[#FF5733]"
-                  }`}
+                  style={{ color: isActive ? THEME.highlight : undefined }}
+                  className={`transition border-b border-gray-50 pb-2 hover:opacity-80`}
                 >
                   {link.name}
                 </Link>
@@ -139,7 +139,16 @@ const Navbar = () => {
           </div>
 
           <div className="mt-auto mb-4 pt-8 shrink-0">
-            <button className="w-full bg-[#0672CD] text-white px-6 py-3 rounded-full hover:bg-[#045bb5] transition shadow-md font-semibold">
+            <button
+              style={{ backgroundColor: THEME.primary }}
+              className="w-full text-white px-6 py-3 rounded-full hover:brightness-110 transition shadow-md font-semibold"
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = THEME.primaryDark)
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = THEME.primary)
+              }
+            >
               Book Safari Now
             </button>
           </div>
