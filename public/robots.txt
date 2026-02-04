@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Block access to specific areas (optional examples)
+# Disallow: /account/
+# Disallow: /admin/
+
+# Point to your Sitemap (highly recommended)
+# Replace with your actual domain
+Sitemap: https://www.saletotours.com/sitemap.xml

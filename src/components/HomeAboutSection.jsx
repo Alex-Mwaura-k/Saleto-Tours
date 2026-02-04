@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
+
 import {
   FaChevronRight,
   FaLeaf,
@@ -18,39 +20,62 @@ import {
   FaClock,
   FaSuitcase,
 } from "react-icons/fa";
+
 import CountUpNumber from "./CountUpNumber";
+
 import Notification from "./Notification";
+
 import { CONTACT_INFO, THEME, MAP_EMBED_CODE } from "../constants";
 
 const mockHotels = [
   {
     id: 1,
+
     name: "Mara Serena Safari Lodge",
+
     location: "Maasai Mara",
+
     image:
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     price: 25000,
+
     rating: 5,
+
     amenities: [{ items: ["Pool", "WiFi", "Spa"] }],
   },
+
   {
     id: 2,
+
     name: "Sarova Salt Lick Game Lodge",
+
     location: "Tsavo West",
+
     image:
       "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     price: 18500,
+
     rating: 4,
+
     amenities: [{ items: ["Restaurant", "Bar"] }],
   },
+
   {
     id: 3,
+
     name: "Hemingways Watamu",
+
     location: "Watamu Coast",
+
     image:
       "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     price: 32000,
+
     rating: 5,
+
     amenities: [{ items: ["Beach", "WiFi", "Gym"] }],
   },
 ];
@@ -58,26 +83,43 @@ const mockHotels = [
 const mockTestimonials = [
   {
     id: 1,
+
     name: "Jessica & Mark",
+
     location: "United Kingdom",
+
     image: "https://randomuser.me/api/portraits/women/44.jpg",
+
     text: "The Maasai Mara migration safari was simply breathtaking. Saleto Tours handled everything flawlessly, from the airport pickup to the amazing lodge selection.",
+
     rating: 5,
   },
+
   {
     id: 2,
+
     name: "David Chen",
+
     location: "China",
+
     image: "https://randomuser.me/api/portraits/men/32.jpg",
+
     text: "I was looking for a custom photography trip and they delivered beyond expectations. The guide knew exactly where to find the leopards. Highly recommended!",
+
     rating: 5,
   },
+
   {
     id: 3,
+
     name: "Sarah Johnson",
+
     location: "USA",
+
     image: "https://randomuser.me/api/portraits/women/68.jpg",
+
     text: "A truly eco-conscious company. It felt good knowing our trip supported local conservation efforts. The Diani beach extension was the perfect ending.",
+
     rating: 5,
   },
 ];
@@ -85,32 +127,52 @@ const mockTestimonials = [
 const mockPackages = [
   {
     id: 1,
+
     title: "Maasai Mara Migration Safari",
+
     location: "Maasai Mara",
+
     duration: "3 Days / 2 Nights",
+
     price: 45000,
+
     image:
       "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     category: "Popular",
   },
+
   {
     id: 2,
+
     title: "Amboseli Elephant Adventure",
+
     location: "Amboseli National Park",
+
     duration: "3 Days / 2 Nights",
+
     price: 38000,
+
     image:
       "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     category: "Family",
   },
+
   {
     id: 3,
+
     title: "Bush & Beach Experience",
+
     location: "Tsavo & Diani",
+
     duration: "5 Days / 4 Nights",
+
     price: 75000,
+
     image:
       "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     category: "Honeymoon",
   },
 ];
@@ -118,19 +180,27 @@ const mockPackages = [
 const teamMembers = [
   {
     name: "David K.",
+
     role: "Head Guide",
+
     image:
       "https://images.unsplash.com/photo-1531384441138-2736e62e0919?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
   },
+
   {
     name: "Sarah M.",
+
     role: "Travel Planner",
+
     image:
       "https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
   },
+
   {
     name: "James O.",
+
     role: "Conservationist",
+
     image:
       "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
   },
@@ -139,60 +209,89 @@ const teamMembers = [
 const recentBlogs = [
   {
     id: 1,
+
     title: "The Great Wildebeest Migration: A Complete Guide",
+
     image:
       "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     date: "Dec 24, 2024",
+
     author: "Saleto Team",
+
     excerpt:
       "Witness the greatest show on earth. Learn the best times to visit the Maasai Mara.",
+
     category: "Wildlife",
   },
+
   {
     id: 2,
+
     title: "Top 5 Luxury Lodges in Amboseli",
+
     image:
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     date: "Dec 18, 2024",
+
     author: "Sarah Jenkins",
+
     excerpt:
       "Experience the shadow of Mount Kilimanjaro in style. We review the top accommodations.",
+
     category: "Accommodation",
   },
+
   {
     id: 3,
+
     title: "Packing List for Your First Safari",
+
     image:
       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+
     date: "Nov 30, 2024",
+
     author: "Saleto Team",
+
     excerpt:
       "From neutral colors to camera gear, here is the ultimate checklist for your adventure.",
+
     category: "Travel Tips",
   },
 ];
 
 const getSafeMapUrl = (embedString) => {
   if (!embedString) return "";
+
   const match = embedString.match(/src="([^"]+)"/);
+
   return match ? match[1] : "";
 };
 
 const HomeAboutSection = () => {
   const featuredHotels = mockHotels.slice(0, 3);
+
   const featuredPackages = mockPackages.slice(0, 3);
+
   const mapSrc = getSafeMapUrl(MAP_EMBED_CODE);
 
   const [formData, setFormData] = useState({
     name: "",
+
     phone: "",
+
     email: "",
+
     message: "",
   });
 
   const [notification, setNotification] = useState({
     show: false,
+
     type: "success",
+
     message: "",
   });
 
@@ -202,6 +301,7 @@ const HomeAboutSection = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -216,27 +316,37 @@ const HomeAboutSection = () => {
     ) {
       setNotification({
         show: true,
+
         type: "error",
+
         message: "Please fill in all fields.",
       });
+
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailRegex.test(formData.email)) {
       setNotification({
         show: true,
+
         type: "error",
+
         message: "Please enter a valid email address.",
       });
+
       return;
     }
 
     setNotification({
       show: true,
+
       type: "success",
+
       message: "Message sent successfully!",
     });
+
     setFormData({ name: "", phone: "", email: "", message: "" });
   };
 
@@ -257,9 +367,11 @@ const HomeAboutSection = () => {
           >
             About Us
           </span>
+
           <h2 className="text-2xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
             Discover Saleto Tours
           </h2>
+
           <div
             className="w-20 h-1 mt-4 rounded-full"
             style={{ backgroundColor: THEME.highlight }}
@@ -272,6 +384,7 @@ const HomeAboutSection = () => {
               className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"
               style={{ borderColor: THEME.highlight }}
             ></div>
+
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
               alt="Safari Guide"
@@ -286,12 +399,14 @@ const HomeAboutSection = () => {
             >
               Who We Are
             </span>
+
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
               Going Beyond the Maps to <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5733] to-orange-600">
                 Discover the Real Africa
               </span>
             </h2>
+
             <p className="text-gray-600 leading-relaxed mb-6 text-base">
               Saleto Tours isn't just a travel agency; we are storytellers,
               conservationists, and your local friends in East Africa. We
@@ -307,11 +422,13 @@ const HomeAboutSection = () => {
                 className="text-xl shrink-0 mt-1"
                 style={{ color: THEME.highlight }}
               />
+
               <div>
                 <p className="text-gray-700 italic text-sm mb-2">
                   "We don't just show you the animals; we introduce you to their
                   world. Every itinerary is a personal promise of excellence."
                 </p>
+
                 <p className="font-bold text-gray-900 text-xs uppercase tracking-wide">
                   – Founder, Saleto Tours
                 </p>
@@ -334,6 +451,7 @@ const HomeAboutSection = () => {
 
       <div className="bg-[#111827] text-white py-10 mt-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800">
             <div className="p-2">
@@ -343,10 +461,12 @@ const HomeAboutSection = () => {
               >
                 <CountUpNumber end={15} suffix="+" />
               </div>
+
               <div className="text-xs text-gray-400 uppercase tracking-widest">
                 Years Experience
               </div>
             </div>
+
             <div className="p-2">
               <div
                 className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
@@ -354,10 +474,12 @@ const HomeAboutSection = () => {
               >
                 <CountUpNumber end={10000} suffix="+" />
               </div>
+
               <div className="text-xs text-gray-400 uppercase tracking-widest">
                 Happy Guests
               </div>
             </div>
+
             <div className="p-2">
               <div
                 className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
@@ -365,10 +487,12 @@ const HomeAboutSection = () => {
               >
                 <CountUpNumber end={50} suffix="+" />
               </div>
+
               <div className="text-xs text-gray-400 uppercase tracking-widest">
                 Partner Lodges
               </div>
             </div>
+
             <div className="p-2">
               <div
                 className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
@@ -376,6 +500,7 @@ const HomeAboutSection = () => {
               >
                 <CountUpNumber end={100} suffix="%" />
               </div>
+
               <div className="text-xs text-gray-400 uppercase tracking-widest">
                 Local Team
               </div>
@@ -389,6 +514,7 @@ const HomeAboutSection = () => {
           <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
             Our Core Values
           </span>
+
           <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
             Why Travelers Choose Us
           </h2>
@@ -398,22 +524,33 @@ const HomeAboutSection = () => {
           {[
             {
               icon: <FaUsers />,
+
               title: "Local Experts",
+
               desc: "Guides born and raised here, offering insights no guidebook can match.",
             },
+
             {
               icon: <FaLeaf />,
+
               title: "Eco-Conscious",
+
               desc: "Sustainable practices that protect wildlife for future generations.",
             },
+
             {
               icon: <FaGlobeAfrica />,
+
               title: "Tailored Safaris",
+
               desc: "Every trip is custom-built to your pace, preferences, and dreams.",
             },
+
             {
               icon: <FaAward />,
+
               title: "Luxury Service",
+
               desc: "Partnering with the finest lodges to ensure comfort meets adventure.",
             },
           ].map((item, idx) => (
@@ -431,7 +568,9 @@ const HomeAboutSection = () => {
               >
                 {item.icon}
               </div>
+
               <h4 className="font-bold text-gray-900 mb-2">{item.title}</h4>
+
               <p className="text-sm text-gray-500 leading-relaxed">
                 {item.desc}
               </p>
@@ -450,10 +589,12 @@ const HomeAboutSection = () => {
               >
                 Luxury Accommodation
               </span>
+
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
                 Top Rated Stays
               </h2>
             </div>
+
             <Link to="/hotels" className="hidden md:block">
               <button
                 className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
@@ -481,6 +622,7 @@ const HomeAboutSection = () => {
                       alt={hotel.name}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                     />
+
                     <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-gray-800 shadow-sm">
                       KES {hotel.price.toLocaleString()}
                     </div>
@@ -498,16 +640,20 @@ const HomeAboutSection = () => {
                         >
                           {hotel.name}
                         </h3>
+
                         <div className="flex items-center text-gray-500 text-xs">
                           <FaMapMarkerAlt
                             className="mr-1"
                             style={{ color: THEME.highlight }}
                           />
+
                           {hotel.location}
                         </div>
                       </div>
+
                       <div className="flex bg-orange-50 px-1.5 py-1 rounded h-fit">
                         <FaStar className="text-xs text-yellow-400" />
+
                         <span className="text-xs font-bold text-yellow-700 ml-1">
                           {hotel.rating}
                         </span>
@@ -517,8 +663,11 @@ const HomeAboutSection = () => {
                     <div className="flex flex-wrap gap-2 mb-6 mt-2">
                       {hotel.amenities && hotel.amenities.length > 0 ? (
                         hotel.amenities
+
                           .flatMap((cat) => cat.items)
+
                           .slice(0, 3)
+
                           .map((am, idx) => (
                             <span
                               key={idx}
@@ -532,6 +681,7 @@ const HomeAboutSection = () => {
                           Amenities available
                         </span>
                       )}
+
                       <span className="text-[10px] text-gray-400 px-1">
                         + more
                       </span>
@@ -576,10 +726,12 @@ const HomeAboutSection = () => {
               >
                 Unforgettable Adventures
               </span>
+
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
                 Popular Safari Packages
               </h2>
             </div>
+
             <Link to="/packages" className="hidden md:block">
               <button
                 className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
@@ -638,10 +790,13 @@ const HomeAboutSection = () => {
                       <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
                         <div className="flex items-center gap-1.5">
                           <FaClock style={{ color: THEME.highlight }} />
+
                           {pkg.duration}
                         </div>
+
                         <div className="flex items-center gap-1.5">
                           <FaMapMarkerAlt style={{ color: THEME.highlight }} />
+
                           {pkg.location}
                         </div>
                       </div>
@@ -687,6 +842,7 @@ const HomeAboutSection = () => {
             >
               Guest Stories
             </span>
+
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
               Memories Made in Africa
             </h2>
@@ -718,10 +874,12 @@ const HomeAboutSection = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
+
                   <div>
                     <h4 className="font-bold text-gray-900 text-sm">
                       {testimonial.name}
                     </h4>
+
                     <p
                       className="text-xs font-bold uppercase tracking-wider"
                       style={{ color: THEME.highlight }}
@@ -746,10 +904,12 @@ const HomeAboutSection = () => {
               >
                 Travel Inspiration
               </span>
+
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
                 Latest Stories
               </h2>
             </div>
+
             <Link to="/blogs" className="hidden md:block">
               <button
                 className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
@@ -777,6 +937,7 @@ const HomeAboutSection = () => {
                       alt={post.title}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                     />
+
                     <div
                       className="absolute top-4 left-4 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide"
                       style={{ backgroundColor: THEME.highlight }}
@@ -792,13 +953,16 @@ const HomeAboutSection = () => {
                           className="mr-1.5"
                           style={{ color: THEME.highlight }}
                         />
+
                         {post.date}
                       </div>
+
                       <div className="flex items-center">
                         <FaUser
                           className="mr-1.5"
                           style={{ color: THEME.highlight }}
                         />
+
                         {post.author}
                       </div>
                     </div>
@@ -857,10 +1021,12 @@ const HomeAboutSection = () => {
               >
                 Our Experts
               </span>
+
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
                 Meet The Team
               </h2>
             </div>
+
             <Link to="/gallery" className="hidden md:block">
               <button
                 className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
@@ -887,10 +1053,12 @@ const HomeAboutSection = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
+
                 <div className="p-6 text-center">
                   <h4 className="text-xl font-bold text-gray-900">
                     {member.name}
                   </h4>
+
                   <p
                     className="text-xs font-bold uppercase tracking-wider mt-1"
                     style={{ color: THEME.highlight }}
@@ -929,6 +1097,7 @@ const HomeAboutSection = () => {
             >
               Get In Touch
             </span>
+
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
               Start Your Journey
             </h2>
@@ -940,12 +1109,14 @@ const HomeAboutSection = () => {
                 className="absolute bottom-0 left-0 w-32 h-32 opacity-10 rounded-tr-full"
                 style={{ backgroundColor: THEME.highlight }}
               ></div>
+
               <div className="absolute top-0 right-0 w-20 h-20 bg-white opacity-5 rounded-bl-full"></div>
 
               <div className="relative z-10">
                 <h3 className="text-xl md:text-2xl font-bold font-['Playfair_Display'] mb-4">
                   Contact Info
                 </h3>
+
                 <p className="text-gray-400 text-sm mb-8 leading-relaxed">
                   Have a question? We'd love to hear from you. Send us a message
                   and we'll respond as soon as possible.
@@ -959,8 +1130,10 @@ const HomeAboutSection = () => {
                     >
                       <FaPhoneAlt className="text-xs" />
                     </div>
+
                     <div>
                       <h5 className="font-bold text-sm text-white">Phone</h5>
+
                       <p className="text-gray-400 text-sm mt-1">
                         {CONTACT_INFO.phone}
                       </p>
@@ -974,8 +1147,10 @@ const HomeAboutSection = () => {
                     >
                       <FaEnvelope className="text-xs" />
                     </div>
+
                     <div>
                       <h5 className="font-bold text-sm text-white">Email</h5>
+
                       <p className="text-gray-400 text-sm mt-1">
                         {CONTACT_INFO.email}
                       </p>
@@ -989,8 +1164,10 @@ const HomeAboutSection = () => {
                     >
                       <FaMapMarkerAlt className="text-xs" />
                     </div>
+
                     <div>
                       <h5 className="font-bold text-sm text-white">Location</h5>
+
                       <p className="text-gray-400 text-sm mt-1">
                         {CONTACT_INFO.address}
                       </p>
@@ -1004,16 +1181,20 @@ const HomeAboutSection = () => {
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 font-['Playfair_Display'] mb-6">
                 Send a Message
               </h3>
-
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                    <label
+                      htmlFor="name"
+                      className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide"
+                    >
                       Your Name
                     </label>
                     <input
                       type="text"
                       name="name"
+                      id="name"
+                      autoComplete="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
@@ -1029,12 +1210,17 @@ const HomeAboutSection = () => {
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                    <label
+                      htmlFor="phone"
+                      className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide"
+                    >
                       Phone Number
                     </label>
                     <input
                       type="tel"
                       name="phone"
+                      id="phone"
+                      autoComplete="tel"
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
@@ -1048,12 +1234,17 @@ const HomeAboutSection = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                  <label
+                    htmlFor="email"
+                    className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide"
+                  >
                     Email Address
                   </label>
                   <input
                     type="email"
                     name="email"
+                    id="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
@@ -1066,12 +1257,17 @@ const HomeAboutSection = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
+                  <label
+                    htmlFor="message"
+                    className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide"
+                  >
                     Message
                   </label>
                   <textarea
                     rows="4"
                     name="message"
+                    id="message"
+                    autoComplete="off"
                     value={formData.message}
                     onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors resize-none"
