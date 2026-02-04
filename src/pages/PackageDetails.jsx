@@ -11,6 +11,7 @@ import {
   FaClock,
 } from "react-icons/fa";
 import { packagesData } from "../data/packagesData";
+import { CONTACT_INFO, THEME } from "../constants"; // 👈 Import constants
 
 const PackageDetails = () => {
   const { id } = useParams();
@@ -47,7 +48,8 @@ const PackageDetails = () => {
         </h2>
         <Link
           to="/packages"
-          className="text-[#FF5733] font-bold hover:underline"
+          className="font-bold hover:underline"
+          style={{ color: THEME.highlight }}
         >
           Back to Packages
         </Link>
@@ -67,14 +69,20 @@ const PackageDetails = () => {
           <div className="flex items-center gap-3 text-sm text-gray-300">
             <Link
               to="/packages"
-              className="flex items-center hover:text-[#FF5733] transition-colors gap-1 font-medium"
+              className="flex items-center transition-colors gap-1 font-medium hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
             >
               <FaChevronLeft className="text-xs" /> Back
             </Link>
             <span className="text-gray-500">|</span>
             <Link
               to="/packages"
-              className="hover:text-[#FF5733] transition-colors font-medium"
+              className="transition-colors font-medium hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
             >
               Packages
             </Link>
@@ -84,11 +92,22 @@ const PackageDetails = () => {
             </span>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <span className="text-lg font-bold text-[#FF5733]">
+            <span
+              className="text-lg font-bold"
+              style={{ color: THEME.highlight }}
+            >
               KES {pkg.price.toLocaleString()}
             </span>
             <Link to="/contact">
-              <button className="bg-white text-[#111827] px-5 py-2 rounded-lg text-sm font-bold hover:bg-[#FF5733] hover:text-white transition-all shadow-sm">
+              <button
+                className="bg-white text-[#111827] px-5 py-2 rounded-lg text-sm font-bold hover:text-white transition-all shadow-sm"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "white")
+                }
+              >
                 Book Now
               </button>
             </Link>
@@ -107,10 +126,11 @@ const PackageDetails = () => {
               {pkg.category}
             </span>
             <span className="flex items-center gap-1">
-              <FaMapMarkerAlt className="text-[#FF5733]" /> {pkg.location}
+              <FaMapMarkerAlt style={{ color: THEME.highlight }} />{" "}
+              {pkg.location}
             </span>
             <span className="flex items-center gap-1">
-              <FaClock className="text-[#FF5733]" /> {pkg.duration}
+              <FaClock style={{ color: THEME.highlight }} /> {pkg.duration}
             </span>
             <span className="flex items-center gap-1 text-yellow-500">
               <FaStar /> <FaStar /> <FaStar /> <FaStar />{" "}
@@ -172,7 +192,10 @@ const PackageDetails = () => {
                   {pkg.itinerary.map((item, index) => (
                     <div key={index} className="relative">
                       {/* Timeline Dot */}
-                      <div className="absolute -left-[21px] top-0 w-4 h-4 rounded-full bg-[#FF5733] border-2 border-white shadow-sm"></div>
+                      <div
+                        className="absolute -left-[21px] top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                        style={{ backgroundColor: THEME.highlight }}
+                      ></div>
                       <h4 className="font-bold text-gray-900 text-lg mb-1">
                         Day {item.day}: {item.title}
                       </h4>
@@ -233,7 +256,10 @@ const PackageDetails = () => {
                 <p className="text-gray-500 text-sm mb-1">
                   Total Package Price
                 </p>
-                <h3 className="text-3xl font-bold text-[#FF5733]">
+                <h3
+                  className="text-3xl font-bold"
+                  style={{ color: THEME.highlight }}
+                >
                   KES {pkg.price.toLocaleString()}
                 </h3>
                 <p className="text-gray-400 text-xs">per person sharing</p>
@@ -241,7 +267,17 @@ const PackageDetails = () => {
 
               <div className="space-y-4 mb-6">
                 <Link to="/contact" className="block w-full">
-                  <button className="w-full bg-[#FF5733] text-white py-3.5 rounded-xl font-bold text-lg hover:bg-[#E64A19] transition-transform hover:-translate-y-1 shadow-md shadow-orange-100">
+                  <button
+                    className="w-full text-white py-3.5 rounded-xl font-bold text-lg transition-transform hover:-translate-y-1 shadow-md"
+                    style={{ backgroundColor: THEME.highlight }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor =
+                        THEME.highlightDark)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = THEME.highlight)
+                    }
+                  >
                     Book This Package
                   </button>
                 </Link>
@@ -255,10 +291,13 @@ const PackageDetails = () => {
               <div className="border-t border-gray-100 pt-6 text-center">
                 <p className="text-sm text-gray-400 mb-2">Need help?</p>
                 <a
-                  href="tel:+254700000000"
-                  className="text-lg font-bold text-gray-900 hover:text-[#FF5733] transition-colors flex items-center justify-center gap-2"
+                  href={`tel:${CONTACT_INFO.phone}`}
+                  className="text-lg font-bold text-gray-900 transition-colors flex items-center justify-center gap-2 hover:opacity-80"
+                  style={{ color: undefined }}
+                  onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+                  onMouseOut={(e) => (e.target.style.color = "")}
                 >
-                  <FaPhoneAlt className="text-xs" /> +254 700 000 000
+                  <FaPhoneAlt className="text-xs" /> {CONTACT_INFO.phone}
                 </a>
               </div>
             </div>

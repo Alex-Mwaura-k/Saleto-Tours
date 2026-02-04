@@ -8,6 +8,7 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
+import { THEME } from "../constants"; // 👈 Import constants
 
 const Destinations = () => {
   // 1. Calculate the highest price in your data dynamically
@@ -41,7 +42,10 @@ const Destinations = () => {
     <div className="bg-gray-50 min-h-screen pb-20 font-sans">
       {/* HERO HEADER */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
@@ -49,7 +53,13 @@ const Destinations = () => {
           </h1>
 
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             <span className="mx-2">/</span>
@@ -61,7 +71,7 @@ const Destinations = () => {
       {/* FILTER & SEARCH BAR */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
-          {/* Main Flex Container: Justify Between spreads the 3 groups apart */}
+          {/* Main Flex Container */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             {/* GROUP 1: LEFT (All Button + Dropdown together) */}
             <div className="flex items-center gap-3 w-full lg:w-auto">
@@ -69,9 +79,13 @@ const Destinations = () => {
                 onClick={() => setFilter("All")}
                 className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 shadow-sm shrink-0 ${
                   filter === "All"
-                    ? "bg-[#FF5733] text-white"
+                    ? "text-white"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
+                style={{
+                  backgroundColor:
+                    filter === "All" ? THEME.highlight : undefined,
+                }}
               >
                 All
               </button>
@@ -80,7 +94,12 @@ const Destinations = () => {
                 <select
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
-                  className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2.5 px-4 pr-8 rounded-full text-sm font-medium focus:outline-none focus:border-[#FF5733] cursor-pointer"
+                  className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2.5 px-4 pr-8 rounded-full text-sm font-medium focus:outline-none focus:ring-1 cursor-pointer"
+                  style={{ "--tw-ring-color": THEME.highlight }}
+                  onFocus={(e) =>
+                    (e.target.style.borderColor = THEME.highlight)
+                  }
+                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")} // tailwind gray-200
                 >
                   <option value="All">Location</option>
                   {categories.map((cat) => (
@@ -99,7 +118,7 @@ const Destinations = () => {
             <div className="flex flex-col w-full lg:w-64 px-2">
               <div className="flex justify-between text-xs font-bold text-gray-500 mb-1.5">
                 <span>Max Price</span>
-                <span className="text-[#FF5733]">
+                <span style={{ color: THEME.highlight }}>
                   {priceRange.toLocaleString()}
                 </span>
               </div>
@@ -110,7 +129,8 @@ const Destinations = () => {
                 step="1000"
                 value={priceRange}
                 onChange={(e) => setPriceRange(Number(e.target.value))}
-                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FF5733]"
+                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                style={{ accentColor: THEME.highlight }}
               />
             </div>
 
@@ -121,7 +141,10 @@ const Destinations = () => {
                 placeholder="Search places..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-1 focus:ring-[#FF5733]"
+                className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-1"
+                style={{ "--tw-ring-color": THEME.highlight }}
+                onFocus={(e) => (e.target.style.borderColor = THEME.highlight)}
+                onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
               />
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs" />
             </div>
@@ -147,7 +170,10 @@ const Destinations = () => {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 w-full p-6">
-                  <span className="bg-[#FF5733] text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">
+                  <span
+                    className="text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block"
+                    style={{ backgroundColor: THEME.highlight }}
+                  >
                     {dest.category}
                   </span>
 
@@ -159,7 +185,10 @@ const Destinations = () => {
                     {dest.description}
                   </p>
 
-                  <div className="flex items-center text-[#FF5733] text-sm font-bold">
+                  <div
+                    className="flex items-center text-sm font-bold"
+                    style={{ color: THEME.highlight }}
+                  >
                     Explore <FaExternalLinkAlt className="ml-2 text-xs" />
                   </div>
                 </div>
@@ -193,7 +222,13 @@ const Destinations = () => {
                   setFilter("All");
                   setPriceRange(highestPrice);
                 }}
-                className="bg-[#111827] text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-[#FF5733] transition-colors"
+                className="bg-[#111827] text-white px-6 py-2 rounded-full font-bold text-sm hover:text-white transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#111827")
+                }
               >
                 Reset Filters
               </button>
@@ -213,7 +248,20 @@ const Destinations = () => {
             based on the season, your budget, and what wildlife you want to see.
           </p>
           <Link to="/contact">
-            <button className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors duration-300">
+            <button
+              className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors duration-300 hover:text-[#111827]"
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = "white";
+                e.currentTarget.style.color = "#111827";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = "#111827";
+                e.currentTarget.style.color = "white";
+              }}
+              // Alternatively, stick to the simple hover logic from previous files:
+              // For consistent theme usage:
+              style={{ backgroundColor: "#111827" }}
+            >
               Get a Recommendation
             </button>
           </Link>

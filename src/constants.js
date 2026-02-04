@@ -19,9 +19,15 @@ export const CONTACT_INFO = {
   phone: "+254714995011",
   whatsapp: "+254714995011",
   email: "info@saletotours.com",
+  careersEmail: "careers@saletotours.com",
+  bookingEmail: "bookings@saletotours.com",
   address: "Nairobi, Kenya",
   office: "Delta Towers, Westlands, Nairobi",
 };
+
+// --- MAP CONFIGURATION ---
+// Paste the ENTIRE <iframe> code here
+export const MAP_EMBED_CODE = `<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d285.19240606965514!2d35.87165415101512!3d-1.089057691440891!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182c02e155555539%3A0xabef98d2f32cfe64!2sOLORROPIL%20TOWERS!5e0!3m2!1sen!2ske!4v1770225599712!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
 
 // --- SOCIAL MEDIA LINKS ---
 export const SOCIAL_LINKS = {

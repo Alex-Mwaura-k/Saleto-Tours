@@ -22,7 +22,14 @@ import {
   FaUser,
 } from "react-icons/fa";
 import CountUpNumber from "./CountUpNumber";
+import {
+  CONTACT_INFO,
+  SOCIAL_LINKS,
+  THEME,
+  MAP_EMBED_CODE, // 👈 Updated Import
+} from "../constants";
 
+// --- MOCK DATA (Unchanged) ---
 const mockHotels = [
   {
     id: 1,
@@ -182,18 +189,27 @@ const HomeAboutSection = () => {
       {/* 1. ABOUT INTRO */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8 pt-8">
-          <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+          <span
+            className="font-bold tracking-widest uppercase text-xs"
+            style={{ color: THEME.highlight }}
+          >
             About Us
           </span>
           <h2 className="text-2xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
             Discover Saleto Tours
           </h2>
-          <div className="w-20 h-1 bg-[#FF5733] mt-4 rounded-full"></div>
+          <div
+            className="w-20 h-1 mt-4 rounded-full"
+            style={{ backgroundColor: THEME.highlight }}
+          ></div>
         </div>
 
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           <div className="w-full lg:w-1/2 relative group">
-            <div className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"></div>
+            <div
+              className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"
+              style={{ borderColor: THEME.highlight }}
+            ></div>
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
               alt="Safari Guide"
@@ -202,7 +218,10 @@ const HomeAboutSection = () => {
           </div>
 
           <div className="w-full lg:w-1/2">
-            <span className="text-[#FF5733] font-bold uppercase tracking-widest text-xs mb-2 block">
+            <span
+              className="font-bold uppercase tracking-widest text-xs mb-2 block"
+              style={{ color: THEME.highlight }}
+            >
               Who We Are
             </span>
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
@@ -218,8 +237,14 @@ const HomeAboutSection = () => {
               transformative journey that touches your soul.
             </p>
 
-            <div className="flex items-start gap-4 p-4 bg-white rounded-lg border-l-4 border-[#FF5733] shadow-sm">
-              <FaQuoteLeft className="text-[#FF5733] text-xl shrink-0 mt-1" />
+            <div
+              className="flex items-start gap-4 p-4 bg-white rounded-lg border-l-4 shadow-sm"
+              style={{ borderColor: THEME.highlight }}
+            >
+              <FaQuoteLeft
+                className="text-xl shrink-0 mt-1"
+                style={{ color: THEME.highlight }}
+              />
               <div>
                 <p className="text-gray-700 italic text-sm mb-2">
                   "We don't just show you the animals; we introduce you to their
@@ -233,7 +258,10 @@ const HomeAboutSection = () => {
 
             <div className="mt-8">
               <Link to="/about">
-                <button className="text-[#FF5733] font-bold hover:underline flex items-center gap-2 transition-all">
+                <button
+                  className="font-bold hover:underline flex items-center gap-2 transition-all"
+                  style={{ color: THEME.highlight }}
+                >
                   Read Our Full Story <FaChevronRight className="text-xs" />
                 </button>
               </Link>
@@ -248,7 +276,10 @@ const HomeAboutSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800">
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={15} suffix="+" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -256,7 +287,10 @@ const HomeAboutSection = () => {
               </div>
             </div>
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={10000} suffix="+" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -264,7 +298,10 @@ const HomeAboutSection = () => {
               </div>
             </div>
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={50} suffix="+" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -272,7 +309,10 @@ const HomeAboutSection = () => {
               </div>
             </div>
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={100} suffix="%" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -321,7 +361,14 @@ const HomeAboutSection = () => {
               key={idx}
               className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
             >
-              <div className="w-12 h-12 bg-orange-50 text-[#FF5733] rounded-full flex items-center justify-center text-xl mb-4 group-hover:bg-[#FF5733] group-hover:text-white transition-colors">
+              <div
+                className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-xl mb-4 group-hover:text-white transition-colors"
+                style={{ color: THEME.highlight }}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "")}
+              >
                 {item.icon}
               </div>
               <h4 className="font-bold text-gray-900 mb-2">{item.title}</h4>
@@ -338,7 +385,10 @@ const HomeAboutSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
             <div className="w-full md:w-auto">
-              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+              <span
+                className="font-bold tracking-widest uppercase text-xs"
+                style={{ color: THEME.highlight }}
+              >
                 Luxury Accommodation
               </span>
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
@@ -346,7 +396,13 @@ const HomeAboutSection = () => {
               </h2>
             </div>
             <Link to="/hotels" className="hidden md:block">
-              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+              <button
+                className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.color = THEME.highlight)
+                }
+                onMouseOut={(e) => (e.currentTarget.style.color = "")}
+              >
                 View All Hotels <FaArrowRight className="text-xs" />
               </button>
             </Link>
@@ -374,11 +430,20 @@ const HomeAboutSection = () => {
                   <div className="p-5 flex flex-col flex-grow">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h3 className="text-lg font-bold text-gray-900 font-['Playfair_Display'] leading-tight mb-1 group-hover:text-[#FF5733] transition-colors">
+                        <h3
+                          className="text-lg font-bold text-gray-900 font-['Playfair_Display'] leading-tight mb-1 transition-colors"
+                          onMouseOver={(e) =>
+                            (e.currentTarget.style.color = THEME.highlight)
+                          }
+                          onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                        >
                           {hotel.name}
                         </h3>
                         <div className="flex items-center text-gray-500 text-xs">
-                          <FaMapMarkerAlt className="mr-1 text-[#FF5733]" />
+                          <FaMapMarkerAlt
+                            className="mr-1"
+                            style={{ color: THEME.highlight }}
+                          />
                           {hotel.location}
                         </div>
                       </div>
@@ -426,7 +491,15 @@ const HomeAboutSection = () => {
 
           <div className="mt-8 md:hidden text-center">
             <Link to="/hotels">
-              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+              <button
+                className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#111827")
+                }
+              >
                 View All Hotels
               </button>
             </Link>
@@ -439,7 +512,10 @@ const HomeAboutSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
             <div className="w-full md:w-auto">
-              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+              <span
+                className="font-bold tracking-widest uppercase text-xs"
+                style={{ color: THEME.highlight }}
+              >
                 Unforgettable Adventures
               </span>
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
@@ -447,7 +523,13 @@ const HomeAboutSection = () => {
               </h2>
             </div>
             <Link to="/packages" className="hidden md:block">
-              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+              <button
+                className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.color = THEME.highlight)
+                }
+                onMouseOut={(e) => (e.currentTarget.style.color = "")}
+              >
                 View All Packages <FaArrowRight className="text-xs" />
               </button>
             </Link>
@@ -472,7 +554,10 @@ const HomeAboutSection = () => {
                       {pkg.category}
                     </div>
 
-                    <div className="absolute bottom-0 right-0 bg-[#FF5733] text-white px-4 py-2 rounded-tl-xl font-bold">
+                    <div
+                      className="absolute bottom-0 right-0 text-white px-4 py-2 rounded-tl-xl font-bold"
+                      style={{ backgroundColor: THEME.highlight }}
+                    >
                       Ksh {pkg.price.toLocaleString()}{" "}
                       <span className="text-xs font-normal opacity-90">
                         / person
@@ -482,24 +567,33 @@ const HomeAboutSection = () => {
 
                   <div className="p-6 flex flex-col flex-grow justify-between">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 font-['Playfair_Display'] mb-3 group-hover:text-[#FF5733] transition-colors">
+                      <h3
+                        className="text-xl font-bold text-gray-900 font-['Playfair_Display'] mb-3 transition-colors"
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.color = THEME.highlight)
+                        }
+                        onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                      >
                         {pkg.title}
                       </h3>
 
                       <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
                         <div className="flex items-center gap-1.5">
-                          <FaClock className="text-[#FF5733]" />
+                          <FaClock style={{ color: THEME.highlight }} />
                           {pkg.duration}
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <FaMapMarkerAlt className="text-[#FF5733]" />
+                          <FaMapMarkerAlt style={{ color: THEME.highlight }} />
                           {pkg.location}
                         </div>
                       </div>
                     </div>
 
                     <div className="w-full py-3 bg-gray-50 text-gray-900 font-bold rounded-lg hover:bg-[#111827] hover:text-white transition-all duration-300 border border-gray-200 hover:border-[#111827] flex items-center justify-center gap-2 group-hover:shadow-lg">
-                      <FaSuitcase className="text-[#FF5733] group-hover:text-white transition-colors" />
+                      <FaSuitcase
+                        className="transition-colors"
+                        style={{ color: THEME.highlight }}
+                      />
                       View Details
                     </div>
                   </div>
@@ -510,7 +604,15 @@ const HomeAboutSection = () => {
 
           <div className="mt-8 md:hidden text-center">
             <Link to="/packages">
-              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+              <button
+                className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#111827")
+                }
+              >
                 View All Packages
               </button>
             </Link>
@@ -522,7 +624,10 @@ const HomeAboutSection = () => {
       <div className="bg-white py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+            <span
+              className="font-bold tracking-widest uppercase text-xs"
+              style={{ color: THEME.highlight }}
+            >
               Guest Stories
             </span>
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
@@ -560,7 +665,10 @@ const HomeAboutSection = () => {
                     <h4 className="font-bold text-gray-900 text-sm">
                       {testimonial.name}
                     </h4>
-                    <p className="text-xs text-[#FF5733] font-bold uppercase tracking-wider">
+                    <p
+                      className="text-xs font-bold uppercase tracking-wider"
+                      style={{ color: THEME.highlight }}
+                    >
                       {testimonial.location}
                     </p>
                   </div>
@@ -576,7 +684,10 @@ const HomeAboutSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
             <div className="w-full md:w-auto">
-              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+              <span
+                className="font-bold tracking-widest uppercase text-xs"
+                style={{ color: THEME.highlight }}
+              >
                 Travel Inspiration
               </span>
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
@@ -584,7 +695,13 @@ const HomeAboutSection = () => {
               </h2>
             </div>
             <Link to="/blogs" className="hidden md:block">
-              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+              <button
+                className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.color = THEME.highlight)
+                }
+                onMouseOut={(e) => (e.currentTarget.style.color = "")}
+              >
                 Read All Blogs <FaArrowRight className="text-xs" />
               </button>
             </Link>
@@ -604,7 +721,10 @@ const HomeAboutSection = () => {
                       alt={post.title}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute top-4 left-4 bg-[#FF5733] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">
+                    <div
+                      className="absolute top-4 left-4 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide"
+                      style={{ backgroundColor: THEME.highlight }}
+                    >
                       {post.category}
                     </div>
                   </div>
@@ -612,16 +732,28 @@ const HomeAboutSection = () => {
                   <div className="p-5 flex flex-col flex-grow">
                     <div className="flex items-center text-xs text-gray-500 mb-3 space-x-4">
                       <div className="flex items-center">
-                        <FaCalendarAlt className="mr-1.5 text-[#FF5733]" />
+                        <FaCalendarAlt
+                          className="mr-1.5"
+                          style={{ color: THEME.highlight }}
+                        />
                         {post.date}
                       </div>
                       <div className="flex items-center">
-                        <FaUser className="mr-1.5 text-[#FF5733]" />
+                        <FaUser
+                          className="mr-1.5"
+                          style={{ color: THEME.highlight }}
+                        />
                         {post.author}
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#FF5733] transition-colors font-['Playfair_Display']">
+                    <h3
+                      className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 transition-colors font-['Playfair_Display']"
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.color = THEME.highlight)
+                      }
+                      onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                    >
                       {post.title}
                     </h3>
 
@@ -629,7 +761,10 @@ const HomeAboutSection = () => {
                       {post.excerpt}
                     </p>
 
-                    <span className="inline-flex items-center text-[#FF5733] font-semibold text-sm group-hover:underline mt-auto">
+                    <span
+                      className="inline-flex items-center font-semibold text-sm group-hover:underline mt-auto"
+                      style={{ color: THEME.highlight }}
+                    >
                       Read More <FaArrowRight className="ml-2 text-xs" />
                     </span>
                   </div>
@@ -640,7 +775,15 @@ const HomeAboutSection = () => {
 
           <div className="mt-8 md:hidden text-center">
             <Link to="/blogs">
-              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+              <button
+                className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#111827")
+                }
+              >
                 Read All Blogs
               </button>
             </Link>
@@ -653,7 +796,10 @@ const HomeAboutSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-8">
             <div className="w-full md:w-auto">
-              <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+              <span
+                className="font-bold tracking-widest uppercase text-xs"
+                style={{ color: THEME.highlight }}
+              >
                 Our Experts
               </span>
               <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
@@ -661,7 +807,13 @@ const HomeAboutSection = () => {
               </h2>
             </div>
             <Link to="/gallery" className="hidden md:block">
-              <button className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#FF5733] transition-colors">
+              <button
+                className="flex items-center gap-2 text-sm font-bold text-gray-600 transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.color = THEME.highlight)
+                }
+                onMouseOut={(e) => (e.currentTarget.style.color = "")}
+              >
                 View Full Team <FaArrowRight className="text-xs" />
               </button>
             </Link>
@@ -684,7 +836,10 @@ const HomeAboutSection = () => {
                   <h4 className="text-xl font-bold text-gray-900">
                     {member.name}
                   </h4>
-                  <p className="text-[#FF5733] text-xs font-bold uppercase tracking-wider mt-1">
+                  <p
+                    className="text-xs font-bold uppercase tracking-wider mt-1"
+                    style={{ color: THEME.highlight }}
+                  >
                     {member.role}
                   </p>
                 </div>
@@ -694,7 +849,15 @@ const HomeAboutSection = () => {
 
           <div className="mt-8 md:hidden text-center">
             <Link to="/gallery">
-              <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors">
+              <button
+                className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors"
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#111827")
+                }
+              >
                 View Full Team
               </button>
             </Link>
@@ -706,7 +869,10 @@ const HomeAboutSection = () => {
       <div className="bg-gray-50 py-10 md:py-16 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="text-[#FF5733] font-bold tracking-widest uppercase text-xs">
+            <span
+              className="font-bold tracking-widest uppercase text-xs"
+              style={{ color: THEME.highlight }}
+            >
               Get In Touch
             </span>
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mt-2">
@@ -716,7 +882,10 @@ const HomeAboutSection = () => {
 
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100 mb-8">
             <div className="bg-[#111827] text-white p-8 md:w-2/5 flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#FF5733] opacity-10 rounded-tr-full"></div>
+              <div
+                className="absolute bottom-0 left-0 w-32 h-32 opacity-10 rounded-tr-full"
+                style={{ backgroundColor: THEME.highlight }}
+              ></div>
               <div className="absolute top-0 right-0 w-20 h-20 bg-white opacity-5 rounded-bl-full"></div>
 
               <div className="relative z-10">
@@ -730,37 +899,46 @@ const HomeAboutSection = () => {
 
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <div className="mt-1 w-8 h-8 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                    <div
+                      className="mt-1 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg"
+                      style={{ backgroundColor: THEME.highlight }}
+                    >
                       <FaPhoneAlt className="text-xs" />
                     </div>
                     <div>
                       <h5 className="font-bold text-sm text-white">Phone</h5>
                       <p className="text-gray-400 text-sm mt-1">
-                        +254 700 000 000
+                        {CONTACT_INFO.phone}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <div className="mt-1 w-8 h-8 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                    <div
+                      className="mt-1 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg"
+                      style={{ backgroundColor: THEME.highlight }}
+                    >
                       <FaEnvelope className="text-xs" />
                     </div>
                     <div>
                       <h5 className="font-bold text-sm text-white">Email</h5>
                       <p className="text-gray-400 text-sm mt-1">
-                        info@saletotours.com
+                        {CONTACT_INFO.email}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <div className="mt-1 w-8 h-8 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                    <div
+                      className="mt-1 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg"
+                      style={{ backgroundColor: THEME.highlight }}
+                    >
                       <FaMapMarkerAlt className="text-xs" />
                     </div>
                     <div>
                       <h5 className="font-bold text-sm text-white">Location</h5>
                       <p className="text-gray-400 text-sm mt-1">
-                        Saleto Plaza, Nairobi, Kenya
+                        {CONTACT_INFO.address}
                       </p>
                     </div>
                   </div>
@@ -773,20 +951,44 @@ const HomeAboutSection = () => {
                 </h5>
                 <div className="flex space-x-3">
                   <a
-                    href="#"
-                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                    href={SOCIAL_LINKS.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = THEME.highlight)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#1F2937")
+                    }
                   >
                     <FaFacebookF className="text-xs" />
                   </a>
                   <a
-                    href="#"
-                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                    href={SOCIAL_LINKS.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = THEME.highlight)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#1F2937")
+                    }
                   >
                     <FaInstagram className="text-xs" />
                   </a>
                   <a
-                    href="#"
-                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                    href={SOCIAL_LINKS.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = THEME.highlight)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#1F2937")
+                    }
                   >
                     <FaWhatsapp className="text-xs" />
                   </a>
@@ -807,7 +1009,12 @@ const HomeAboutSection = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
+                      style={{ "--tw-ring-color": THEME.highlight }}
+                      onFocus={(e) =>
+                        (e.target.style.borderColor = THEME.highlight)
+                      }
+                      onBlur={(e) => (e.target.style.borderColor = "")}
                       placeholder="First Last"
                     />
                   </div>
@@ -817,7 +1024,12 @@ const HomeAboutSection = () => {
                     </label>
                     <input
                       type="tel"
-                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
+                      style={{ "--tw-ring-color": THEME.highlight }}
+                      onFocus={(e) =>
+                        (e.target.style.borderColor = THEME.highlight)
+                      }
+                      onBlur={(e) => (e.target.style.borderColor = "")}
                       placeholder="+254..."
                     />
                   </div>
@@ -828,8 +1040,13 @@ const HomeAboutSection = () => {
                   </label>
                   <input
                     type="email"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
-                    placeholder="john@example.com"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
+                    style={{ "--tw-ring-color": THEME.highlight }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = THEME.highlight)
+                    }
+                    onBlur={(e) => (e.target.style.borderColor = "")}
+                    placeholder="email@example.com"
                   />
                 </div>
                 <div>
@@ -838,28 +1055,40 @@ const HomeAboutSection = () => {
                   </label>
                   <textarea
                     rows="4"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors resize-none"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors resize-none"
+                    style={{ "--tw-ring-color": THEME.highlight }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = THEME.highlight)
+                    }
+                    onBlur={(e) => (e.target.style.borderColor = "")}
                     placeholder="Tell us about your trip..."
                   ></textarea>
                 </div>
-                <button className="w-full bg-[#FF5733] hover:bg-[#E64A19] text-white font-bold py-3.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 text-sm">
+                <button
+                  className="w-full text-white font-bold py-3.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 text-sm"
+                  style={{ backgroundColor: THEME.highlight }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      THEME.highlightDark)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = THEME.highlight)
+                  }
+                >
                   Send Message <FaPaperPlane className="text-xs" />
                 </button>
               </form>
             </div>
           </div>
 
-          <div className="w-full h-[350px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <iframe
-              title="Nairobi Map"
-              src="https://maps.google.com/maps?q=Nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+          {/* MAP CONTAINER */}
+          {/* We assume MAP_EMBED_CODE from constants contains the full <iframe> string. */}
+          {/* Use Tailwind arbitrary values to ensure the inner iframe matches the parent size. */}
+          <div className="w-full h-[350px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200 relative">
+            <div
+              className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full"
+              dangerouslySetInnerHTML={{ __html: MAP_EMBED_CODE }}
+            />
           </div>
         </div>
       </div>

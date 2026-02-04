@@ -1,18 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { COMPANY_NAME, CONTACT_INFO, THEME } from "../constants"; // 👈 Import constants
 
 const PrivacyPolicy = () => {
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
       {/* 1. HERO SECTION (Matches other pages) */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
             Privacy Policy
           </h1>
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             <span className="mx-2 text-xs">/</span>
@@ -32,9 +42,9 @@ const PrivacyPolicy = () => {
             1. Introduction
           </h3>
           <p className="mb-6">
-            Saleto Tours ("we", "our", or "us") is committed to protecting your
-            privacy. This Privacy Policy explains how we collect, use, and share
-            your personal information when you visit our website or book a
+            {COMPANY_NAME} ("we", "our", or "us") is committed to protecting
+            your privacy. This Privacy Policy explains how we collect, use, and
+            share your personal information when you visit our website or book a
             safari with us.
           </p>
 
@@ -79,7 +89,7 @@ const PrivacyPolicy = () => {
           </h3>
           <p>
             If you have questions about this policy, please contact us at{" "}
-            <strong>info@saletotours.com</strong>.
+            <strong>{CONTACT_INFO.email}</strong>.
           </p>
         </div>
       </div>

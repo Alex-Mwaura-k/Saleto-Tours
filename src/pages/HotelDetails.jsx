@@ -10,6 +10,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { hotelsData } from "../data/hotelsData";
+import { CONTACT_INFO, THEME } from "../constants"; // 👈 Import constants
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -38,7 +39,11 @@ const HotelDetails = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
           Hotel Not Found
         </h2>
-        <Link to="/hotels" className="text-[#FF5733] font-bold hover:underline">
+        <Link
+          to="/hotels"
+          className="font-bold hover:underline"
+          style={{ color: THEME.highlight }}
+        >
           Back to Hotels
         </Link>
       </div>
@@ -54,14 +59,17 @@ const HotelDetails = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen pb-20 font-sans">
-      {/* 3. HEADER & BREADCRUMB (Updated to #111827) */}
+      {/* 3. HEADER & BREADCRUMB */}
       <div className="bg-[#111827] text-white border-b border-gray-800 w-full shadow-md relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           {/* Breadcrumb: Back | Hotels | Detail */}
           <div className="flex items-center gap-3 text-sm text-gray-300">
             <Link
               to="/hotels"
-              className="flex items-center hover:text-[#FF5733] transition-colors gap-1 font-medium"
+              className="flex items-center transition-colors gap-1 font-medium hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
             >
               <FaChevronLeft className="text-xs" /> Back
             </Link>
@@ -70,7 +78,10 @@ const HotelDetails = () => {
 
             <Link
               to="/hotels"
-              className="hover:text-[#FF5733] transition-colors font-medium"
+              className="transition-colors font-medium hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
             >
               Hotels
             </Link>
@@ -84,10 +95,21 @@ const HotelDetails = () => {
 
           {/* Right Side Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <span className="text-lg font-bold text-[#FF5733]">
+            <span
+              className="text-lg font-bold"
+              style={{ color: THEME.highlight }}
+            >
               KES {hotel.price.toLocaleString()}
             </span>
-            <button className="bg-white text-[#111827] px-5 py-2 rounded-lg text-sm font-bold hover:bg-[#FF5733] hover:text-white transition-all shadow-sm">
+            <button
+              className="bg-white text-[#111827] px-5 py-2 rounded-lg text-sm font-bold hover:text-white transition-all shadow-sm"
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = THEME.highlight)
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "white")
+              }
+            >
               Book Now
             </button>
           </div>
@@ -105,7 +127,8 @@ const HotelDetails = () => {
               {hotel.category}
             </span>
             <span className="flex items-center gap-1">
-              <FaMapMarkerAlt className="text-[#FF5733]" /> {hotel.location}
+              <FaMapMarkerAlt style={{ color: THEME.highlight }} />{" "}
+              {hotel.location}
             </span>
             <span className="flex items-center gap-1 text-yellow-500">
               {[...Array(5)].map((_, i) => (
@@ -185,10 +208,20 @@ const HotelDetails = () => {
                 {hotel.rooms?.map((room, idx) => (
                   <div
                     key={idx}
-                    className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-[#FF5733] hover:shadow-md transition-all"
+                    className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:shadow-md transition-all"
+                    style={{ borderColor: "transparent" }} // handled by hover logic via class usually, but inline override below
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.borderColor = THEME.highlight)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.borderColor = "#e5e7eb")
+                    }
                   >
                     <div className="flex items-center gap-4">
-                      <div className="bg-orange-50 p-4 rounded-full text-[#FF5733]">
+                      <div
+                        className="bg-orange-50 p-4 rounded-full"
+                        style={{ color: THEME.highlight }}
+                      >
                         <FaBed className="text-xl" />
                       </div>
                       <div>
@@ -227,7 +260,10 @@ const HotelDetails = () => {
                             key={i}
                             className="text-gray-600 text-sm flex items-center gap-3"
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#FF5733]"></div>{" "}
+                            <div
+                              className="w-1.5 h-1.5 rounded-full"
+                              style={{ backgroundColor: THEME.highlight }}
+                            ></div>{" "}
                             {item}
                           </li>
                         ))}
@@ -274,7 +310,10 @@ const HotelDetails = () => {
             <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
               <div className="text-center mb-6">
                 <p className="text-gray-500 text-sm mb-1">Starting from</p>
-                <h3 className="text-3xl font-bold text-[#FF5733]">
+                <h3
+                  className="text-3xl font-bold"
+                  style={{ color: THEME.highlight }}
+                >
                   KES {hotel.price.toLocaleString()}
                 </h3>
                 <p className="text-gray-400 text-xs">
@@ -283,7 +322,17 @@ const HotelDetails = () => {
               </div>
 
               <div className="space-y-4 mb-6">
-                <button className="w-full bg-[#FF5733] text-white py-3.5 rounded-xl font-bold text-lg hover:bg-[#E64A19] transition-transform hover:-translate-y-1 shadow-md shadow-orange-100">
+                <button
+                  className="w-full text-white py-3.5 rounded-xl font-bold text-lg transition-transform hover:-translate-y-1 shadow-md"
+                  style={{ backgroundColor: THEME.highlight }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      THEME.highlightDark)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = THEME.highlight)
+                  }
+                >
                   Book This Hotel
                 </button>
 
@@ -308,10 +357,13 @@ const HotelDetails = () => {
                   Need immediate assistance?
                 </p>
                 <a
-                  href="tel:+254700000000"
-                  className="text-lg font-bold text-gray-900 hover:text-[#FF5733] transition-colors flex items-center justify-center gap-2"
+                  href={`tel:${CONTACT_INFO.phone}`}
+                  className="text-lg font-bold text-gray-900 transition-colors flex items-center justify-center gap-2"
+                  style={{ color: undefined }}
+                  onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+                  onMouseOut={(e) => (e.target.style.color = "")}
                 >
-                  <FaPhoneAlt className="text-xs" /> +254 700 000 000
+                  <FaPhoneAlt className="text-xs" /> {CONTACT_INFO.phone}
                 </a>
               </div>
             </div>

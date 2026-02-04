@@ -12,6 +12,7 @@ import {
   FaGlobeAfrica,
   FaPlus,
 } from "react-icons/fa";
+import { THEME } from "../constants"; // 👈 Import constants
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -32,8 +33,21 @@ const BlogDetails = () => {
       readTime: "8 min read",
       content: (
         <>
-          <p className="mb-6 first-letter:text-5xl first-letter:font-bold first-letter:text-[#FF5733] first-letter:mr-3 first-letter:float-left">
-            The Great Wildebeest Migration is often dubbed the "World Cup of
+          {/* Dynamic Drop Cap */}
+          <p className="mb-6">
+            <span
+              style={{
+                color: THEME.highlight,
+                fontSize: "3rem",
+                fontWeight: "bold",
+                float: "left",
+                marginRight: "0.75rem",
+                lineHeight: "1",
+              }}
+            >
+              T
+            </span>
+            he Great Wildebeest Migration is often dubbed the "World Cup of
             Wildlife." It is a year-round, circular journey where over 1.5
             million wildebeest, accompanied by zebras and gazelles, trek across
             the Serengeti-Mara ecosystem in search of greener pastures and
@@ -53,7 +67,10 @@ const BlogDetails = () => {
             calving season in the southern Serengeti, where thousands of babies
             are born daily—a magnet for predators like lions and cheetahs.
           </p>
-          <blockquote className="border-l-4 border-[#FF5733] pl-6 italic text-gray-700 my-10 text-lg bg-gray-50 py-4 rounded-r-lg">
+          <blockquote
+            className="border-l-4 pl-6 italic text-gray-700 my-10 text-lg bg-gray-50 py-4 rounded-r-lg"
+            style={{ borderColor: THEME.highlight }}
+          >
             "It is not just a movement of animals; it is a movement of life
             itself. The sheer noise, dust, and drama are unlike anything else on
             earth."
@@ -175,7 +192,9 @@ const BlogDetails = () => {
             </span>
           </div>
           <div className="hidden md:flex items-center gap-4 text-xs font-bold uppercase tracking-wider">
-            <span className="text-[#FF5733]">{displayPost.readTime}</span>
+            <span style={{ color: THEME.highlight }}>
+              {displayPost.readTime}
+            </span>
           </div>
         </div>
       </div>
@@ -190,7 +209,7 @@ const BlogDetails = () => {
             {displayPost.category}
           </span>
           <div className="flex items-center gap-1.5">
-            <FaCalendarAlt className="text-[#FF5733]" />
+            <FaCalendarAlt style={{ color: THEME.highlight }} />
             <span className="font-medium">{displayPost.date}</span>
           </div>
         </div>
@@ -227,7 +246,10 @@ const BlogDetails = () => {
                     />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#FF5733] uppercase tracking-wide bg-orange-100 px-2 py-0.5 rounded-md">
+                    <span
+                      className="text-xs font-bold uppercase tracking-wide bg-orange-100 px-2 py-0.5 rounded-md"
+                      style={{ color: THEME.highlight }}
+                    >
                       {displayPost.role}
                     </span>
                     <h3 className="font-bold text-gray-900 text-2xl font-['Playfair_Display'] mt-1">
@@ -239,7 +261,7 @@ const BlogDetails = () => {
                   </div>
                 </div>
 
-                {/* Stats Grid - NEW ADDITION */}
+                {/* Stats Grid */}
                 <div className="grid grid-cols-2 gap-4 mb-6 border-y border-gray-200 py-4 bg-white/50 rounded-lg px-2">
                   <div className="text-center border-r border-gray-200">
                     <div className="flex items-center justify-center gap-1.5 text-gray-900 font-bold text-lg">
@@ -271,7 +293,18 @@ const BlogDetails = () => {
 
               {/* Footer: Actions */}
               <div className="flex flex-col sm:flex-row items-center gap-4 mt-auto">
-                <button className="flex-1 w-full bg-[#111827] text-white py-3 rounded-lg font-bold text-sm hover:bg-[#FF5733] transition-colors flex items-center justify-center gap-2 shadow-md">
+                <button
+                  className="flex-1 w-full bg-[#111827] text-white py-3 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-md hover:bg-white"
+                  style={{ color: undefined }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = THEME.highlight;
+                    e.currentTarget.style.color = "white";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "#111827";
+                    e.currentTarget.style.color = "white";
+                  }}
+                >
                   <FaPlus className="text-xs" /> Follow Author
                 </button>
 
@@ -294,7 +327,13 @@ const BlogDetails = () => {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           {/* LEFT: Main Content */}
           <div className="lg:w-2/3">
-            <div className="prose prose-lg prose-headings:font-['Playfair_Display'] prose-a:text-[#FF5733] text-gray-600 max-w-none">
+            <div
+              className="prose prose-lg prose-headings:font-['Playfair_Display'] text-gray-600 max-w-none"
+              // Dynamically style prose links if possible, otherwise rely on CSS/Tailwind config
+              style={{
+                "--tw-prose-links": THEME.highlight,
+              }}
+            >
               {displayPost.content}
             </div>
           </div>
@@ -302,7 +341,10 @@ const BlogDetails = () => {
           {/* RIGHT: CTA Sidebar */}
           <div className="lg:w-1/3">
             <div className="bg-[#111827] p-8 rounded-2xl text-white text-center relative overflow-hidden sticky top-24">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5733] opacity-10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2"></div>
+              <div
+                className="absolute top-0 right-0 w-32 h-32 opacity-10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2"
+                style={{ backgroundColor: THEME.highlight }}
+              ></div>
               <h3 className="text-xl font-bold font-['Playfair_Display'] mb-2 relative z-10">
                 Inspired to Travel?
               </h3>
@@ -311,7 +353,18 @@ const BlogDetails = () => {
                 guide.
               </p>
               <Link to="/contact">
-                <button className="w-full bg-[#FF5733] text-white font-bold py-3 rounded-lg hover:bg-white hover:text-[#111827] transition-colors relative z-10">
+                <button
+                  className="w-full text-white font-bold py-3 rounded-lg transition-colors relative z-10 hover:bg-white hover:text-[#111827]"
+                  style={{ backgroundColor: THEME.highlight }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = "white";
+                    e.currentTarget.style.color = "#111827";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = THEME.highlight;
+                    e.currentTarget.style.color = "white";
+                  }}
+                >
                   Plan My Trip
                 </button>
               </Link>

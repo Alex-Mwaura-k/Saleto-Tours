@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import { THEME } from "../constants"; // 👈 Import constants
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +35,7 @@ const ScrollToTop = () => {
     if (prevPath.current) {
       sessionStorage.setItem(
         `scrollPos:${prevPath.current}`,
-        scrollPos.current.toString()
+        scrollPos.current.toString(),
       );
     }
 
@@ -73,8 +74,15 @@ const ScrollToTop = () => {
       <button
         type="button"
         onClick={manualScrollToTop}
-        className="p-3 rounded-full shadow-2xl text-white bg-[#FF5733] hover:bg-[#E64A19] transition-colors duration-300 focus:outline-none ring-2 ring-white"
+        className="p-3 rounded-full shadow-2xl text-white transition-colors duration-300 focus:outline-none ring-2 ring-white"
         aria-label="Scroll to top"
+        style={{ backgroundColor: THEME.highlight }}
+        onMouseOver={(e) =>
+          (e.currentTarget.style.backgroundColor = THEME.highlightDark)
+        }
+        onMouseOut={(e) =>
+          (e.currentTarget.style.backgroundColor = THEME.highlight)
+        }
       >
         <FaArrowUp className="text-xl" />
       </button>

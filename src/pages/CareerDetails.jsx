@@ -8,6 +8,7 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import { jobs, isJobExpired } from "./Careers";
+import { COMPANY_NAME, CONTACT_INFO, THEME } from "../constants"; // 👈 Import constants
 
 const CareerDetails = () => {
   const { id } = useParams();
@@ -21,7 +22,8 @@ const CareerDetails = () => {
           <h2 className="text-2xl font-bold text-gray-900">Job not found</h2>
           <Link
             to="/careers"
-            className="text-[#FF5733] hover:underline mt-4 block"
+            className="hover:underline mt-4 block font-bold"
+            style={{ color: THEME.highlight }}
           >
             Back to Careers
           </Link>
@@ -49,7 +51,13 @@ const CareerDetails = () => {
           </p>
           <Link
             to="/careers"
-            className="inline-block bg-gray-900 hover:bg-[#FF5733] text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            className="inline-block bg-gray-900 hover:text-white text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = THEME.highlight)
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#111827")
+            }
           >
             Browse Open Positions
           </Link>
@@ -60,7 +68,6 @@ const CareerDetails = () => {
 
   // 3. Render Active Job
   return (
-    // UPDATED: Reduced pb-10 to pb-6 to tighten bottom spacing
     <div className="bg-gray-50 min-h-screen font-sans pb-6">
       {/* 1. HERO SECTION */}
       <div className="bg-[#111827] text-white py-12 md:py-16">
@@ -69,12 +76,20 @@ const CareerDetails = () => {
           <div className="flex flex-wrap justify-between items-center mb-8">
             <Link
               to="/careers"
-              className="inline-flex items-center text-gray-400 hover:text-[#FF5733] transition-colors"
+              className="inline-flex items-center text-gray-400 transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.color = THEME.highlight)
+              }
+              onMouseOut={(e) => (e.currentTarget.style.color = "")}
             >
               <FaArrowLeft className="mr-2" /> Back to Jobs
             </Link>
 
-            <span className="bg-[#FF5733] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            <span
+              className="text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"
+              style={{ backgroundColor: THEME.highlight }}
+            >
               {job.department}
             </span>
           </div>
@@ -85,20 +100,21 @@ const CareerDetails = () => {
           </h1>
           <div className="flex flex-wrap gap-6 text-sm md:text-base text-gray-300">
             <span className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-[#FF5733]" /> {job.location}
+              <FaMapMarkerAlt style={{ color: THEME.highlight }} />{" "}
+              {job.location}
             </span>
             <span className="flex items-center gap-2">
-              <FaClock className="text-[#FF5733]" /> {job.type}
+              <FaClock style={{ color: THEME.highlight }} /> {job.type}
             </span>
             <span className="flex items-center gap-2">
-              <FaMoneyBillWave className="text-[#FF5733]" /> Competitive Salary
+              <FaMoneyBillWave style={{ color: THEME.highlight }} /> Competitive
+              Salary
             </span>
           </div>
         </div>
       </div>
 
       {/* 2. CONTENT SECTION */}
-      {/* UPDATED: Reduced mt-10 to mt-6 to tighten top spacing */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 md:p-12">
           <div className="prose prose-lg max-w-none text-gray-600">
@@ -108,7 +124,7 @@ const CareerDetails = () => {
             <p className="mb-6">
               We are seeking a passionate <strong>{job.title}</strong> to join
               our {job.department} team. In this role, you will play a pivotal
-              part in delivering the exceptional Saleto Tours experience that
+              part in delivering the exceptional {COMPANY_NAME} experience that
               our guests have come to expect. You will be working in a
               fast-paced, dynamic environment where your contributions directly
               impact our success.
@@ -166,8 +182,15 @@ const CareerDetails = () => {
               Job Title in the subject line.
             </p>
             <a
-              href={`mailto:careers@saletotours.com?subject=Application for ${job.title}`}
-              className="inline-block bg-[#FF5733] hover:bg-[#E64A19] text-white text-lg font-bold px-8 py-4 rounded-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              href={`mailto:${CONTACT_INFO.email}?subject=Application for ${job.title}`}
+              className="inline-block text-white text-lg font-bold px-8 py-4 rounded-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              style={{ backgroundColor: THEME.highlight }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = THEME.highlightDark)
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = THEME.highlight)
+              }
             >
               Apply via Email
             </a>

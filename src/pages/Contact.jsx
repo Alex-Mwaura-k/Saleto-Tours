@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  FaChevronRight, // Kept for logic, but using / in breadcrumb as requested
+  FaChevronRight,
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
@@ -11,6 +11,12 @@ import {
   FaInstagram,
   FaFacebookF,
 } from "react-icons/fa";
+import {
+  CONTACT_INFO,
+  SOCIAL_LINKS,
+  THEME,
+  MAP_EMBED_CODE,
+} from "../constants";
 
 const Contact = () => {
   return (
@@ -18,7 +24,10 @@ const Contact = () => {
       {/* 1. HERO HEADER */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         {/* Abstract Background Element */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
@@ -27,7 +36,13 @@ const Contact = () => {
 
           {/* Breadcrumb */}
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             <span className="mx-2">/</span>
@@ -41,7 +56,10 @@ const Contact = () => {
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
           {/* LEFT: INFO SIDEBAR */}
           <div className="bg-[#111827] text-white p-10 md:w-2/5 flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#FF5733] opacity-10 rounded-tr-full"></div>
+            <div
+              className="absolute bottom-0 left-0 w-32 h-32 opacity-10 rounded-tr-full"
+              style={{ backgroundColor: THEME.highlight }}
+            ></div>
             <div className="absolute top-0 right-0 w-20 h-20 bg-white opacity-5 rounded-bl-full"></div>
 
             <div className="relative z-10">
@@ -55,37 +73,46 @@ const Contact = () => {
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 w-10 h-10 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                  <div
+                    className="mt-1 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg"
+                    style={{ backgroundColor: THEME.highlight }}
+                  >
                     <FaPhoneAlt className="text-sm" />
                   </div>
                   <div>
                     <h5 className="font-bold text-sm text-white">Phone</h5>
                     <p className="text-gray-400 text-sm mt-1">
-                      +254 700 000 000
+                      {CONTACT_INFO.phone}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 w-10 h-10 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                  <div
+                    className="mt-1 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg"
+                    style={{ backgroundColor: THEME.highlight }}
+                  >
                     <FaEnvelope className="text-sm" />
                   </div>
                   <div>
                     <h5 className="font-bold text-sm text-white">Email</h5>
                     <p className="text-gray-400 text-sm mt-1">
-                      info@saletotours.com
+                      {CONTACT_INFO.email}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 w-10 h-10 bg-[#FF5733] rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                  <div
+                    className="mt-1 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white shadow-lg"
+                    style={{ backgroundColor: THEME.highlight }}
+                  >
                     <FaMapMarkerAlt className="text-sm" />
                   </div>
                   <div>
                     <h5 className="font-bold text-sm text-white">Location</h5>
                     <p className="text-gray-400 text-sm mt-1">
-                      Saleto Plaza, Nairobi, Kenya
+                      {CONTACT_INFO.address}
                     </p>
                   </div>
                 </div>
@@ -98,20 +125,44 @@ const Contact = () => {
               </h5>
               <div className="flex space-x-3">
                 <a
-                  href="#"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                  href={SOCIAL_LINKS.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor = THEME.highlight)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#1F2937")
+                  }
                 >
                   <FaFacebookF className="text-sm" />
                 </a>
                 <a
-                  href="#"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                  href={SOCIAL_LINKS.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor = THEME.highlight)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#1F2937")
+                  }
                 >
                   <FaInstagram className="text-sm" />
                 </a>
                 <a
-                  href="#"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF5733] hover:text-white text-gray-400 transition-all duration-300"
+                  href={SOCIAL_LINKS.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor = THEME.highlight)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#1F2937")
+                  }
                 >
                   <FaWhatsapp className="text-sm" />
                 </a>
@@ -133,8 +184,13 @@ const Contact = () => {
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
-                    placeholder="Frist Last"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
+                    style={{ "--tw-ring-color": THEME.highlight }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = THEME.highlight)
+                    }
+                    onBlur={(e) => (e.target.style.borderColor = "")}
+                    placeholder="First Last"
                   />
                 </div>
                 <div>
@@ -143,7 +199,12 @@ const Contact = () => {
                   </label>
                   <input
                     type="tel"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
+                    style={{ "--tw-ring-color": THEME.highlight }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = THEME.highlight)
+                    }
+                    onBlur={(e) => (e.target.style.borderColor = "")}
                     placeholder="+254..."
                   />
                 </div>
@@ -154,7 +215,12 @@ const Contact = () => {
                 </label>
                 <input
                   type="email"
-                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
+                  style={{ "--tw-ring-color": THEME.highlight }}
+                  onFocus={(e) =>
+                    (e.target.style.borderColor = THEME.highlight)
+                  }
+                  onBlur={(e) => (e.target.style.borderColor = "")}
                   placeholder="john@example.com"
                 />
               </div>
@@ -164,11 +230,25 @@ const Contact = () => {
                 </label>
                 <textarea
                   rows="4"
-                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:border-[#FF5733] focus:ring-1 focus:ring-[#FF5733] transition-colors resize-none"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors resize-none"
+                  style={{ "--tw-ring-color": THEME.highlight }}
+                  onFocus={(e) =>
+                    (e.target.style.borderColor = THEME.highlight)
+                  }
+                  onBlur={(e) => (e.target.style.borderColor = "")}
                   placeholder="Tell us about your trip..."
                 ></textarea>
               </div>
-              <button className="w-full bg-[#FF5733] hover:bg-[#E64A19] text-white font-bold py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
+              <button
+                className="w-full text-white font-bold py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
+                style={{ backgroundColor: THEME.highlight }}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlightDark)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = THEME.highlight)
+                }
+              >
                 Send Message <FaPaperPlane className="text-xs" />
               </button>
             </form>
@@ -179,21 +259,15 @@ const Contact = () => {
       {/* 3. MAP SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full mt-8">
         <h3 className="text-xl font-bold text-gray-900 font-['Playfair_Display'] mb-6 flex items-center gap-2">
-          <FaMapMarkerAlt className="text-[#FF5733]" /> Find Us Here
+          <FaMapMarkerAlt style={{ color: THEME.highlight }} /> Find Us Here
         </h3>
 
-        {/* Working Google Map Embed for Nairobi */}
-        <div className="w-full h-[400px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-          <iframe
-            title="Nairobi Map"
-            src="https://maps.google.com/maps?q=Nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+        {/* Working Google Map Embed */}
+        <div className="w-full h-[400px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200 relative">
+          <div
+            className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full"
+            dangerouslySetInnerHTML={{ __html: MAP_EMBED_CODE }}
+          />
         </div>
       </div>
     </div>

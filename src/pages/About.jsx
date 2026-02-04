@@ -8,8 +8,8 @@ import {
   FaAward,
   FaQuoteLeft,
 } from "react-icons/fa";
-// 1. IMPORT THE NEW COMPONENT
 import CountUpNumber from "../components/CountUpNumber";
+import { COMPANY_NAME, THEME } from "../constants"; // 👈 Import constants
 
 const About = () => {
   // Mock Data for Team
@@ -57,13 +57,22 @@ const About = () => {
     <div className="bg-gray-50 min-h-screen pb-8 font-sans">
       {/* 1. HERO HEADER */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
             About Us
           </h1>
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             <span className="mx-2 text-xs">/</span>
@@ -77,8 +86,10 @@ const About = () => {
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           {/* Image Side */}
           <div className="w-full lg:w-1/2 relative group">
-            {/* UPDATED BORDER LOGIC: Mobile = below (left-0 top-4), Desktop = left (-left-4) */}
-            <div className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 border-[#FF5733] rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"></div>
+            <div
+              className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"
+              style={{ borderColor: THEME.highlight }}
+            ></div>
 
             <img
               src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
@@ -89,31 +100,45 @@ const About = () => {
 
           {/* Text Side */}
           <div className="w-full lg:w-1/2 lg:pl-4">
-            <span className="text-[#FF5733] font-bold uppercase tracking-widest text-xs mb-2 block">
+            <span
+              className="font-bold uppercase tracking-widest text-xs mb-2 block"
+              style={{ color: THEME.highlight }}
+            >
               Who We Are
             </span>
             <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-6 leading-tight">
               Going Beyond the Maps to <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5733] to-orange-600">
+              <span
+                className="text-transparent bg-clip-text bg-gradient-to-r"
+                style={{
+                  backgroundImage: `linear-gradient(to right, ${THEME.highlight}, #ea580c)`,
+                }}
+              >
                 Discover the Real Africa
               </span>
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6 text-base">
-              Saleto Tours isn't just a travel agency; we are storytellers,
+              {COMPANY_NAME} isn't just a travel agency; we are storytellers,
               conservationists, and your local friends in East Africa. We
               believe a safari shouldn't just be a vacation—it should be a
               transformative journey that touches your soul.
             </p>
 
-            <div className="flex items-start gap-4 p-4 bg-white rounded-lg border-l-4 border-[#FF5733] shadow-sm">
-              <FaQuoteLeft className="text-[#FF5733] text-xl shrink-0 mt-1" />
+            <div
+              className="flex items-start gap-4 p-4 bg-white rounded-lg border-l-4 shadow-sm"
+              style={{ borderColor: THEME.highlight }}
+            >
+              <FaQuoteLeft
+                className="text-xl shrink-0 mt-1"
+                style={{ color: THEME.highlight }}
+              />
               <div>
                 <p className="text-gray-700 italic text-sm mb-2">
                   "We don't just show you the animals; we introduce you to their
                   world. Every itinerary is a personal promise of excellence."
                 </p>
                 <p className="font-bold text-gray-900 text-xs uppercase tracking-wide">
-                  – Founder, Saleto Tours
+                  – Founder, {COMPANY_NAME}
                 </p>
               </div>
             </div>
@@ -127,7 +152,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800">
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={15} suffix="+" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -135,7 +163,10 @@ const About = () => {
               </div>
             </div>
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={10000} suffix="+" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -143,7 +174,10 @@ const About = () => {
               </div>
             </div>
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={50} suffix="+" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -151,7 +185,10 @@ const About = () => {
               </div>
             </div>
             <div className="p-2">
-              <div className="text-3xl md:text-4xl font-bold text-[#FF5733] mb-1 flex justify-center">
+              <div
+                className="text-3xl md:text-4xl font-bold mb-1 flex justify-center"
+                style={{ color: THEME.highlight }}
+              >
                 <CountUpNumber end={100} suffix="%" />
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-widest">
@@ -200,7 +237,18 @@ const About = () => {
               key={idx}
               className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
             >
-              <div className="w-12 h-12 bg-orange-50 text-[#FF5733] rounded-full flex items-center justify-center text-xl mb-4 group-hover:bg-[#FF5733] group-hover:text-white transition-colors">
+              <div
+                className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-xl mb-4 transition-colors"
+                style={{ color: THEME.highlight }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = THEME.highlight;
+                  e.currentTarget.style.color = "white";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = ""; // reverts to class
+                  e.currentTarget.style.color = THEME.highlight;
+                }}
+              >
                 {item.icon}
               </div>
               <h4 className="font-bold text-gray-900 mb-2">{item.title}</h4>
@@ -226,7 +274,8 @@ const About = () => {
             </div>
             <Link
               to="/contact"
-              className="text-[#FF5733] font-bold text-sm hover:underline mt-4 md:mt-0 flex items-center gap-1"
+              className="font-bold text-sm hover:underline mt-4 md:mt-0 flex items-center gap-1"
+              style={{ color: THEME.highlight }}
             >
               Join our team <FaChevronRight className="text-xs" />
             </Link>
@@ -249,7 +298,10 @@ const About = () => {
                   <h4 className="text-xl font-bold text-gray-900">
                     {member.name}
                   </h4>
-                  <p className="text-[#FF5733] text-xs font-bold uppercase tracking-wider mt-1">
+                  <p
+                    className="text-xs font-bold uppercase tracking-wider mt-1"
+                    style={{ color: THEME.highlight }}
+                  >
                     {member.role}
                   </p>
                 </div>
@@ -270,7 +322,10 @@ const About = () => {
               key={idx}
               className="bg-white border border-gray-100 p-6 rounded-xl hover:border-gray-200 transition-colors"
             >
-              <span className="bg-orange-100 text-[#FF5733] text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">
+              <span
+                className="bg-orange-100 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide"
+                style={{ color: THEME.highlight }}
+              >
                 {item.tag}
               </span>
               <h3 className="text-lg font-bold text-gray-900 mt-3 mb-2">
@@ -279,7 +334,9 @@ const About = () => {
               <p className="text-gray-500 text-sm mb-4">{item.desc}</p>
               <Link
                 to="/blogs"
-                className="text-[#111827] text-sm font-bold hover:text-[#FF5733] flex items-center gap-1 transition-colors"
+                className="text-[#111827] text-sm font-bold flex items-center gap-1 transition-colors"
+                onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+                onMouseOut={(e) => (e.target.style.color = "#111827")}
               >
                 Read More <FaChevronRight className="text-xs" />
               </Link>
@@ -303,7 +360,18 @@ const About = () => {
               </p>
             </div>
             <Link to="/contact">
-              <button className="bg-[#FF5733] text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#111827] transition-all shadow-lg whitespace-nowrap">
+              <button
+                className="text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg whitespace-nowrap hover:bg-white hover:text-[#111827]"
+                style={{ backgroundColor: THEME.highlight }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "white";
+                  e.currentTarget.style.color = "#111827";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = THEME.highlight;
+                  e.currentTarget.style.color = "white";
+                }}
+              >
                 Get in Touch
               </button>
             </Link>

@@ -6,6 +6,7 @@ import {
   FaArrowRight,
   FaChevronRight,
 } from "react-icons/fa";
+import { COMPANY_NAME, THEME } from "../constants"; // 👈 Import constants
 
 const Blogs = () => {
   // 1. MOCK DATA
@@ -16,7 +17,7 @@ const Blogs = () => {
       image:
         "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       date: "Dec 24, 2024",
-      author: "Saleto Team",
+      author: `${COMPANY_NAME} Team`,
       excerpt:
         "Witness the greatest show on earth. Learn the best times to visit the Maasai Mara to see millions of wildebeest crossing the Mara River.",
       category: "Wildlife",
@@ -38,7 +39,7 @@ const Blogs = () => {
       image:
         "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       date: "Nov 30, 2024",
-      author: "Saleto Team",
+      author: `${COMPANY_NAME} Team`,
       excerpt:
         "Don't know what to wear? From neutral colors to camera gear, here is the ultimate checklist for your African safari adventure.",
       category: "Travel Tips",
@@ -60,7 +61,7 @@ const Blogs = () => {
       image:
         "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       date: "Oct 28, 2024",
-      author: "Saleto Team",
+      author: `${COMPANY_NAME} Team`,
       excerpt:
         "Respect is key. Learn about the traditions, dress code, and social norms before you visit a local Maasai community.",
       category: "Culture",
@@ -83,7 +84,10 @@ const Blogs = () => {
       {/* 1. HERO HEADER WITH BREADCRUMB */}
       <div className="bg-gray-900 text-white py-12 md:py-16 relative overflow-hidden">
         {/* Abstract Background Element */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
@@ -92,7 +96,13 @@ const Blogs = () => {
 
           {/* Breadcrumb */}
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             {/* Slash Separator */}
@@ -104,14 +114,15 @@ const Blogs = () => {
 
       {/* 2. BLOG GRID SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        {/* The Grid: Standardized gap-6 */}
+        {/* The Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
-            /* CHANGE: The Outer wrapper is now the ONE Link for the whole card */
             <Link
               to={`/blogs/${post.id}`}
               key={post.id}
               className="group block h-full"
+              // Inject theme color as a CSS variable for group-hover children to use
+              style={{ "--theme-highlight": THEME.highlight }}
             >
               <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col h-full">
                 {/* Image Container */}
@@ -122,7 +133,10 @@ const Blogs = () => {
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />
                   {/* Category Badge */}
-                  <div className="absolute top-4 left-4 bg-[#FF5733] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">
+                  <div
+                    className="absolute top-4 left-4 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide"
+                    style={{ backgroundColor: THEME.highlight }}
+                  >
                     {post.category}
                   </div>
                 </div>
@@ -132,18 +146,23 @@ const Blogs = () => {
                   {/* Meta Data */}
                   <div className="flex items-center text-xs text-gray-500 mb-3 space-x-4">
                     <div className="flex items-center">
-                      <FaCalendarAlt className="mr-1.5 text-[#FF5733]" />
+                      <FaCalendarAlt
+                        className="mr-1.5"
+                        style={{ color: THEME.highlight }}
+                      />
                       {post.date}
                     </div>
                     <div className="flex items-center">
-                      <FaUser className="mr-1.5 text-[#FF5733]" />
+                      <FaUser
+                        className="mr-1.5"
+                        style={{ color: THEME.highlight }}
+                      />
                       {post.author}
                     </div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-[#FF5733] transition-colors font-['Playfair_Display']">
-                    {/* Inner Link removed, text remains */}
+                  {/* Title - Uses CSS variable for dynamic hover color */}
+                  <h3 className="text-lg font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-[var(--theme-highlight)] transition-colors font-['Playfair_Display']">
                     {post.title}
                   </h3>
 
@@ -152,8 +171,8 @@ const Blogs = () => {
                     {post.excerpt}
                   </p>
 
-                  {/* Read More Link (Now just a span for visual styling) */}
-                  <span className="inline-flex items-center text-[#FF5733] font-semibold text-sm group-hover:underline mt-auto">
+                  {/* Read More Link - Uses CSS variable for color */}
+                  <span className="inline-flex items-center text-[var(--theme-highlight)] font-semibold text-sm group-hover:underline mt-auto">
                     Read More <FaArrowRight className="ml-2 text-xs" />
                   </span>
                 </div>

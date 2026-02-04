@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import {
   FaFacebook,
   FaInstagram,
-  FaTwitter,
   FaWhatsapp,
   FaChevronRight,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6"; // 👈 Import new X icon
 import {
   COMPANY_NAME,
   FOOTER_DESCRIPTION,
@@ -69,7 +69,8 @@ const Footer = () => {
                 }
                 onMouseOut={(e) => (e.currentTarget.style.color = "")}
               >
-                <FaTwitter size={20} />
+                {/* 👇 Updated to the new X Icon */}
+                <FaXTwitter size={20} />
               </a>
               <a
                 href={SOCIAL_LINKS.whatsapp}
@@ -157,7 +158,7 @@ const Footer = () => {
                 </Link>
               </li>
 
-              {/* MOBILE ONLY LINKS (Maintained from your original code) */}
+              {/* MOBILE ONLY LINKS */}
               <li className="lg:hidden">
                 <Link
                   to="/gallery"

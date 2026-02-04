@@ -8,9 +8,8 @@ import {
   FaTimes,
   FaCheck,
 } from "react-icons/fa";
-
-// 1. IMPORT DATA
 import { hotelsData } from "../data/hotelsData";
+import { THEME } from "../constants"; // 👈 Import constants
 
 const Hotels = () => {
   const allHotels = hotelsData;
@@ -114,13 +113,22 @@ const Hotels = () => {
     <div className="bg-gray-50 min-h-screen">
       {/* HERO HEADER - Updated Background Color */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
             Hotels & Lodges
           </h1>
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             <span className="mx-2 text-xs">/</span>
@@ -136,7 +144,7 @@ const Hotels = () => {
             onClick={() => setIsSidebarOpen(true)}
             className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm text-gray-700 font-bold border border-gray-200"
           >
-            <FaFilter className="text-[#FF5733]" /> Filters
+            <FaFilter style={{ color: THEME.highlight }} /> Filters
           </button>
           <span className="text-gray-500 text-sm font-bold">
             {filteredHotels.length} Properties
@@ -170,7 +178,15 @@ const Hotels = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:ring-[#FF5733] focus:border-[#FF5733]"
+                  className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:outline-none"
+                  style={{
+                    "--tw-ring-color": THEME.highlight,
+                    "--tw-border-opacity": 1,
+                  }}
+                  onFocus={(e) =>
+                    (e.target.style.borderColor = THEME.highlight)
+                  }
+                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
                 >
                   <option>Top Rated</option>
                   <option>Price: Low to High</option>
@@ -182,7 +198,10 @@ const Hotels = () => {
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span className="font-bold text-gray-700">Max Price</span>
-                  <span className="text-[#FF5733] font-bold">
+                  <span
+                    className="font-bold"
+                    style={{ color: THEME.highlight }}
+                  >
                     KES {priceRange.toLocaleString()}
                   </span>
                 </div>
@@ -193,7 +212,8 @@ const Hotels = () => {
                   step="5000"
                   value={priceRange}
                   onChange={(e) => setPriceRange(Number(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FF5733]"
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  style={{ accentColor: THEME.highlight }}
                 />
               </div>
 
@@ -207,7 +227,21 @@ const Hotels = () => {
                       className="flex items-center gap-3 cursor-pointer group"
                     >
                       <div
-                        className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedStars === star ? "bg-[#FF5733] border-[#FF5733] text-white" : "border-gray-300 bg-white"}`}
+                        className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                          selectedStars === star
+                            ? "text-white"
+                            : "border-gray-300 bg-white"
+                        }`}
+                        style={{
+                          backgroundColor:
+                            selectedStars === star
+                              ? THEME.highlight
+                              : undefined,
+                          borderColor:
+                            selectedStars === star
+                              ? THEME.highlight
+                              : undefined,
+                        }}
                       >
                         {selectedStars === star && (
                           <FaCheck className="text-xs" />
@@ -244,7 +278,12 @@ const Hotels = () => {
                 <select
                   value={selectedLocation}
                   onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:ring-[#FF5733] focus:border-[#FF5733]"
+                  className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:outline-none"
+                  style={{ "--tw-ring-color": THEME.highlight }}
+                  onFocus={(e) =>
+                    (e.target.style.borderColor = THEME.highlight)
+                  }
+                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
                 >
                   {locations.map((loc) => (
                     <option key={loc} value={loc}>
@@ -264,7 +303,19 @@ const Hotels = () => {
                       className="flex items-center gap-3 cursor-pointer"
                     >
                       <div
-                        className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedAmenities.includes(amenity) ? "bg-[#FF5733] border-[#FF5733] text-white" : "border-gray-300 bg-white"}`}
+                        className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                          selectedAmenities.includes(amenity)
+                            ? "text-white"
+                            : "border-gray-300 bg-white"
+                        }`}
+                        style={{
+                          backgroundColor: selectedAmenities.includes(amenity)
+                            ? THEME.highlight
+                            : undefined,
+                          borderColor: selectedAmenities.includes(amenity)
+                            ? THEME.highlight
+                            : undefined,
+                        }}
                       >
                         {selectedAmenities.includes(amenity) && (
                           <FaCheck className="text-xs" />
@@ -321,11 +372,21 @@ const Hotels = () => {
                       <div className="p-5 flex flex-col flex-grow">
                         <div className="flex justify-between items-start mb-2">
                           <div>
-                            <h3 className="text-lg font-bold text-gray-900 font-['Playfair_Display'] leading-tight mb-1 group-hover:text-[#FF5733] transition-colors">
+                            <h3
+                              className="text-lg font-bold text-gray-900 font-['Playfair_Display'] leading-tight mb-1 transition-colors"
+                              style={{ color: undefined }}
+                              onMouseOver={(e) =>
+                                (e.target.style.color = THEME.highlight)
+                              }
+                              onMouseOut={(e) => (e.target.style.color = "")}
+                            >
                               {hotel.name}
                             </h3>
                             <div className="flex items-center text-gray-500 text-xs">
-                              <FaMapMarkerAlt className="mr-1 text-[#FF5733]" />
+                              <FaMapMarkerAlt
+                                className="mr-1"
+                                style={{ color: THEME.highlight }}
+                              />
                               {hotel.location}
                             </div>
                           </div>
@@ -387,7 +448,8 @@ const Hotels = () => {
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="text-[#FF5733] font-bold text-sm hover:underline"
+                  className="font-bold text-sm hover:underline"
+                  style={{ color: THEME.highlight }}
                 >
                   Reset all filters
                 </button>

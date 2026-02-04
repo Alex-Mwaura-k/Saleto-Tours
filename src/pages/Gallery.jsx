@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
+import { THEME } from "../constants"; // 👈 Import constants
 
 const galleryImages = [
   // --- OUR TEAM ---
@@ -110,13 +111,22 @@ const Gallery = () => {
     <div className="bg-gray-50 min-h-screen font-sans pb-20">
       {/* 1. HERO SECTION */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5733] opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div
+          className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
+          style={{ backgroundColor: THEME.highlight }}
+        ></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
             Our Gallery
           </h1>
           <nav className="flex items-center text-sm md:text-base text-gray-400">
-            <Link to="/" className="hover:text-[#FF5733] transition-colors">
+            <Link
+              to="/"
+              className="transition-colors hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
+              onMouseOut={(e) => (e.target.style.color = "")}
+            >
               Home
             </Link>
             <span className="mx-2 text-xs">/</span>
@@ -134,9 +144,17 @@ const Gallery = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border-2 ${
                 activeCategory === cat
-                  ? "bg-[#FF5733] text-white border-[#FF5733] shadow-lg scale-105"
-                  : "bg-white text-gray-600 border-transparent hover:border-[#FF5733] hover:text-[#FF5733]"
+                  ? "text-white shadow-lg scale-105"
+                  : "bg-white text-gray-600 border-transparent"
               }`}
+              style={{
+                backgroundColor:
+                  activeCategory === cat ? THEME.highlight : "white",
+                borderColor:
+                  activeCategory === cat ? THEME.highlight : "transparent",
+                // For hover state logic on inactive buttons, we need inline styles or a more complex solution.
+                // A simple approach is keeping the class based hover and using the style for active state overrides.
+              }}
             >
               {cat}
             </button>
@@ -161,7 +179,10 @@ const Gallery = () => {
               />
 
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-4">
-                <span className="text-[#FF5733] text-xs font-bold uppercase tracking-widest mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                <span
+                  className="text-xs font-bold uppercase tracking-widest mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75"
+                  style={{ color: THEME.highlight }}
+                >
                   {image.category}
                 </span>
                 <h3 className="text-white font-['Playfair_Display'] text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
@@ -187,14 +208,18 @@ const Gallery = () => {
       {selectedImage &&
         createPortal(
           <div
-            // UPDATED: Used h-[100dvh] as requested to cover the full screen
             className="fixed top-0 left-0 w-screen h-[100dvh] z-[9999] bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center overflow-hidden animate-fade-in p-8 md:p-12"
             onClick={() => setSelectedImage(null)}
           >
             {/* Close Button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 text-white/80 hover:text-[#FF5733] hover:rotate-90 transition-all duration-300 p-2 z-20"
+              className="absolute top-4 right-4 text-white/80 transition-all duration-300 p-2 z-20 hover:rotate-90 hover:text-white"
+              style={{ color: undefined }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.color = THEME.highlight)
+              }
+              onMouseOut={(e) => (e.currentTarget.style.color = "")}
             >
               <FaTimes size={32} />
             </button>
@@ -212,7 +237,10 @@ const Gallery = () => {
               className="mt-4 bg-black/50 backdrop-blur-md px-6 py-3 rounded-full text-center min-w-[200px] pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <span className="text-[#FF5733] text-xs font-bold uppercase tracking-wider block mb-1">
+              <span
+                className="text-xs font-bold uppercase tracking-wider block mb-1"
+                style={{ color: THEME.highlight }}
+              >
                 {selectedImage.category}
               </span>
               <h3 className="text-white font-['Playfair_Display'] text-lg font-bold">
@@ -220,7 +248,7 @@ const Gallery = () => {
               </h3>
             </div>
           </div>,
-          document.body, // Renders outside the root app div
+          document.body,
         )}
     </div>
   );
