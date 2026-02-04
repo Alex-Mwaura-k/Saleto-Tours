@@ -12,8 +12,6 @@ import {
   FOOTER_DESCRIPTION,
   CONTACT_INFO,
   SOCIAL_LINKS,
-  QUICK_LINKS,
-  OTHER_LINKS,
   THEME,
 } from "../constants";
 
@@ -35,14 +33,13 @@ const Footer = () => {
               {FOOTER_DESCRIPTION}
             </p>
 
-            {/* Social Icons */}
             <div className="flex justify-center lg:justify-start space-x-4">
               <a
                 href={SOCIAL_LINKS.facebook}
                 target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
-                style={{ color: undefined }} // Let CSS handle default, hover via class or style below
+                rel="noopener noreferrer"
+                className="hover:text-[#FF5733] transition"
+                style={{ color: undefined }}
                 onMouseOver={(e) =>
                   (e.currentTarget.style.color = THEME.highlight)
                 }
@@ -53,8 +50,8 @@ const Footer = () => {
               <a
                 href={SOCIAL_LINKS.instagram}
                 target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
+                rel="noopener noreferrer"
+                className="hover:text-[#FF5733] transition"
                 onMouseOver={(e) =>
                   (e.currentTarget.style.color = THEME.highlight)
                 }
@@ -65,8 +62,8 @@ const Footer = () => {
               <a
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
+                rel="noopener noreferrer"
+                className="hover:text-[#FF5733] transition"
                 onMouseOver={(e) =>
                   (e.currentTarget.style.color = THEME.highlight)
                 }
@@ -77,8 +74,8 @@ const Footer = () => {
               <a
                 href={SOCIAL_LINKS.whatsapp}
                 target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
+                rel="noopener noreferrer"
+                className="hover:text-[#FF5733] transition"
                 onMouseOver={(e) =>
                   (e.currentTarget.style.color = THEME.highlight)
                 }
@@ -95,49 +92,145 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-2 text-sm">
-              {QUICK_LINKS.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="flex items-center gap-2 hover:text-white transition group"
-                  >
-                    <FaChevronRight
-                      className="text-[10px]"
-                      style={{ color: THEME.highlight }}
-                    />
-                    <span className="group-hover:translate-x-1 transition-transform">
-                      {link.name}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/about"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/destinations"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Destinations
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/packages"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Safari Packages
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blogs"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Travel Blogs
+                </Link>
+              </li>
 
-              {/* Mobile-only logic handled by CSS if needed, but for now showing all relevant ones */}
+              {/* MOBILE ONLY LINKS (Maintained from your original code) */}
+              <li className="lg:hidden">
+                <Link
+                  to="/gallery"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Gallery
+                </Link>
+              </li>
+              <li className="lg:hidden">
+                <Link
+                  to="/careers"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Careers
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* 3. OTHER LINKS */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-2">
+          {/* 3. OTHER LINKS (Desktop Only) */}
+          <div className="hidden lg:block col-span-1 md:col-span-1 lg:col-span-2">
             <h4 className="text-lg font-semibold text-white mb-4">
               Other Links
             </h4>
             <ul className="space-y-2 text-sm">
-              {OTHER_LINKS.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="flex items-center gap-2 hover:text-white transition group"
-                  >
-                    <FaChevronRight
-                      className="text-[10px]"
-                      style={{ color: THEME.highlight }}
-                    />
-                    <span className="group-hover:translate-x-1 transition-transform">
-                      {link.name}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/gallery"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Gallery
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/careers"
+                  className="flex items-center gap-2 hover:text-[#FF5733] transition"
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.color = THEME.highlight)
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.color = "")}
+                >
+                  <FaChevronRight
+                    className="text-[10px]"
+                    style={{ color: THEME.highlight }}
+                  />
+                  Careers
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -150,22 +243,8 @@ const Footer = () => {
               <li className="flex items-center gap-2">
                 {CONTACT_INFO.address}
               </li>
-              <li className="flex items-center gap-2">
-                <a
-                  href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-white"
-                >
-                  {CONTACT_INFO.email}
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <a
-                  href={`tel:${CONTACT_INFO.phone}`}
-                  className="hover:text-white"
-                >
-                  {CONTACT_INFO.phone}
-                </a>
-              </li>
+              <li className="flex items-center gap-2">{CONTACT_INFO.email}</li>
+              <li className="flex items-center gap-2">{CONTACT_INFO.phone}</li>
             </ul>
           </div>
 
@@ -177,15 +256,15 @@ const Footer = () => {
             <p className="text-sm text-gray-400 mb-4">
               Subscribe for the latest safari offers.
             </p>
-            <form className="flex" onSubmit={(e) => e.preventDefault()}>
+            <div className="flex">
               <input
                 type="email"
                 placeholder="Your email"
+                id="cEmail"
                 className="bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-1 w-full border border-gray-700"
                 style={{ "--tw-ring-color": THEME.highlight }}
               />
               <button
-                type="submit"
                 className="text-white px-6 py-2 rounded-r-md transition font-bold"
                 style={{ backgroundColor: THEME.highlight }}
                 onMouseOver={(e) =>
@@ -197,7 +276,7 @@ const Footer = () => {
               >
                 Go
               </button>
-            </form>
+            </div>
           </div>
         </div>
 

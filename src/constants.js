@@ -16,8 +16,8 @@ export const THEME = {
 
 // --- CONTACT DETAILS ---
 export const CONTACT_INFO = {
-  phone: "+25474995011",
-  whatsapp: "+25474995011",
+  phone: "+254714995011",
+  whatsapp: "+254714995011",
   email: "info@saletotours.com",
   address: "Nairobi, Kenya",
   office: "Delta Towers, Westlands, Nairobi",
@@ -29,7 +29,7 @@ export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/saleto_tours/",
   twitter: "https://x.com/search?q=saleto%20tours&src=typed_query&f=top",
   linkedin: "https://linkedin.com/company/saletotours",
-  whatsapp: `https://wa.me/25474995011`,
+  whatsapp: `https://wa.me/254714995011`,
 };
 
 // --- NAVIGATION MENU (Main) ---
