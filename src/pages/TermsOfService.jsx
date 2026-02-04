@@ -81,7 +81,7 @@ const TermsOfService = () => {
           </h3>
           <p>
             These terms are governed by the laws of Kenya. Any disputes shall be
-            resolved in the courts of Nairobi.
+            resolved in the courts of Narok.
           </p>
         </div>
       </div>
