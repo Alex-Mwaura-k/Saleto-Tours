@@ -9,22 +9,19 @@ import {
   FaCheck,
 } from "react-icons/fa";
 import { hotelsData } from "../data/hotelsData";
-import { THEME } from "../constants"; // 👈 Import constants
+import { THEME } from "../constants";
 
 const Hotels = () => {
   const allHotels = hotelsData;
 
-  // 2. STATE MANAGEMENT
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sortBy, setSortBy] = useState("Top Rated");
 
-  // Filter States
   const [priceRange, setPriceRange] = useState(100000);
   const [selectedStars, setSelectedStars] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState("All Locations");
   const [selectedAmenities, setSelectedAmenities] = useState([]);
 
-  // 3. AVAILABLE OPTIONS
   const locations = [
     "All Locations",
     ...new Set(allHotels.map((h) => h.location)),
@@ -43,24 +40,19 @@ const Hotels = () => {
     "View",
   ];
 
-  // 4. FILTER LOGIC
   const filteredHotels = useMemo(() => {
     return allHotels
       .filter((hotel) => {
-        // A. Price Filter
         if (hotel.price > priceRange) return false;
 
-        // B. Star Rating
         if (selectedStars && hotel.rating < selectedStars) return false;
 
-        // C. Location
         if (
           selectedLocation !== "All Locations" &&
           !hotel.location.includes(selectedLocation)
         )
           return false;
 
-        // D. Amenities (Robust Check)
         const hotelAmenityStrings = hotel.amenities
           ? hotel.amenities
               .flatMap((cat) => cat.items)
@@ -92,7 +84,6 @@ const Hotels = () => {
     sortBy,
   ]);
 
-  // Handlers
   const toggleAmenity = (amenity) => {
     setSelectedAmenities((prev) =>
       prev.includes(amenity)
@@ -111,7 +102,6 @@ const Hotels = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* HERO HEADER - Updated Background Color */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -138,7 +128,6 @@ const Hotels = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* MOBILE FILTER TOGGLE */}
         <div className="lg:hidden mb-6 flex justify-between items-center">
           <button
             onClick={() => setIsSidebarOpen(true)}
@@ -152,7 +141,6 @@ const Hotels = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-start relative">
-          {/* SIDEBAR FILTER SECTION */}
           <div
             className={`
             fixed inset-0 z-50 bg-white p-6 transition-transform duration-300 ease-in-out 
@@ -163,7 +151,6 @@ const Hotels = () => {
             [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']
           `}
           >
-            {/* Mobile Header */}
             <div className="flex justify-between items-center lg:hidden mb-6">
               <h2 className="text-xl font-bold">Filters</h2>
               <button onClick={() => setIsSidebarOpen(false)}>
@@ -172,7 +159,6 @@ const Hotels = () => {
             </div>
 
             <div className="bg-white lg:rounded-xl lg:shadow-sm lg:p-6 space-y-8 lg:border lg:border-gray-100">
-              {/* 1. Sort By */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Sort By</h3>
                 <select
@@ -194,7 +180,6 @@ const Hotels = () => {
                 </select>
               </div>
 
-              {/* 2. Price Range */}
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span className="font-bold text-gray-700">Max Price</span>
@@ -217,7 +202,6 @@ const Hotels = () => {
                 />
               </div>
 
-              {/* 3. Star Rating */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Star Rating</h3>
                 <div className="space-y-2">
@@ -272,7 +256,6 @@ const Hotels = () => {
                 </div>
               </div>
 
-              {/* 4. Location */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Location</h3>
                 <select
@@ -293,7 +276,6 @@ const Hotels = () => {
                 </select>
               </div>
 
-              {/* 5. Amenities */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Amenities</h3>
                 <div className="space-y-2.5">
@@ -335,7 +317,6 @@ const Hotels = () => {
                 </div>
               </div>
 
-              {/* Clear Filters */}
               <button
                 onClick={clearFilters}
                 className="w-full py-2.5 border border-gray-300 rounded-lg text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors"
@@ -345,7 +326,6 @@ const Hotels = () => {
             </div>
           </div>
 
-          {/* MAIN GRID SECTION */}
           <div className="flex-1">
             {filteredHotels.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -353,10 +333,9 @@ const Hotels = () => {
                   <Link
                     key={hotel.id}
                     to={`/hotels/${hotel.id}`}
-                    className="block group" // Makes entire card a link
+                    className="block group"
                   >
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-                      {/* Image */}
                       <div className="relative h-52 overflow-hidden">
                         <img
                           src={hotel.image}
@@ -368,7 +347,6 @@ const Hotels = () => {
                         </div>
                       </div>
 
-                      {/* Content */}
                       <div className="p-5 flex flex-col flex-grow">
                         <div className="flex justify-between items-start mb-2">
                           <div>
@@ -398,7 +376,6 @@ const Hotels = () => {
                           </div>
                         </div>
 
-                        {/* Amenities */}
                         <div className="flex flex-wrap gap-2 mb-6 mt-2">
                           {hotel.amenities && hotel.amenities.length > 0 ? (
                             hotel.amenities
@@ -422,7 +399,6 @@ const Hotels = () => {
                           </span>
                         </div>
 
-                        {/* Updated Button */}
                         <div className="mt-auto">
                           <button className="w-full py-2.5 bg-[#111827] text-white border-2 border-[#111827] rounded-lg font-bold text-sm hover:bg-transparent hover:text-[#111827] transition-all duration-300">
                             View Details
@@ -434,7 +410,6 @@ const Hotels = () => {
                 ))}
               </div>
             ) : (
-              // Empty State
               <div className="flex flex-col items-center justify-center py-20 bg-white rounded-xl border border-gray-100 border-dashed text-center">
                 <div className="bg-gray-50 p-4 rounded-full mb-4">
                   <FaSearch className="text-gray-400 text-xl" />

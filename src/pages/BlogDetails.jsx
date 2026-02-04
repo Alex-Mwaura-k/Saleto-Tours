@@ -2,22 +2,18 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   FaCalendarAlt,
-  FaUser,
-  FaClock,
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
   FaChevronLeft,
   FaPenNib,
   FaGlobeAfrica,
   FaPlus,
+  FaTwitter,
+  FaLinkedinIn,
 } from "react-icons/fa";
-import { THEME } from "../constants"; // 👈 Import constants
+import { THEME } from "../constants";
 
 const BlogDetails = () => {
   const { id } = useParams();
 
-  // MOCK DATA
   const blogPosts = [
     {
       id: 1,
@@ -33,7 +29,6 @@ const BlogDetails = () => {
       readTime: "8 min read",
       content: (
         <>
-          {/* Dynamic Drop Cap */}
           <p className="mb-6">
             <span
               style={{
@@ -160,10 +155,8 @@ const BlogDetails = () => {
     },
   ];
 
-  // Find the post
   const post = blogPosts.find((p) => p.id === parseInt(id));
 
-  // Fallback
   const displayPost = post || {
     ...blogPosts[0],
     title: "Post Not Found",
@@ -172,7 +165,6 @@ const BlogDetails = () => {
 
   return (
     <div className="bg-white min-h-screen font-sans pb-20">
-      {/* 1. TOP BLACK NAVIGATION BAR */}
       <div className="bg-[#111827] text-gray-300 py-3 text-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
@@ -199,7 +191,6 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      {/* 2. TITLE SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
         <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-gray-900 mb-4 leading-tight">
           {displayPost.title}
@@ -215,10 +206,8 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      {/* 3. SPLIT HERO: IMAGE (50%) + AUTHOR CARD (50%) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
-          {/* LEFT: IMAGE (50%) */}
           <div className="w-full lg:w-1/2">
             <div className="w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-sm">
               <img
@@ -229,14 +218,11 @@ const BlogDetails = () => {
             </div>
           </div>
 
-          {/* RIGHT: ENRICHED AUTHOR CARD (50%) */}
           <div className="w-full lg:w-1/2">
             <div className="h-full bg-gray-50 p-8 rounded-3xl border border-gray-100 flex flex-col justify-between relative overflow-hidden">
-              {/* Background Texture */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
 
               <div>
-                {/* Header: Avatar + Name + Role */}
                 <div className="flex items-center gap-5 mb-6 relative z-10">
                   <div className="w-20 h-20 bg-gray-200 rounded-full overflow-hidden border-4 border-white shadow-lg shrink-0">
                     <img
@@ -261,7 +247,6 @@ const BlogDetails = () => {
                   </div>
                 </div>
 
-                {/* Stats Grid */}
                 <div className="grid grid-cols-2 gap-4 mb-6 border-y border-gray-200 py-4 bg-white/50 rounded-lg px-2">
                   <div className="text-center border-r border-gray-200">
                     <div className="flex items-center justify-center gap-1.5 text-gray-900 font-bold text-lg">
@@ -283,7 +268,6 @@ const BlogDetails = () => {
                   </div>
                 </div>
 
-                {/* Bio */}
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">
                   Passionate about sharing the hidden gems of Africa. Dedicated
                   to sustainable tourism and capturing the magic of the wild
@@ -291,7 +275,6 @@ const BlogDetails = () => {
                 </p>
               </div>
 
-              {/* Footer: Actions */}
               <div className="flex flex-col sm:flex-row items-center gap-4 mt-auto">
                 <button
                   className="flex-1 w-full bg-[#111827] text-white py-3 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-md hover:bg-white"
@@ -322,14 +305,11 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      {/* 4. CONTENT & CTA GRID */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-          {/* LEFT: Main Content */}
           <div className="lg:w-2/3">
             <div
               className="prose prose-lg prose-headings:font-['Playfair_Display'] text-gray-600 max-w-none"
-              // Dynamically style prose links if possible, otherwise rely on CSS/Tailwind config
               style={{
                 "--tw-prose-links": THEME.highlight,
               }}
@@ -338,7 +318,6 @@ const BlogDetails = () => {
             </div>
           </div>
 
-          {/* RIGHT: CTA Sidebar */}
           <div className="lg:w-1/3">
             <div className="bg-[#111827] p-8 rounded-2xl text-white text-center relative overflow-hidden sticky top-24">
               <div

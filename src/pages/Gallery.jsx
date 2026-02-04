@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
-import { THEME } from "../constants"; // 👈 Import constants
+import { THEME } from "../constants";
 
 const galleryImages = [
-  // --- OUR TEAM ---
   {
     id: 1,
     src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -30,8 +29,6 @@ const galleryImages = [
     category: "Team",
     title: "Alice - Customer Care",
   },
-
-  // --- WILDLIFE ---
   {
     id: 5,
     src: "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -56,8 +53,6 @@ const galleryImages = [
     category: "Wildlife",
     title: "Giraffes in Nairobi",
   },
-
-  // --- LODGES ---
   {
     id: 9,
     src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -95,7 +90,6 @@ const Gallery = () => {
       ? galleryImages
       : galleryImages.filter((img) => img.category === activeCategory);
 
-  // DISABLE BODY SCROLL WHEN MODAL IS OPEN
   useEffect(() => {
     if (selectedImage) {
       document.body.style.overflow = "hidden";
@@ -109,7 +103,6 @@ const Gallery = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans pb-20">
-      {/* 1. HERO SECTION */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -136,7 +129,6 @@ const Gallery = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        {/* 2. FILTER TABS */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           {categories.map((cat) => (
             <button
@@ -152,8 +144,6 @@ const Gallery = () => {
                   activeCategory === cat ? THEME.highlight : "white",
                 borderColor:
                   activeCategory === cat ? THEME.highlight : "transparent",
-                // For hover state logic on inactive buttons, we need inline styles or a more complex solution.
-                // A simple approach is keeping the class based hover and using the style for active state overrides.
               }}
             >
               {cat}
@@ -161,7 +151,6 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* 3. IMAGE GRID */}
         <div
           key={activeCategory}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in-up"
@@ -196,7 +185,6 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredImages.length === 0 && (
           <div className="text-center py-20 text-gray-500 animate-pulse">
             No images found for this category.
@@ -204,14 +192,12 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* 4. LIGHTBOX MODAL (USING PORTAL + 100DVH) */}
       {selectedImage &&
         createPortal(
           <div
             className="fixed top-0 left-0 w-screen h-[100dvh] z-[9999] bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center overflow-hidden animate-fade-in p-8 md:p-12"
             onClick={() => setSelectedImage(null)}
           >
-            {/* Close Button */}
             <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-4 right-4 text-white/80 transition-all duration-300 p-2 z-20 hover:rotate-90 hover:text-white"
@@ -224,7 +210,6 @@ const Gallery = () => {
               <FaTimes size={32} />
             </button>
 
-            {/* IMAGE */}
             <img
               src={selectedImage.src}
               alt={selectedImage.title}
@@ -232,7 +217,6 @@ const Gallery = () => {
               onClick={(e) => e.stopPropagation()}
             />
 
-            {/* CAPTION */}
             <div
               className="mt-4 bg-black/50 backdrop-blur-md px-6 py-3 rounded-full text-center min-w-[200px] pointer-events-auto"
               onClick={(e) => e.stopPropagation()}

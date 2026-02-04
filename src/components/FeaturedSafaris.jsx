@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaExternalLinkAlt } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
+import { THEME } from "../constants";
 
 const FeaturedSafaris = () => {
   const featuredDestinations = destinationsData.slice(0, 4);
@@ -36,7 +37,10 @@ const FeaturedSafaris = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
 
                 <div className="absolute bottom-0 left-0 w-full p-6">
-                  <span className="bg-[#FF5733] text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">
+                  <span
+                    className="text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block"
+                    style={{ backgroundColor: THEME.highlight }}
+                  >
                     {dest.category}
                   </span>
 
@@ -48,7 +52,10 @@ const FeaturedSafaris = () => {
                     {dest.description}
                   </p>
 
-                  <div className="flex items-center text-[#FF5733] text-xs font-bold">
+                  <div
+                    className="flex items-center text-xs font-bold"
+                    style={{ color: THEME.highlight }}
+                  >
                     Explore <FaExternalLinkAlt className="ml-2 text-[10px]" />
                   </div>
                 </div>
@@ -71,7 +78,15 @@ const FeaturedSafaris = () => {
 
         <div className="text-center">
           <Link to="/destinations">
-            <button className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#FF5733] transition-colors duration-300 transform text-sm">
+            <button
+              className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors duration-300 transform text-sm"
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = THEME.highlight)
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#111827")
+              }
+            >
               View All Destinations
             </button>
           </Link>

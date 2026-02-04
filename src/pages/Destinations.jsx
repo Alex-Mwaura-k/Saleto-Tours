@@ -1,28 +1,24 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
-  FaChevronRight,
   FaMapMarkerAlt,
   FaExternalLinkAlt,
   FaSearch,
   FaChevronDown,
 } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
-import { THEME } from "../constants"; // 👈 Import constants
+import { THEME } from "../constants";
 
 const Destinations = () => {
-  // 1. Calculate the highest price in your data dynamically
   const highestPrice = useMemo(
     () => Math.max(...destinationsData.map((d) => d.price || 0)),
     [],
   );
 
-  // 2. STATE: Category, Search, and Price
   const [filter, setFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [priceRange, setPriceRange] = useState(highestPrice); // Default to max price
+  const [priceRange, setPriceRange] = useState(highestPrice);
 
-  // 3. LOGIC: Filter by Category + Search + Price
   const filteredDestinations = destinationsData.filter((dest) => {
     const matchesCategory = filter === "All" || dest.category === filter;
 
@@ -35,12 +31,10 @@ const Destinations = () => {
     return matchesCategory && matchesSearch && matchesPrice;
   });
 
-  // Extract unique categories for the dropdown
   const categories = ["Park", "Beach", "Mountain", "Lake"];
 
   return (
     <div className="bg-gray-50 min-h-screen pb-20 font-sans">
-      {/* HERO HEADER */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -68,12 +62,9 @@ const Destinations = () => {
         </div>
       </div>
 
-      {/* FILTER & SEARCH BAR */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
-          {/* Main Flex Container */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            {/* GROUP 1: LEFT (All Button + Dropdown together) */}
             <div className="flex items-center gap-3 w-full lg:w-auto">
               <button
                 onClick={() => setFilter("All")}
@@ -99,7 +90,7 @@ const Destinations = () => {
                   onFocus={(e) =>
                     (e.target.style.borderColor = THEME.highlight)
                   }
-                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")} // tailwind gray-200
+                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
                 >
                   <option value="All">Location</option>
                   {categories.map((cat) => (
@@ -114,7 +105,6 @@ const Destinations = () => {
               </div>
             </div>
 
-            {/* GROUP 2: CENTER (Price Range) */}
             <div className="flex flex-col w-full lg:w-64 px-2">
               <div className="flex justify-between text-xs font-bold text-gray-500 mb-1.5">
                 <span>Max Price</span>
@@ -134,7 +124,6 @@ const Destinations = () => {
               />
             </div>
 
-            {/* GROUP 3: RIGHT (Search Input) */}
             <div className="relative w-full lg:w-64">
               <input
                 type="text"
@@ -152,23 +141,19 @@ const Destinations = () => {
         </div>
       </div>
 
-      {/* DESTINATIONS GRID */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDestinations.map((dest) => (
             <Link to={`/destinations/${dest.id}`} key={dest.id}>
               <div className="group relative h-96 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                {/* Background Image */}
                 <img
                   src={dest.image}
                   alt={dest.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
-                {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
 
-                {/* Content */}
                 <div className="absolute bottom-0 left-0 w-full p-6">
                   <span
                     className="text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block"
@@ -193,12 +178,10 @@ const Destinations = () => {
                   </div>
                 </div>
 
-                {/* Map Marker */}
                 <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm p-2 rounded-full text-white">
                   <FaMapMarkerAlt />
                 </div>
 
-                {/* Price Tag */}
                 {dest.price && (
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full shadow-lg z-10">
                     <span className="text-gray-900 font-bold text-xs flex items-center gap-1">
@@ -210,7 +193,6 @@ const Destinations = () => {
             </Link>
           ))}
 
-          {/* No Results Message */}
           {filteredDestinations.length === 0 && (
             <div className="col-span-full text-center py-20 text-gray-500">
               <p className="text-xl mb-4">
@@ -237,7 +219,6 @@ const Destinations = () => {
         </div>
       </div>
 
-      {/* CTA SECTION */}
       <div className="bg-white mt-20 py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold font-['Playfair_Display'] mb-4 text-gray-900">
@@ -258,8 +239,6 @@ const Destinations = () => {
                 e.currentTarget.style.backgroundColor = "#111827";
                 e.currentTarget.style.color = "white";
               }}
-              // Alternatively, stick to the simple hover logic from previous files:
-              // For consistent theme usage:
               style={{ backgroundColor: "#111827" }}
             >
               Get a Recommendation

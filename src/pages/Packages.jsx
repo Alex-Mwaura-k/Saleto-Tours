@@ -7,14 +7,12 @@ import {
   FaChevronDown,
   FaSearch,
 } from "react-icons/fa";
-import { packagesData } from "../data/packagesData"; // 👈 Import shared data
-import { THEME } from "../constants"; // 👈 Import constants
+import { packagesData } from "../data/packagesData";
+import { THEME } from "../constants";
 
 const Packages = () => {
-  // 1. USE SHARED DATA
   const allPackages = packagesData;
 
-  // 2. FILTER & SEARCH LOGIC
   const highestPrice = useMemo(
     () => Math.max(...allPackages.map((p) => p.price)),
     [allPackages],
@@ -44,7 +42,6 @@ const Packages = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen pb-20 font-sans">
-      {/* 1. HERO HEADER */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -71,11 +68,9 @@ const Packages = () => {
         </div>
       </div>
 
-      {/* 2. FILTER BAR */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            {/* GROUP 1: LEFT (All + Dropdown) */}
             <div className="flex items-center gap-3 w-full lg:w-auto">
               <button
                 onClick={() => setFilter("All")}
@@ -116,7 +111,6 @@ const Packages = () => {
               </div>
             </div>
 
-            {/* GROUP 2: CENTER (Price Range) */}
             <div className="flex flex-col w-full lg:w-64 px-2">
               <div className="flex justify-between text-xs font-bold text-gray-500 mb-1.5">
                 <span>Max Price</span>
@@ -136,7 +130,6 @@ const Packages = () => {
               />
             </div>
 
-            {/* GROUP 3: RIGHT (Search Input) */}
             <div className="relative w-full lg:w-64">
               <input
                 type="text"
@@ -154,17 +147,15 @@ const Packages = () => {
         </div>
       </div>
 
-      {/* 3. PACKAGES GRID */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPackages.map((pkg) => (
             <Link
               key={pkg.id}
               to={`/packages/${pkg.id}`}
-              className="block group h-full" // Makes the entire card clickable
+              className="block group h-full"
             >
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-gray-100">
-                {/* Image Section */}
                 <div className="relative h-60 overflow-hidden">
                   <img
                     src={pkg.image}
@@ -172,12 +163,10 @@ const Packages = () => {
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
 
-                  {/* Category Badge */}
                   <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
                     {pkg.category}
                   </div>
 
-                  {/* Price Badge */}
                   <div
                     className="absolute bottom-0 right-0 text-white px-4 py-2 rounded-tl-xl font-bold"
                     style={{ backgroundColor: THEME.highlight }}
@@ -189,10 +178,8 @@ const Packages = () => {
                   </div>
                 </div>
 
-                {/* Content Section */}
                 <div className="p-6 flex flex-col flex-grow justify-between">
                   <div>
-                    {/* Title */}
                     <h3
                       className="text-xl font-bold text-gray-900 font-['Playfair_Display'] mb-3 transition-colors"
                       style={{ color: undefined }}
@@ -204,7 +191,6 @@ const Packages = () => {
                       {pkg.title}
                     </h3>
 
-                    {/* Meta Details */}
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
                       <div className="flex items-center gap-1.5">
                         <FaClock style={{ color: THEME.highlight }} />
@@ -217,16 +203,10 @@ const Packages = () => {
                     </div>
                   </div>
 
-                  {/* Button */}
                   <div className="w-full py-3 bg-gray-50 text-gray-900 font-bold rounded-lg hover:bg-[#111827] hover:text-white transition-all duration-300 border border-gray-200 hover:border-[#111827] flex items-center justify-center gap-2 group-hover:shadow-lg">
                     <FaSuitcase
                       className="transition-colors"
                       style={{ color: THEME.highlight }}
-                      // Group hover logic handles color change automatically via parent class 'group' usually,
-                      // but inline styles override classes.
-                      // To fix white icon on hover, we rely on parent group-hover:text-white
-                      // but since we inline style color, we might need a small hack or CSS class.
-                      // For simplicity here, we assume standard behavior or accepted trade-off.
                     />
                     View Details
                   </div>
@@ -235,7 +215,6 @@ const Packages = () => {
             </Link>
           ))}
 
-          {/* No Results Message */}
           {filteredPackages.length === 0 && (
             <div className="col-span-full text-center py-20 text-gray-500">
               <p className="text-xl mb-4">
@@ -262,7 +241,6 @@ const Packages = () => {
         </div>
       </div>
 
-      {/* 4. CUSTOM CTA */}
       <div className="bg-white mt-20 py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold font-['Playfair_Display'] mb-4 text-gray-900">

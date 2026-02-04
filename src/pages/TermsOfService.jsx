@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { COMPANY_NAME, THEME } from "../constants"; // 👈 Import constants
+import { COMPANY_NAME, THEME } from "../constants";
 
 const TermsOfService = () => {
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
-      {/* 1. HERO SECTION (Matches other pages) */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -31,7 +30,6 @@ const TermsOfService = () => {
         </div>
       </div>
 
-      {/* 2. CONTENT SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 prose prose-lg max-w-none text-gray-600">
           <p className="mb-6 font-bold text-gray-900">

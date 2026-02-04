@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaChevronRight,
@@ -10,26 +10,18 @@ import {
   FaMapMarkerAlt,
   FaStar,
   FaArrowRight,
-  FaClock,
-  FaSuitcase,
   FaPhoneAlt,
   FaEnvelope,
   FaPaperPlane,
-  FaWhatsapp,
-  FaInstagram,
-  FaFacebookF,
   FaCalendarAlt,
   FaUser,
+  FaClock,
+  FaSuitcase,
 } from "react-icons/fa";
 import CountUpNumber from "./CountUpNumber";
-import {
-  CONTACT_INFO,
-  SOCIAL_LINKS,
-  THEME,
-  MAP_EMBED_CODE, // 👈 Updated Import
-} from "../constants";
+import Notification from "./Notification";
+import { CONTACT_INFO, THEME, MAP_EMBED_CODE } from "../constants";
 
-// --- MOCK DATA (Unchanged) ---
 const mockHotels = [
   {
     id: 1,
@@ -180,13 +172,83 @@ const recentBlogs = [
   },
 ];
 
+const getSafeMapUrl = (embedString) => {
+  if (!embedString) return "";
+  const match = embedString.match(/src="([^"]+)"/);
+  return match ? match[1] : "";
+};
+
 const HomeAboutSection = () => {
   const featuredHotels = mockHotels.slice(0, 3);
   const featuredPackages = mockPackages.slice(0, 3);
+  const mapSrc = getSafeMapUrl(MAP_EMBED_CODE);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const [notification, setNotification] = useState({
+    show: false,
+    type: "success",
+    message: "",
+  });
+
+  const closeNotification = () => {
+    setNotification((prev) => ({ ...prev, show: false }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.message
+    ) {
+      setNotification({
+        show: true,
+        type: "error",
+        message: "Please fill in all fields.",
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setNotification({
+        show: true,
+        type: "error",
+        message: "Please enter a valid email address.",
+      });
+      return;
+    }
+
+    setNotification({
+      show: true,
+      type: "success",
+      message: "Message sent successfully!",
+    });
+    setFormData({ name: "", phone: "", email: "", message: "" });
+  };
 
   return (
     <div className="bg-gray-50 font-sans">
-      {/* 1. ABOUT INTRO */}
+      <Notification
+        isOpen={notification.show}
+        type={notification.type}
+        message={notification.message}
+        onClose={closeNotification}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8 pt-8">
           <span
@@ -270,7 +332,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 2. STATS */}
       <div className="bg-[#111827] text-white py-10 mt-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -323,7 +384,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 3. CORE VALUES */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="text-center mb-6">
           <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
@@ -380,7 +440,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 4. HOTELS */}
       <div className="bg-white pt-10 pb-6 md:py-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
@@ -507,7 +566,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 5. PACKAGES */}
       <div className="bg-gray-50 pt-10 pb-6 md:py-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
@@ -558,7 +616,7 @@ const HomeAboutSection = () => {
                       className="absolute bottom-0 right-0 text-white px-4 py-2 rounded-tl-xl font-bold"
                       style={{ backgroundColor: THEME.highlight }}
                     >
-                      Ksh {pkg.price.toLocaleString()}{" "}
+                      KES {pkg.price.toLocaleString()}{" "}
                       <span className="text-xs font-normal opacity-90">
                         / person
                       </span>
@@ -620,7 +678,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 6. TESTIMONIALS */}
       <div className="bg-white py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -679,7 +736,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 7. RECENT BLOGS */}
       <div className="bg-gray-50 py-10 md:py-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
@@ -791,7 +847,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 8. TEAM MEMBERS */}
       <div className="bg-white py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-8">
@@ -865,7 +920,6 @@ const HomeAboutSection = () => {
         </div>
       </div>
 
-      {/* 9. CONTACT FORM & MAP */}
       <div className="bg-gray-50 py-10 md:py-16 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
@@ -944,56 +998,6 @@ const HomeAboutSection = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-10 relative z-10">
-                <h5 className="font-bold text-xs mb-3 text-gray-300 uppercase tracking-wider">
-                  Follow Us
-                </h5>
-                <div className="flex space-x-3">
-                  <a
-                    href={SOCIAL_LINKS.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor = THEME.highlight)
-                    }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = "#1F2937")
-                    }
-                  >
-                    <FaFacebookF className="text-xs" />
-                  </a>
-                  <a
-                    href={SOCIAL_LINKS.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor = THEME.highlight)
-                    }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = "#1F2937")
-                    }
-                  >
-                    <FaInstagram className="text-xs" />
-                  </a>
-                  <a
-                    href={SOCIAL_LINKS.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white"
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor = THEME.highlight)
-                    }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = "#1F2937")
-                    }
-                  >
-                    <FaWhatsapp className="text-xs" />
-                  </a>
-                </div>
-              </div>
             </div>
 
             <div className="p-8 md:p-10 md:w-3/5 bg-white">
@@ -1001,7 +1005,7 @@ const HomeAboutSection = () => {
                 Send a Message
               </h3>
 
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="text-xs font-bold text-gray-500 uppercase mb-1.5 block tracking-wide">
@@ -1009,8 +1013,14 @@ const HomeAboutSection = () => {
                     </label>
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
-                      style={{ "--tw-ring-color": THEME.highlight }}
+                      style={{
+                        "--tw-ring-color": THEME.highlight,
+                        "--tw-border-opacity": "1",
+                      }}
                       onFocus={(e) =>
                         (e.target.style.borderColor = THEME.highlight)
                       }
@@ -1024,6 +1034,9 @@ const HomeAboutSection = () => {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
                       style={{ "--tw-ring-color": THEME.highlight }}
                       onFocus={(e) =>
@@ -1040,13 +1053,16 @@ const HomeAboutSection = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
                     style={{ "--tw-ring-color": THEME.highlight }}
                     onFocus={(e) =>
                       (e.target.style.borderColor = THEME.highlight)
                     }
                     onBlur={(e) => (e.target.style.borderColor = "")}
-                    placeholder="email@example.com"
+                    placeholder="john@example.com"
                   />
                 </div>
                 <div>
@@ -1055,6 +1071,9 @@ const HomeAboutSection = () => {
                   </label>
                   <textarea
                     rows="4"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors resize-none"
                     style={{ "--tw-ring-color": THEME.highlight }}
                     onFocus={(e) =>
@@ -1065,6 +1084,7 @@ const HomeAboutSection = () => {
                   ></textarea>
                 </div>
                 <button
+                  type="submit"
                   className="w-full text-white font-bold py-3.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2 text-sm"
                   style={{ backgroundColor: THEME.highlight }}
                   onMouseOver={(e) =>
@@ -1081,14 +1101,25 @@ const HomeAboutSection = () => {
             </div>
           </div>
 
-          {/* MAP CONTAINER */}
-          {/* We assume MAP_EMBED_CODE from constants contains the full <iframe> string. */}
-          {/* Use Tailwind arbitrary values to ensure the inner iframe matches the parent size. */}
           <div className="w-full h-[350px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200 relative">
-            <div
-              className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full"
-              dangerouslySetInnerHTML={{ __html: MAP_EMBED_CODE }}
-            />
+            <div className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full">
+              {mapSrc ? (
+                <iframe
+                  title="Map"
+                  src={mapSrc}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-500 font-bold">
+                  Map Unavailable
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

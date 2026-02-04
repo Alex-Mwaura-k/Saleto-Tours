@@ -11,19 +11,17 @@ import {
   FaCamera,
 } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
-import { CONTACT_INFO, THEME } from "../constants"; // 👈 Import constants
+import { CONTACT_INFO, THEME } from "../constants";
 
 const DestinationDetails = () => {
   const { id } = useParams();
   const destination = destinationsData.find((d) => d.id === parseInt(id));
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // 1. SCROLL TO TOP ON LOAD
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // 2. PREPARE IMAGES (Fallback for single image data)
   const carouselImages =
     destination?.images && destination.images.length > 1
       ? destination.images
@@ -31,13 +29,12 @@ const DestinationDetails = () => {
         ? Array(5).fill(destination.image)
         : [];
 
-  // 3. SMOOTH CAROUSEL TIMER
   useEffect(() => {
     if (carouselImages.length < 2) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [carouselImages]);
@@ -59,7 +56,6 @@ const DestinationDetails = () => {
     );
   }
 
-  // Helper to get images cyclically
   const getImage = (offset) => {
     return carouselImages[(currentImageIndex + offset) % carouselImages.length];
   };
@@ -68,7 +64,6 @@ const DestinationDetails = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen pb-20 font-sans">
-      {/* HEADER & BREADCRUMB */}
       <div className="bg-[#111827] text-white border-b border-gray-800 w-full shadow-md relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3 text-sm text-gray-300">
@@ -123,7 +118,6 @@ const DestinationDetails = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* TITLE & INFO */}
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-900 mb-2">
             {destination.title}
@@ -143,13 +137,11 @@ const DestinationDetails = () => {
           </div>
         </div>
 
-        {/* SMOOTH ANIMATED PHOTO GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-2 h-[400px] md:h-[500px] mb-8 rounded-2xl overflow-hidden shadow-sm">
-          {/* Main Large Image (Animated) */}
           <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 relative overflow-hidden group bg-gray-100">
             {carouselImages.length > 0 && (
               <img
-                key={currentImageIndex} // Key forces re-render for animation
+                key={currentImageIndex}
                 src={getImage(0)}
                 alt="Main View"
                 className="w-full h-full object-cover animate-slide-left"
@@ -157,7 +149,6 @@ const DestinationDetails = () => {
             )}
           </div>
 
-          {/* Secondary Images */}
           {[1, 2, 3, 4].map((offset) => (
             <div
               key={offset}
@@ -174,12 +165,9 @@ const DestinationDetails = () => {
           ))}
         </div>
 
-        {/* MAIN CONTENT GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* LEFT: CONTENT */}
           <div className="lg:col-span-2">
             <div className="bg-white p-6 md:p-8 rounded-xl border border-gray-100 shadow-sm space-y-12">
-              {/* Overview */}
               <div className="animate-fade-in space-y-6">
                 <div>
                   <h3 className="text-xl font-bold mb-3 font-['Playfair_Display']">
@@ -189,7 +177,6 @@ const DestinationDetails = () => {
                     {destination.description}
                   </p>
                 </div>
-                {/* Highlights */}
                 <div>
                   <h4 className="font-bold mb-3 text-gray-800">
                     Trip Highlights
@@ -215,7 +202,6 @@ const DestinationDetails = () => {
                 </div>
               </div>
 
-              {/* Best Time To Visit */}
               <div className="animate-fade-in space-y-4">
                 <h3 className="text-xl font-bold mb-4 font-['Playfair_Display'] border-t border-gray-100 pt-8">
                   Best Time to Visit
@@ -270,7 +256,6 @@ const DestinationDetails = () => {
             </div>
           </div>
 
-          {/* RIGHT: BOOKING CARD */}
           <div className="lg:col-span-1">
             <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
               <div className="text-center mb-6">

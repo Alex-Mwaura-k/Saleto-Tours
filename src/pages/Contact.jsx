@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  FaChevronRight,
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaClock,
   FaPaperPlane,
   FaWhatsapp,
   FaInstagram,
@@ -18,12 +16,18 @@ import {
   MAP_EMBED_CODE,
 } from "../constants";
 
+const getSafeMapUrl = (embedString) => {
+  if (!embedString) return "";
+  const match = embedString.match(/src="([^"]+)"/);
+  return match ? match[1] : "";
+};
+
 const Contact = () => {
+  const mapSrc = getSafeMapUrl(MAP_EMBED_CODE);
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col font-sans">
-      {/* 1. HERO HEADER */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
-        {/* Abstract Background Element */}
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
           style={{ backgroundColor: THEME.highlight }}
@@ -33,8 +37,6 @@ const Contact = () => {
           <h1 className="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-4">
             Contact Us
           </h1>
-
-          {/* Breadcrumb */}
           <nav className="flex items-center text-sm md:text-base text-gray-400">
             <Link
               to="/"
@@ -51,10 +53,8 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* 2. CONTACT FORM CARD */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
-          {/* LEFT: INFO SIDEBAR */}
           <div className="bg-[#111827] text-white p-10 md:w-2/5 flex flex-col justify-between relative overflow-hidden">
             <div
               className="absolute bottom-0 left-0 w-32 h-32 opacity-10 rounded-tr-full"
@@ -170,7 +170,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* RIGHT: CLEAN FORM */}
           <div className="p-8 md:p-12 md:w-3/5 bg-white">
             <h3 className="text-2xl font-bold text-gray-900 font-['Playfair_Display'] mb-6">
               Send a Message
@@ -256,18 +255,28 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* 3. MAP SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full mt-8">
         <h3 className="text-xl font-bold text-gray-900 font-['Playfair_Display'] mb-6 flex items-center gap-2">
           <FaMapMarkerAlt style={{ color: THEME.highlight }} /> Find Us Here
         </h3>
 
-        {/* Working Google Map Embed */}
         <div className="w-full h-[400px] bg-gray-200 rounded-2xl overflow-hidden shadow-lg border border-gray-200 relative">
-          <div
-            className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full"
-            dangerouslySetInnerHTML={{ __html: MAP_EMBED_CODE }}
-          />
+          {mapSrc ? (
+            <iframe
+              title="Google Map"
+              src={mapSrc}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              Map not available
+            </div>
+          )}
         </div>
       </div>
     </div>

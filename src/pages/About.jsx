@@ -9,10 +9,9 @@ import {
   FaQuoteLeft,
 } from "react-icons/fa";
 import CountUpNumber from "../components/CountUpNumber";
-import { COMPANY_NAME, THEME } from "../constants"; // 👈 Import constants
+import { COMPANY_NAME, THEME } from "../constants";
 
 const About = () => {
-  // Mock Data for Team
   const team = [
     {
       name: "David K.",
@@ -34,7 +33,6 @@ const About = () => {
     },
   ];
 
-  // Mock Data for Insights blog preview
   const insights = [
     {
       title: "The Great Migration",
@@ -55,7 +53,6 @@ const About = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen pb-8 font-sans">
-      {/* 1. HERO HEADER */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -81,10 +78,8 @@ const About = () => {
         </div>
       </div>
 
-      {/* 2. OUR STORY & VISION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-          {/* Image Side */}
           <div className="w-full lg:w-1/2 relative group">
             <div
               className="absolute top-4 left-0 md:top-4 md:-left-4 w-full h-full border-2 rounded-2xl z-0 transition-transform duration-300 group-hover:top-6 md:group-hover:top-4 md:group-hover:-left-6"
@@ -98,7 +93,6 @@ const About = () => {
             />
           </div>
 
-          {/* Text Side */}
           <div className="w-full lg:w-1/2 lg:pl-4">
             <span
               className="font-bold uppercase tracking-widest text-xs mb-2 block"
@@ -146,7 +140,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* 3. IMPACT INSIGHTS (Stats Bar) */}
       <div className="bg-[#111827] text-white py-10 mt-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -199,7 +192,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* 4. CORE VALUES */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         <div className="text-center mb-8">
           <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">
@@ -260,7 +252,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* 5. TEAM SPOTLIGHT */}
       <div className="bg-gray-100 py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-8">
@@ -311,7 +302,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* 6. SAFARI INSIGHTS */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-8 text-center">
           Safari Insights
@@ -345,7 +335,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* 7. COMPACT CTA */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="bg-[#111827] rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>

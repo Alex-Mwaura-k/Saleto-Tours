@@ -7,14 +7,12 @@ import {
   FaCalendarTimes,
   FaCalendarAlt,
 } from "react-icons/fa";
-import { THEME } from "../constants"; // 👈 Import constants
+import { THEME } from "../constants";
 
-// Helper to check if a date has passed
 export const isJobExpired = (deadline) => {
   return new Date(deadline) < new Date();
 };
 
-// Calculate a date roughly 4 months from now for the "Open" positions
 const today = new Date();
 const fourMonthsLater = new Date(today.setMonth(today.getMonth() + 4))
   .toISOString()
@@ -39,7 +37,7 @@ export const jobs = [
     department: "Sales",
     summary:
       "Design bespoke itineraries for international clients and manage bookings.",
-    deadline: "2023-01-01", // EXPIRED
+    deadline: "2023-01-01",
   },
   {
     id: 3,
@@ -64,7 +62,6 @@ export const jobs = [
 const Careers = () => {
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
-      {/* 1. HERO SECTION */}
       <div className="bg-[#111827] text-white py-12 md:py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -91,7 +88,6 @@ const Careers = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        {/* 2. VALUES SECTION */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {[
             {
@@ -130,7 +126,6 @@ const Careers = () => {
           ))}
         </div>
 
-        {/* 3. OPEN POSITIONS */}
         <h2 className="text-3xl font-['Playfair_Display'] font-bold text-gray-900 mb-8 text-center md:text-left">
           Open Positions
         </h2>
@@ -149,7 +144,6 @@ const Careers = () => {
                 className={`bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center justify-between group transition-all duration-300 ${
                   expired ? "opacity-75 bg-gray-50" : ""
                 }`}
-                // Dynamic border color on hover
                 style={{ borderColor: "#e5e7eb" }}
                 onMouseOver={(e) => {
                   if (!expired)
@@ -163,7 +157,6 @@ const Careers = () => {
                   <div className="flex items-center gap-3">
                     <h3
                       className="text-xl font-bold text-gray-900 transition-colors"
-                      // Dynamic text color on hover
                       style={{ color: undefined }}
                       onMouseOver={(e) => {
                         if (!expired)

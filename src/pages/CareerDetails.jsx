@@ -8,13 +8,12 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import { jobs, isJobExpired } from "./Careers";
-import { COMPANY_NAME, CONTACT_INFO, THEME } from "../constants"; // 👈 Import constants
+import { COMPANY_NAME, CONTACT_INFO, THEME } from "../constants";
 
 const CareerDetails = () => {
   const { id } = useParams();
   const job = jobs.find((j) => j.id === parseInt(id));
 
-  // 1. Check if job exists
   if (!job) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -32,7 +31,6 @@ const CareerDetails = () => {
     );
   }
 
-  // 2. Check if job is expired
   if (isJobExpired(job.deadline)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -66,13 +64,10 @@ const CareerDetails = () => {
     );
   }
 
-  // 3. Render Active Job
   return (
     <div className="bg-gray-50 min-h-screen font-sans pb-6">
-      {/* 1. HERO SECTION */}
       <div className="bg-[#111827] text-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top Row */}
           <div className="flex flex-wrap justify-between items-center mb-8">
             <Link
               to="/careers"
@@ -94,7 +89,6 @@ const CareerDetails = () => {
             </span>
           </div>
 
-          {/* Job Title & Metadata */}
           <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-6">
             {job.title}
           </h1>
@@ -114,7 +108,6 @@ const CareerDetails = () => {
         </div>
       </div>
 
-      {/* 2. CONTENT SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 md:p-12">
           <div className="prose prose-lg max-w-none text-gray-600">

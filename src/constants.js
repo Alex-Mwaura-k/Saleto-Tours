@@ -15,19 +15,20 @@ export const THEME = {
 };
 
 // --- CONTACT DETAILS ---
+// Pulling from .env for security, with fallbacks
 export const CONTACT_INFO = {
-  phone: "+254714995011",
-  whatsapp: "+254714995011",
-  email: "info@saletotours.com",
+  phone: import.meta.env.VITE_COMPANY_PHONE || "+254714995011",
+  whatsapp: import.meta.env.VITE_COMPANY_PHONE || "254714995011", // Usually same as phone
+  email: import.meta.env.VITE_COMPANY_EMAIL || "info@saletotours.com",
   careersEmail: "careers@saletotours.com",
   bookingEmail: "bookings@saletotours.com",
   address: "Narok, Kenya",
-  office: "Oloropil Towers, Westlands, Narok",
+  office: "Olorropil Towers, Narok, Kenya",
 };
 
 // --- MAP CONFIGURATION ---
-// Paste the ENTIRE <iframe> code here
-export const MAP_EMBED_CODE = `<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d285.19240606965514!2d35.87165415101512!3d-1.089057691440891!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182c02e155555539%3A0xabef98d2f32cfe64!2sOLORROPIL%20TOWERS!5e0!3m2!1sen!2ske!4v1770225599712!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+// We pull the raw string, but we will sanitize it in the components
+export const MAP_EMBED_CODE = import.meta.env.VITE_MAP_EMBED_CODE || "";
 
 // --- SOCIAL MEDIA LINKS ---
 export const SOCIAL_LINKS = {
@@ -35,10 +36,10 @@ export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/saleto_tours/",
   twitter: "https://x.com/search?q=saleto%20tours&src=typed_query&f=top",
   linkedin: "https://linkedin.com/company/saletotours",
-  whatsapp: `https://wa.me/254714995011`,
+  whatsapp: `https://wa.me/${CONTACT_INFO.whatsapp.replace("+", "")}`,
 };
 
-// --- NAVIGATION MENU (Main) ---
+// --- NAVIGATION MENU ---
 export const NAV_LINKS = [
   { name: "Home", path: "/" },
   { name: "Destinations", path: "/destinations" },
@@ -49,7 +50,6 @@ export const NAV_LINKS = [
   { name: "Contact Us", path: "/contact" },
 ];
 
-// --- FOOTER QUICK LINKS ---
 export const QUICK_LINKS = [
   { name: "About Us", path: "/about" },
   { name: "Destinations", path: "/destinations" },
@@ -57,11 +57,9 @@ export const QUICK_LINKS = [
   { name: "Travel Blogs", path: "/blogs" },
 ];
 
-// --- FOOTER OTHER LINKS ---
 export const OTHER_LINKS = [
   { name: "Gallery", path: "/gallery" },
   { name: "Careers", path: "/careers" },
 ];
 
-// --- ASSETS ---
 export const IMAGES = {};

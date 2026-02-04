@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // 👈 Only import Routes and Route
 import Navbar from "./components/Navbar";
 import InstallBanner from "./components/InstallBanner";
 import Footer from "./components/Footer";
@@ -40,7 +40,11 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <>
+      {/* CRITICAL: We removed <BrowserRouter> here because it is already 
+        wrapping <App /> in src/main.jsx. 
+      */}
+
       <ScrollToTop />
       <ContactFab />
 
@@ -72,7 +76,7 @@ function App() {
 
         <Footer />
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 
