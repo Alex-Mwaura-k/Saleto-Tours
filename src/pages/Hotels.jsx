@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   FaStar,
@@ -39,6 +39,18 @@ const Hotels = () => {
     "Family",
     "View",
   ];
+
+  // Lock Body Scroll when Filter is Open
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
 
   const filteredHotels = useMemo(() => {
     return allHotels
@@ -130,7 +142,7 @@ const Hotels = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Mobile Filter Button */}
+        {/* Mobile Filter Toggle Button */}
         <div className="lg:hidden mb-6 flex justify-between items-center">
           <button
             onClick={() => setIsSidebarOpen(true)}
@@ -144,203 +156,225 @@ const Hotels = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-start relative">
-          {/* Sidebar */}
+          {/* --- MOBILE FILTER SIDEBAR START --- */}
+
+          {/* 1. Backdrop Overlay */}
+          <div
+            className={`fixed inset-0 bg-black/60 z-[9998] transition-opacity duration-300 lg:hidden ${
+              isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+
+          {/* 2. Sidebar Container - Full Width & Height */}
           <div
             className={`
-            fixed inset-0 z-[999] bg-white p-6 transition-transform duration-300 ease-in-out 
-            overflow-y-auto 
-            lg:translate-x-0 lg:w-1/4 lg:bg-transparent lg:p-0 lg:shadow-none lg:z-auto lg:overflow-visible
+            fixed top-0 left-0 h-[100dvh] w-full bg-white z-[9999] shadow-2xl 
+            transform transition-transform duration-300 ease-in-out flex flex-col
+            lg:translate-x-0 lg:static lg:h-auto lg:w-1/4 lg:bg-transparent lg:shadow-none lg:z-auto lg:block
             ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-            lg:static lg:h-auto
-            [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']
           `}
           >
-            {/* Mobile Header with Close Button */}
-            <div className="flex justify-between items-center lg:hidden mb-6 sticky top-0 bg-white py-2 z-10 border-b border-gray-100">
+            {/* Header: Fixed at top */}
+            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-white lg:hidden shrink-0">
               <h2 className="text-xl font-bold text-gray-900">Filters</h2>
+              {/* CLOSE BUTTON - Large touch target */}
               <button
                 type="button"
-                onClick={() => setIsSidebarOpen(false)}
-                className="p-3 -mr-3 rounded-full hover:bg-gray-100 transition-colors active:bg-gray-200"
-                aria-label="Close filters"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSidebarOpen(false);
+                }}
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors active:scale-95"
+                aria-label="Close menu"
               >
-                <FaTimes className="text-xl text-gray-600" />
+                <FaTimes className="text-xl" />
               </button>
             </div>
 
-            <div className="bg-white lg:rounded-xl lg:shadow-sm lg:p-6 space-y-8 lg:border lg:border-gray-100">
-              {/* Sort By */}
-              <div>
-                <h3 className="font-bold text-gray-900 mb-3">Sort By</h3>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:outline-none"
-                  style={{
-                    "--tw-ring-color": THEME.highlight,
-                    "--tw-border-opacity": 1,
-                  }}
-                  onFocus={(e) =>
-                    (e.target.style.borderColor = THEME.highlight)
-                  }
-                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
-                >
-                  <option>Top Rated</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                </select>
-              </div>
-
-              {/* Price Range */}
-              <div>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="font-bold text-gray-700">Max Price</span>
-                  <span
-                    className="font-bold"
-                    style={{ color: THEME.highlight }}
+            {/* Scrollable Filters Area */}
+            <div className="flex-1 overflow-y-auto p-6 lg:p-0">
+              <div className="bg-white lg:rounded-xl lg:shadow-sm lg:p-6 space-y-8 lg:border lg:border-gray-100">
+                {/* Sort By */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-3">Sort By</h3>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:outline-none"
+                    style={{
+                      "--tw-ring-color": THEME.highlight,
+                      "--tw-border-opacity": 1,
+                    }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = THEME.highlight)
+                    }
+                    onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
                   >
-                    KES {priceRange.toLocaleString()}
-                  </span>
+                    <option>Top Rated</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                  </select>
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="100000"
-                  step="5000"
-                  value={priceRange}
-                  onChange={(e) => setPriceRange(Number(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                  style={{ accentColor: THEME.highlight }}
-                />
-              </div>
 
-              {/* Star Rating */}
-              <div>
-                <h3 className="font-bold text-gray-900 mb-3">Star Rating</h3>
-                <div className="space-y-2">
-                  {[5, 4, 3, 2, 1].map((star) => (
-                    <label
-                      key={star}
-                      className="flex items-center gap-3 cursor-pointer group"
+                {/* Price Range */}
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="font-bold text-gray-700">Max Price</span>
+                    <span
+                      className="font-bold"
+                      style={{ color: THEME.highlight }}
                     >
+                      KES {priceRange.toLocaleString()}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100000"
+                    step="5000"
+                    value={priceRange}
+                    onChange={(e) => setPriceRange(Number(e.target.value))}
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                    style={{ accentColor: THEME.highlight }}
+                  />
+                </div>
+
+                {/* Star Rating */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-3">Star Rating</h3>
+                  <div className="space-y-2">
+                    {[5, 4, 3, 2, 1].map((star) => (
                       <div
-                        className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                          selectedStars === star
-                            ? "text-white"
-                            : "border-gray-300 bg-white"
-                        }`}
-                        style={{
-                          backgroundColor:
-                            selectedStars === star
-                              ? THEME.highlight
-                              : undefined,
-                          borderColor:
-                            selectedStars === star
-                              ? THEME.highlight
-                              : undefined,
-                        }}
-                      >
-                        {selectedStars === star && (
-                          <FaCheck className="text-xs" />
-                        )}
-                      </div>
-                      <input
-                        type="radio"
-                        name="stars"
-                        className="hidden"
-                        checked={selectedStars === star}
-                        onChange={() =>
+                        key={star}
+                        onClick={() =>
                           setSelectedStars(selectedStars === star ? null : star)
                         }
-                      />
-                      <div className="flex items-center text-yellow-400 text-sm">
-                        {[...Array(5)].map((_, i) => (
-                          <FaStar
-                            key={i}
-                            className={i < star ? "" : "text-gray-200"}
-                          />
-                        ))}
-                        <span className="ml-2 text-gray-600 text-xs font-medium group-hover:text-gray-900">
-                          {star === 5 ? "5 Stars" : `${star}+ Stars`}
-                        </span>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Location */}
-              <div>
-                <h3 className="font-bold text-gray-900 mb-3">Location</h3>
-                <select
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:outline-none"
-                  style={{ "--tw-ring-color": THEME.highlight }}
-                  onFocus={(e) =>
-                    (e.target.style.borderColor = THEME.highlight)
-                  }
-                  onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
-                >
-                  {locations.map((loc) => (
-                    <option key={loc} value={loc}>
-                      {loc}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Amenities */}
-              <div>
-                <h3 className="font-bold text-gray-900 mb-3">Amenities</h3>
-                <div className="space-y-2.5">
-                  {amenitiesList.map((amenity) => (
-                    <label
-                      key={amenity}
-                      className="flex items-center gap-3 cursor-pointer"
-                    >
-                      <div
-                        className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                          selectedAmenities.includes(amenity)
-                            ? "text-white"
-                            : "border-gray-300 bg-white"
-                        }`}
-                        style={{
-                          backgroundColor: selectedAmenities.includes(amenity)
-                            ? THEME.highlight
-                            : undefined,
-                          borderColor: selectedAmenities.includes(amenity)
-                            ? THEME.highlight
-                            : undefined,
-                        }}
+                        className="flex items-center gap-3 cursor-pointer group select-none"
                       >
-                        {selectedAmenities.includes(amenity) && (
-                          <FaCheck className="text-xs" />
-                        )}
-                      </div>
-                      <input
-                        type="checkbox"
-                        className="hidden"
-                        checked={selectedAmenities.includes(amenity)}
-                        onChange={() => toggleAmenity(amenity)}
-                      />
-                      <span className="text-sm text-gray-600 hover:text-gray-900">
-                        {amenity}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+                        <div
+                          className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                            selectedStars === star
+                              ? "text-white"
+                              : "border-gray-300 bg-white"
+                          }`}
+                          style={{
+                            backgroundColor:
+                              selectedStars === star
+                                ? THEME.highlight
+                                : undefined,
+                            borderColor:
+                              selectedStars === star
+                                ? THEME.highlight
+                                : undefined,
+                          }}
+                        >
+                          {selectedStars === star && (
+                            <FaCheck className="text-xs" />
+                          )}
+                        </div>
 
-              {/* Clear Button */}
+                        <div className="flex items-center text-yellow-400 text-sm">
+                          {[...Array(5)].map((_, i) => (
+                            <FaStar
+                              key={i}
+                              className={i < star ? "" : "text-gray-200"}
+                            />
+                          ))}
+                          <span className="ml-2 text-gray-600 text-xs font-medium group-hover:text-gray-900">
+                            {star === 5 ? "5 Stars" : `${star}+ Stars`}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-3">Location</h3>
+                  <select
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:outline-none"
+                    style={{ "--tw-ring-color": THEME.highlight }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = THEME.highlight)
+                    }
+                    onBlur={(e) => (e.target.style.borderColor = "#e5e7eb")}
+                  >
+                    {locations.map((loc) => (
+                      <option key={loc} value={loc}>
+                        {loc}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Amenities */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-3">Amenities</h3>
+                  <div className="space-y-3">
+                    {amenitiesList.map((amenity) => (
+                      <label
+                        key={amenity}
+                        className="flex items-center gap-3 cursor-pointer select-none"
+                      >
+                        <div
+                          className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                            selectedAmenities.includes(amenity)
+                              ? "text-white"
+                              : "border-gray-300 bg-white"
+                          }`}
+                          style={{
+                            backgroundColor: selectedAmenities.includes(amenity)
+                              ? THEME.highlight
+                              : undefined,
+                            borderColor: selectedAmenities.includes(amenity)
+                              ? THEME.highlight
+                              : undefined,
+                          }}
+                        >
+                          {selectedAmenities.includes(amenity) && (
+                            <FaCheck className="text-xs" />
+                          )}
+                        </div>
+                        <input
+                          type="checkbox"
+                          className="hidden"
+                          checked={selectedAmenities.includes(amenity)}
+                          onChange={() => toggleAmenity(amenity)}
+                        />
+                        <span className="text-sm text-gray-600 hover:text-gray-900">
+                          {amenity}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Clear Button */}
+                <button
+                  onClick={clearFilters}
+                  className="w-full py-3 border border-gray-300 rounded-lg text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Footer Button */}
+            <div className="p-4 border-t border-gray-100 bg-white lg:hidden shrink-0">
               <button
-                onClick={clearFilters}
-                className="w-full py-2.5 border border-gray-300 rounded-lg text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors"
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-full py-3 text-white font-bold rounded-lg shadow-md active:scale-95 transition-transform"
+                style={{ backgroundColor: THEME.highlight }}
               >
-                Clear All Filters
+                Show {filteredHotels.length} Results
               </button>
             </div>
           </div>
+          {/* --- MOBILE FILTER SIDEBAR END --- */}
 
           {/* Results Grid */}
           <div className="flex-1">
