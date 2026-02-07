@@ -83,6 +83,7 @@ const Destinations = () => {
 
               <div className="relative w-full lg:w-48">
                 <select
+                  id="locations"
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
                   className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2.5 px-4 pr-8 rounded-full text-sm font-medium focus:outline-none focus:ring-1 cursor-pointer"
@@ -126,6 +127,7 @@ const Destinations = () => {
 
             <div className="relative w-full lg:w-64">
               <input
+                id="search_location"
                 type="text"
                 placeholder="Search places..."
                 value={searchQuery}

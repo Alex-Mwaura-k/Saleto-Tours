@@ -41,10 +41,6 @@ function App() {
 
   return (
     <>
-      {/* CRITICAL: We removed <BrowserRouter> here because it is already 
-        wrapping <App /> in src/main.jsx. 
-      */}
-
       <ScrollToTop />
       <ContactFab />
 

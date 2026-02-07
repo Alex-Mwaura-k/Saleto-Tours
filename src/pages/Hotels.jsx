@@ -102,6 +102,7 @@ const Hotels = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      {/* Header Section */}
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -127,7 +128,9 @@ const Hotels = () => {
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Mobile Filter Button */}
         <div className="lg:hidden mb-6 flex justify-between items-center">
           <button
             onClick={() => setIsSidebarOpen(true)}
@@ -141,9 +144,10 @@ const Hotels = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-start relative">
+          {/* Sidebar */}
           <div
             className={`
-            fixed inset-0 z-50 bg-white p-6 transition-transform duration-300 ease-in-out 
+            fixed inset-0 z-[999] bg-white p-6 transition-transform duration-300 ease-in-out 
             overflow-y-auto 
             lg:translate-x-0 lg:w-1/4 lg:bg-transparent lg:p-0 lg:shadow-none lg:z-auto lg:overflow-visible
             ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
@@ -151,14 +155,21 @@ const Hotels = () => {
             [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']
           `}
           >
-            <div className="flex justify-between items-center lg:hidden mb-6">
-              <h2 className="text-xl font-bold">Filters</h2>
-              <button onClick={() => setIsSidebarOpen(false)}>
-                <FaTimes className="text-xl" />
+            {/* Mobile Header with Close Button */}
+            <div className="flex justify-between items-center lg:hidden mb-6 sticky top-0 bg-white py-2 z-10 border-b border-gray-100">
+              <h2 className="text-xl font-bold text-gray-900">Filters</h2>
+              <button
+                type="button"
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-3 -mr-3 rounded-full hover:bg-gray-100 transition-colors active:bg-gray-200"
+                aria-label="Close filters"
+              >
+                <FaTimes className="text-xl text-gray-600" />
               </button>
             </div>
 
             <div className="bg-white lg:rounded-xl lg:shadow-sm lg:p-6 space-y-8 lg:border lg:border-gray-100">
+              {/* Sort By */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Sort By</h3>
                 <select
@@ -180,6 +191,7 @@ const Hotels = () => {
                 </select>
               </div>
 
+              {/* Price Range */}
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span className="font-bold text-gray-700">Max Price</span>
@@ -202,6 +214,7 @@ const Hotels = () => {
                 />
               </div>
 
+              {/* Star Rating */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Star Rating</h3>
                 <div className="space-y-2">
@@ -256,6 +269,7 @@ const Hotels = () => {
                 </div>
               </div>
 
+              {/* Location */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Location</h3>
                 <select
@@ -276,6 +290,7 @@ const Hotels = () => {
                 </select>
               </div>
 
+              {/* Amenities */}
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Amenities</h3>
                 <div className="space-y-2.5">
@@ -317,6 +332,7 @@ const Hotels = () => {
                 </div>
               </div>
 
+              {/* Clear Button */}
               <button
                 onClick={clearFilters}
                 className="w-full py-2.5 border border-gray-300 rounded-lg text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors"
@@ -326,6 +342,7 @@ const Hotels = () => {
             </div>
           </div>
 
+          {/* Results Grid */}
           <div className="flex-1">
             {filteredHotels.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

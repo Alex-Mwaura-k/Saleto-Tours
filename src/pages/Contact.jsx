@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaPhoneAlt,
@@ -9,6 +9,7 @@ import {
   FaInstagram,
   FaFacebookF,
 } from "react-icons/fa";
+import Notification from "../components/Notification"; // Adjust path if necessary
 import {
   CONTACT_INFO,
   SOCIAL_LINKS,
@@ -25,8 +26,78 @@ const getSafeMapUrl = (embedString) => {
 const Contact = () => {
   const mapSrc = getSafeMapUrl(MAP_EMBED_CODE);
 
+  // 1. Add State
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const [notification, setNotification] = useState({
+    show: false,
+    type: "success",
+    message: "",
+  });
+
+  // 2. Helper Functions
+  const closeNotification = () => {
+    setNotification((prev) => ({ ...prev, show: false }));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // 3. Submit Handler with Validation
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Basic Validation
+    if (
+      !formData.name ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.message
+    ) {
+      setNotification({
+        show: true,
+        type: "error",
+        message: "Please fill in all fields.",
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setNotification({
+        show: true,
+        type: "error",
+        message: "Please enter a valid email address.",
+      });
+      return;
+    }
+
+    // Success Simulation
+    setNotification({
+      show: true,
+      type: "success",
+      message: "Message sent successfully!",
+    });
+    setFormData({ name: "", phone: "", email: "", message: "" });
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col font-sans">
+      {/* 4. Render Notification Component */}
+      <Notification
+        isOpen={notification.show}
+        type={notification.type}
+        message={notification.message}
+        onClose={closeNotification}
+      />
+
       <div className="bg-[#111827] text-white py-16 relative overflow-hidden">
         <div
           className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"
@@ -175,14 +246,23 @@ const Contact = () => {
               Send a Message
             </h3>
 
-            <form className="space-y-6">
+            {/* 5. Update Form with State & Accessibility Attributes */}
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide">
+                  <label
+                    htmlFor="contact-name"
+                    className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide"
+                  >
                     Your Name
                   </label>
                   <input
                     type="text"
+                    id="contact-name"
+                    name="name"
+                    autoComplete="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
                     style={{ "--tw-ring-color": THEME.highlight }}
                     onFocus={(e) =>
@@ -193,11 +273,19 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide">
+                  <label
+                    htmlFor="contact-phone"
+                    className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide"
+                  >
                     Phone Number
                   </label>
                   <input
                     type="tel"
+                    id="contact-phone"
+                    name="phone"
+                    autoComplete="tel"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
                     style={{ "--tw-ring-color": THEME.highlight }}
                     onFocus={(e) =>
@@ -209,11 +297,19 @@ const Contact = () => {
                 </div>
               </div>
               <div>
-                <label className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide">
+                <label
+                  htmlFor="contact-email"
+                  className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide"
+                >
                   Email Address
                 </label>
                 <input
                   type="email"
+                  id="contact-email"
+                  name="email"
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors"
                   style={{ "--tw-ring-color": THEME.highlight }}
                   onFocus={(e) =>
@@ -224,11 +320,19 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide">
+                <label
+                  htmlFor="contact-message"
+                  className="text-xs font-bold text-gray-500 uppercase mb-2 block tracking-wide"
+                >
                   Message
                 </label>
                 <textarea
                   rows="4"
+                  id="contact-message"
+                  name="message"
+                  autoComplete="off"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3.5 text-sm text-gray-800 focus:outline-none focus:ring-1 transition-colors resize-none"
                   style={{ "--tw-ring-color": THEME.highlight }}
                   onFocus={(e) =>
@@ -239,6 +343,7 @@ const Contact = () => {
                 ></textarea>
               </div>
               <button
+                type="submit"
                 className="w-full text-white font-bold py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
                 style={{ backgroundColor: THEME.highlight }}
                 onMouseOver={(e) =>
