@@ -6,10 +6,12 @@ const Hero = ({ title, subtitle }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const heroImages = [
-    "/Hero/Flight.png",
-    "/Hero/Wildbeasts.png",
-    "/Hero/Maasai.png",
-    "/Hero/Elephant.png",
+    "/Hero/wild.webp",
+    "/Hero/pool.webp",
+    "/Hero/Flight.webp",
+    "/Hero/Giraffe.webp",
+    "/Hero/Maasai.webp",
+    "/Hero/beach.webp",
   ];
 
   const rotatingTexts = [

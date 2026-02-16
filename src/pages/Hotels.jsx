@@ -40,7 +40,7 @@ const Hotels = () => {
     "View",
   ];
 
-  // Lock Body Scroll when Filter is Open
+  // Disable body scroll when sidebar is open
   useEffect(() => {
     if (isSidebarOpen) {
       document.body.style.overflow = "hidden";
@@ -160,40 +160,36 @@ const Hotels = () => {
 
           {/* 1. Backdrop Overlay */}
           <div
-            className={`fixed inset-0 bg-black/60 z-[9998] transition-opacity duration-300 lg:hidden ${
-              isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            className={`fixed inset-0 bg-black/60 z-[99998] transition-opacity duration-300 lg:hidden ${
+              isSidebarOpen
+                ? "opacity-100 pointer-events-auto"
+                : "opacity-0 pointer-events-none"
             }`}
             onClick={() => setIsSidebarOpen(false)}
           ></div>
 
-          {/* 2. Sidebar Container - Full Width & Height */}
+          {/* 2. Sidebar Container - Full Screen Width & Height */}
           <div
             className={`
-            fixed top-0 left-0 h-[100dvh] w-full bg-white z-[9999] shadow-2xl 
+            fixed top-0 left-0 h-[100dvh] w-full bg-white z-[99999] shadow-2xl 
             transform transition-transform duration-300 ease-in-out flex flex-col
             lg:translate-x-0 lg:static lg:h-auto lg:w-1/4 lg:bg-transparent lg:shadow-none lg:z-auto lg:block
             ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
           `}
           >
-            {/* Header: Fixed at top */}
-            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-white lg:hidden shrink-0">
+            {/* Header: Fixed at top with SAFE AREA PADDING */}
+            <div className="flex justify-between items-center px-6 py-4 pt-12 lg:pt-4 border-b border-gray-100 bg-white lg:hidden shrink-0">
               <h2 className="text-xl font-bold text-gray-900">Filters</h2>
-              {/* CLOSE BUTTON - Large touch target */}
               <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsSidebarOpen(false);
-                }}
-                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors active:scale-95"
-                aria-label="Close menu"
+                onClick={clearFilters}
+                className="text-sm font-bold text-gray-500 hover:text-gray-900 underline"
               >
-                <FaTimes className="text-xl" />
+                Reset
               </button>
             </div>
 
             {/* Scrollable Filters Area */}
-            <div className="flex-1 overflow-y-auto p-6 lg:p-0">
+            <div className="flex-1 overflow-y-auto p-6 lg:p-0 pb-32 lg:pb-0">
               <div className="bg-white lg:rounded-xl lg:shadow-sm lg:p-6 space-y-8 lg:border lg:border-gray-100">
                 {/* Sort By */}
                 <div>
@@ -240,20 +236,20 @@ const Hotels = () => {
                   />
                 </div>
 
-                {/* Star Rating */}
+                {/* Star Rating - Unselectable Text */}
                 <div>
                   <h3 className="font-bold text-gray-900 mb-3">Star Rating</h3>
-                  <div className="space-y-2">
+                  <div className="space-y-2 select-none">
                     {[5, 4, 3, 2, 1].map((star) => (
                       <div
                         key={star}
                         onClick={() =>
                           setSelectedStars(selectedStars === star ? null : star)
                         }
-                        className="flex items-center gap-3 cursor-pointer group select-none"
+                        className="flex items-center gap-3 cursor-pointer group py-1"
                       >
                         <div
-                          className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                          className={`w-5 h-5 flex-shrink-0 rounded border flex items-center justify-center transition-colors ${
                             selectedStars === star
                               ? "text-white"
                               : "border-gray-300 bg-white"
@@ -281,7 +277,7 @@ const Hotels = () => {
                               className={i < star ? "" : "text-gray-200"}
                             />
                           ))}
-                          <span className="ml-2 text-gray-600 text-xs font-medium group-hover:text-gray-900">
+                          <span className="ml-2 text-gray-600 text-xs font-medium">
                             {star === 5 ? "5 Stars" : `${star}+ Stars`}
                           </span>
                         </div>
@@ -318,10 +314,10 @@ const Hotels = () => {
                     {amenitiesList.map((amenity) => (
                       <label
                         key={amenity}
-                        className="flex items-center gap-3 cursor-pointer select-none"
+                        className="flex items-center gap-3 cursor-pointer select-none py-1"
                       >
                         <div
-                          className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                          className={`w-5 h-5 flex-shrink-0 rounded border flex items-center justify-center transition-colors ${
                             selectedAmenities.includes(amenity)
                               ? "text-white"
                               : "border-gray-300 bg-white"
@@ -345,32 +341,39 @@ const Hotels = () => {
                           checked={selectedAmenities.includes(amenity)}
                           onChange={() => toggleAmenity(amenity)}
                         />
-                        <span className="text-sm text-gray-600 hover:text-gray-900">
-                          {amenity}
-                        </span>
+                        <span className="text-sm text-gray-600">{amenity}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                {/* Clear Button */}
+                {/* Desktop Clear Button */}
                 <button
                   onClick={clearFilters}
-                  className="w-full py-3 border border-gray-300 rounded-lg text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors"
+                  className="hidden lg:block w-full py-3 border border-gray-300 rounded-lg text-gray-600 font-bold text-sm hover:bg-gray-50 transition-colors"
                 >
                   Clear All Filters
                 </button>
               </div>
             </div>
 
-            {/* Mobile Footer Button */}
-            <div className="p-4 border-t border-gray-100 bg-white lg:hidden shrink-0">
+            {/* --- NEW MOBILE FOOTER (Easy to Reach) --- */}
+            <div className="absolute bottom-0 left-0 w-full p-4 border-t border-gray-100 bg-white lg:hidden z-20 flex gap-3 pb-8 md:pb-4">
+              {/* 1. CLOSE BUTTON (Cancel) */}
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="w-full py-3 text-white font-bold rounded-lg shadow-md active:scale-95 transition-transform"
+                className="flex-1 py-3 text-gray-700 font-bold rounded-lg border border-gray-300 hover:bg-gray-50 active:bg-gray-100 transition-colors"
+              >
+                Close
+              </button>
+
+              {/* 2. SHOW RESULTS BUTTON (Apply) */}
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="flex-1 py-3 text-white font-bold rounded-lg shadow-md active:scale-95 transition-transform"
                 style={{ backgroundColor: THEME.highlight }}
               >
-                Show {filteredHotels.length} Results
+                Show Results
               </button>
             </div>
           </div>
