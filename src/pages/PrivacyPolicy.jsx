@@ -40,10 +40,9 @@ const PrivacyPolicy = () => {
             1. Introduction
           </h3>
           <p className="mb-6">
-            {COMPANY_NAME} ("we", "our", or "us") is committed to protecting
-            your privacy. This Privacy Policy explains how we collect, use, and
-            share your personal information when you visit our website or book a
-            safari with us.
+            At {COMPANY_NAME} we are committed to protecting your privacy. This
+            Privacy Policy explains how we collect, use, and share your personal
+            information when you visit our website or book a safari with us.
           </p>
 
           <h3 className="text-xl font-bold text-gray-900 mb-3">

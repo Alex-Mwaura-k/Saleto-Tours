@@ -21,21 +21,22 @@ export const destinationsData = [
   },
   {
     id: 2,
-    title: "Diani Beach",
+    title: "Shanzu Beach",
     image:
       "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description:
       "Pristine white sands and turquoise waters. Voted Africa's leading beach destination.",
     category: "Beach",
     isFeatured: true,
-    price: 35000,
+    price: 57000,
     longDescription:
       "Diani Beach is voted Africa's leading beach destination for a reason. With its flawless white sands, crystal clear waters, and lush greenery, it provides a tranquil retreat after a dusty safari.",
     highlights: [
-      "Snorkeling at Kisite Mpunguti",
-      "Sky Diving",
-      "Sunset Dhow Cruise",
-      "Seafood Dining",
+      "4 nights Accommodation",
+      "All Inclusive Meals Plan",
+      "Return SGR Economy Tickets",
+      "Return Transfers",
+      "Access to Hotel Amenities",
     ],
     gallery: [],
   },
