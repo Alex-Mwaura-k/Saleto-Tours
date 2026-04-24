@@ -21,65 +21,75 @@ const FeaturedSafaris = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {featuredDestinations.map((dest, index) => (
-            <Link
-              to={`/destinations/${dest.id}`}
-              key={dest.id}
-              className={index === 3 ? "hidden md:block" : "block"}
-            >
-              <div className="group relative h-80 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                <img
-                  src={dest.coverImagemage}
-                  alt={dest.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+          {featuredDestinations.map((dest, index) => {
+            // Robust image selector to match your data structure and fix the typo
+            const displayImage = 
+              dest.coverImage || 
+              dest.image || 
+              (dest.images && dest.images[0]) || 
+              "https://via.placeholder.com/800x600?text=Safari+Image";
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+            return (
+              <Link
+                to={`/destinations/${dest.slug}`}
+                key={dest.id}
+                className={index === 3 ? "hidden md:block" : "block"}
+              >
+                <div className="group relative h-80 rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-gray-200">
+                  <img
+                    src={displayImage}
+                    alt={dest.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
 
-                <div className="absolute bottom-0 left-0 w-full p-6">
-                  <span
-                    className="text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block"
-                    style={{ backgroundColor: THEME.highlight }}
-                  >
-                    {dest.category}
-                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
 
-                  <h3 className="text-lg font-bold text-white font-['Playfair_Display'] mb-2">
-                    {dest.title}
-                  </h3>
-
-                  <p className="text-gray-300 text-xs mb-4 line-clamp-2">
-                    {dest.description}
-                  </p>
-
-                  <div
-                    className="flex items-center text-xs font-bold"
-                    style={{ color: THEME.highlight }}
-                  >
-                    Explore <FaExternalLinkAlt className="ml-2 text-[10px]" />
-                  </div>
-                </div>
-
-                <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm p-2 rounded-full text-white">
-                  <FaMapMarkerAlt className="text-sm" />
-                </div>
-
-                {dest.price && (
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full shadow-lg z-10">
-                    <span className="text-gray-900 font-bold text-xs flex items-center gap-1">
-                      From Ksh {dest.price.toLocaleString()}
+                  <div className="absolute bottom-0 left-0 w-full p-6">
+                    <span
+                      className="text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block"
+                      style={{ backgroundColor: THEME.highlight }}
+                    >
+                      {dest.category}
                     </span>
+
+                    <h3 className="text-lg font-bold text-white font-['Playfair_Display'] mb-2">
+                      {dest.title}
+                    </h3>
+
+                    <p className="text-gray-300 text-xs mb-4 line-clamp-2">
+                      {dest.description}
+                    </p>
+
+                    <div
+                      className="flex items-center text-xs font-bold"
+                      style={{ color: THEME.highlight }}
+                    >
+                      Explore <FaExternalLinkAlt className="ml-2 text-[10px]" />
+                    </div>
                   </div>
-                )}
-              </div>
-            </Link>
-          ))}
+
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm p-2 rounded-full text-white">
+                    <FaMapMarkerAlt className="text-sm" />
+                  </div>
+
+                  {dest.price && (
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full shadow-lg z-10">
+                      <span className="text-gray-900 font-bold text-xs flex items-center gap-1">
+                        From Ksh {dest.price.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="text-center">
           <Link to="/destinations">
             <button
-              className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors duration-300 transform text-sm"
+              className="inline-flex items-center gap-2 bg-[#111827] text-white px-8 py-3 rounded-full font-bold shadow-lg transition-all duration-300 transform text-sm hover:scale-105"
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor = THEME.highlight)
               }

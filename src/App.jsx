@@ -54,7 +54,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/destinations" element={<Destinations />} />
-            <Route path="/destinations/:id" element={<DestinationDetails />} />
+            
+            {/* UPDATED: Changed :id to :slug to match DestinationDetails component */}
+            <Route path="/destinations/:slug" element={<DestinationDetails />} />
+            
             <Route path="/packages" element={<Packages />} />
             <Route path="/packages/:id" element={<PackageDetails />} />
             <Route path="/hotels" element={<Hotels />} />

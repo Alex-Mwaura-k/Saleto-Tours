@@ -1,6 +1,7 @@
 export const destinationsData = [
-{
+  {
     id: 1,
+    slug: "diani-beach",
     title: "Diani Beach",
     coverImage: "/img/destinations/diani/1.jpg", 
     images: [
@@ -55,11 +56,10 @@ export const destinationsData = [
   },
   {
     id: 2,
+    slug: "mombasa",
     title: "Mombasa",
-    image:
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description:
-      "Mombasa is a vibrant coastal city steeped in history. From the ancient walls of Fort Jesus to the bustling spice markets of Old Town, it offers a rich blend of Swahili culture, warm Indian Ocean waters, and beautiful pristine beaches.",
+    coverImage: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    description: "Mombasa is a vibrant coastal city steeped in history. From the ancient walls of Fort Jesus to the bustling spice markets of Old Town, it offers a rich blend of Swahili culture, warm Indian Ocean waters, and beautiful pristine beaches.",
     category: "Beach",
     isFeatured: true,
     price: 57000,
@@ -69,15 +69,14 @@ export const destinationsData = [
       "Haller Park Nature Walk",
       "Authentic Swahili Cuisine",
     ],
-    gallery: [],
+    images: ["https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
   },
   {
     id: 3,
+    slug: "watamu",
     title: "Watamu",
-    image:
-      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description:
-      "Watamu is a peaceful coastal town renowned for the Watamu Marine National Park. It is a spectacular haven for green sea turtles, colorful coral gardens, and the mysterious 12th-century Gedi Ruins hidden within the lush Arabuko Sokoke Forest.",
+    coverImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    description: "Watamu is a peaceful coastal town renowned for the Watamu Marine National Park. It is a spectacular haven for green sea turtles, colorful coral gardens, and the mysterious 12th-century Gedi Ruins hidden within the lush Arabuko Sokoke Forest.",
     category: "Beach",
     isFeatured: true,
     price: 30000,
@@ -87,15 +86,14 @@ export const destinationsData = [
       "Sea Turtle Watching",
       "Arabuko Sokoke Forest",
     ],
-    gallery: [],
+    images: ["https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
   },
   {
     id: 4,
+    slug: "lamu",
     title: "Lamu",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description:
-      "Lamu is a UNESCO World Heritage site and the oldest continually inhabited town in Kenya. With no cars on the island, life moves at the gentle pace of a dhow sailing on the breeze amidst narrow winding streets and stunning traditional Swahili architecture.",
+    coverImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    description: "Lamu is a UNESCO World Heritage site and the oldest continually inhabited town in Kenya. With no cars on the island, life moves at the gentle pace of a dhow sailing on the breeze amidst narrow winding streets and stunning traditional Swahili architecture.",
     category: "Beach",
     isFeatured: false,
     price: 28000,
@@ -105,15 +103,14 @@ export const destinationsData = [
       "Traditional Swahili Architecture",
       "Shela Beach Walk",
     ],
-    gallery: [],
+    images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
   },
   {
     id: 5,
+    slug: "malindi",
     title: "Malindi",
-    image:
-      "https://images.unsplash.com/photo-1551009175-8a68da93d5f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description:
-      "Malindi offers a unique blend of historic charm and modern resort lifestyle. Known for the Vasco da Gama pillar and beautiful marine parks, it is a fantastic destination for deep-sea fishing, surfing, and enjoying a vibrant mix of local and Italian cultures.",
+    coverImage: "https://images.unsplash.com/photo-1551009175-8a68da93d5f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    description: "Malindi offers a unique blend of historic charm and modern resort lifestyle. Known for the Vasco da Gama pillar and beautiful marine parks, it is a fantastic destination for deep-sea fishing, surfing, and enjoying a vibrant mix of local and Italian cultures.",
     category: "Beach",
     isFeatured: false,
     price: 40000,
@@ -123,15 +120,14 @@ export const destinationsData = [
       "Deep Sea Fishing",
       "Marafa Hell's Kitchen",
     ],
-    gallery: [],
+    images: ["https://images.unsplash.com/photo-1551009175-8a68da93d5f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
   },
   {
     id: 6,
+    slug: "lake-nakuru",
     title: "Lake Nakuru",
-    image:
-      "https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description:
-      "Lake Nakuru is a spectacular Rift Valley soda lake at an elevation of 1,754 m above sea level. Protected by Lake Nakuru National Park, it is globally famous as a birdwatcher's paradise and a highly successful sanctuary for both endangered black and white rhinos.",
+    coverImage: "https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    description: "Lake Nakuru is a spectacular Rift Valley soda lake at an elevation of 1,754 m above sea level. Protected by Lake Nakuru National Park, it is globally famous as a birdwatcher's paradise and a highly successful sanctuary for both endangered black and white rhinos.",
     category: "Lake",
     isFeatured: false,
     price: 25000,
@@ -141,6 +137,6 @@ export const destinationsData = [
       "Baboon Cliff Viewpoint",
       "Makalia Falls",
     ],
-    gallery: [],
+    images: ["https://images.unsplash.com/photo-1535591273668-578e31182c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
   },
 ];

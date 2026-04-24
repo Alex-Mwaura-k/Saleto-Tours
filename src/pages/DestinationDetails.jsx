@@ -23,8 +23,9 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 const DestinationDetails = () => {
-  const { id } = useParams();
-  const destination = destinationsData.find((d) => d.id === parseInt(id));
+  // Update to use slug instead of id
+  const { slug } = useParams();
+  const destination = destinationsData.find((d) => d.slug === slug);
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
@@ -34,7 +35,7 @@ const DestinationDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [slug]);
 
   // Updated to handle both "image" and "coverImage" just in case
   const mainImage = destination?.image || destination?.coverImage;
