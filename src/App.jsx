@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async"; 
+import ReactGA from "react-ga4";
 
 import Navbar from "./components/Navbar";
 import InstallBanner from "./components/InstallBanner";
@@ -26,9 +27,23 @@ import CareerDetails from "./pages/CareerDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 
+// Initialize Google Analytics GA4
+// TODO: Replace with your actual Measurement ID from the Google Analytics dashboard
+ReactGA.initialize("G-2506VDVH3V");
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
 
+  // Track page views whenever the route (location) changes
+  useEffect(() => {
+    ReactGA.send({ 
+      hitType: "pageview", 
+      page: location.pathname + location.search 
+    });
+  }, [location]);
+
+  // Handle initial loader
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
