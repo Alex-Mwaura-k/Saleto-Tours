@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // <-- Imported React Router Link
 import { FaChevronDown } from "react-icons/fa";
 import { THEME } from "../constants";
 
@@ -19,6 +20,8 @@ const Hero = ({ title, subtitle }) => {
     "Discover the Wild Heart of Kenya",
     "Unforgettable Safari Adventures",
     "Journey Into the Untamed",
+    "Experience the Beauty of Africa",
+    "Embark on your Adventure"
   ];
 
   useEffect(() => {
@@ -68,8 +71,10 @@ const Hero = ({ title, subtitle }) => {
         </p>
 
         <div className="animate-fade-in-up delay-200">
-          <button
-            className="text-white font-bold py-3 px-8 rounded-full text-sm md:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+          {/* Replaced button with React Router Link */}
+          <Link
+            to="/destinations"
+            className="inline-block text-white font-bold py-3 px-8 rounded-full text-sm md:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
             style={{ backgroundColor: THEME.highlight }}
             onMouseOver={(e) => {
               e.currentTarget.style.backgroundColor = "white";
@@ -81,7 +86,7 @@ const Hero = ({ title, subtitle }) => {
             }}
           >
             Find Your Safari
-          </button>
+          </Link>
         </div>
       </div>
 

@@ -29,7 +29,7 @@ const FeaturedSafaris = () => {
             >
               <div className="group relative h-80 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
                 <img
-                  src={dest.image}
+                  src={dest.coverImagemage}
                   alt={dest.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />

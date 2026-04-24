@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom"; // 👈 Only import Routes and Route
+import { Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async"; 
+
 import Navbar from "./components/Navbar";
 import InstallBanner from "./components/InstallBanner";
 import Footer from "./components/Footer";
@@ -7,7 +9,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import ContactFab from "./components/ContactFab";
 import Loader from "./components/Loader";
 
-// Pages
 import Home from "./pages/Home";
 import Destinations from "./pages/Destinations";
 import DestinationDetails from "./pages/DestinationDetails";
@@ -40,13 +41,13 @@ function App() {
   }
 
   return (
-    <>
+    <HelmetProvider>
       <ScrollToTop />
       <ContactFab />
 
       <Navbar />
 
-      <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative animate-fade-in-up overflow-x-hidden">
+      <div className="min-h-screen bg-gray-50 font-sans flex flex-col relative animate-fade-in-up">
         <InstallBanner />
 
         <div className="flex-grow">
@@ -72,7 +73,7 @@ function App() {
 
         <Footer />
       </div>
-    </>
+    </HelmetProvider>
   );
 }
 

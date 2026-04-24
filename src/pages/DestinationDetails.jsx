@@ -9,24 +9,40 @@ import {
   FaEnvelope,
   FaCalendarAlt,
   FaCamera,
+  FaInfoCircle,
+  FaCompass
 } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
 import { CONTACT_INFO, THEME } from "../constants";
 
+// 1. Import Helmet for SEO
+import { Helmet } from "react-helmet-async";
+
+// 2. Import Lightbox and its CSS
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 const DestinationDetails = () => {
   const { id } = useParams();
   const destination = destinationsData.find((d) => d.id === parseInt(id));
+  
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // State for the Lightbox
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  // Updated to handle both "image" and "coverImage" just in case
+  const mainImage = destination?.image || destination?.coverImage;
   const carouselImages =
     destination?.images && destination.images.length > 1
       ? destination.images
-      : destination?.image
-        ? Array(5).fill(destination.image)
+      : mainImage
+        ? Array(5).fill(mainImage)
         : [];
 
   useEffect(() => {
@@ -60,10 +76,29 @@ const DestinationDetails = () => {
     return carouselImages[(currentImageIndex + offset) % carouselImages.length];
   };
 
+  // Helper function to map your image array strings to objects for the Lightbox
+  const lightboxSlides = carouselImages.map((src) => ({ src }));
+
+  // Helper to open the Lightbox at the specific image clicked
+  const handleImageClick = (offset) => {
+    const actualIndex = (currentImageIndex + offset) % carouselImages.length;
+    setLightboxIndex(actualIndex);
+    setLightboxOpen(true);
+  };
+
   const rating = destination.rating || 5;
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20 font-sans">
+    <div className="bg-gray-50 min-h-screen pb-5 font-sans">
+      {/* --- SEO Helmet Tags --- */}
+      <Helmet>
+        <title>{destination.title} Tour | Saleto Tours</title>
+        <meta name="description" content={destination.description} />
+        {/* You can also add Open Graph tags here for better social sharing */}
+        <meta property="og:title" content={`${destination.title} | Saleto Tours`} />
+        <meta property="og:image" content={mainImage} />
+      </Helmet>
+
       <div className="bg-[#111827] text-white border-b border-gray-800 w-full shadow-md relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3 text-sm text-gray-300">
@@ -137,6 +172,7 @@ const DestinationDetails = () => {
           </div>
         </div>
 
+        {/* --- Image Grid --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-2 h-[400px] md:h-[500px] mb-8 rounded-2xl overflow-hidden shadow-sm">
           <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 relative overflow-hidden group bg-gray-100">
             {carouselImages.length > 0 && (
@@ -144,7 +180,8 @@ const DestinationDetails = () => {
                 key={currentImageIndex}
                 src={getImage(0)}
                 alt="Main View"
-                className="w-full h-full object-cover animate-slide-left"
+                className="w-full h-full object-cover animate-slide-left cursor-pointer hover:opacity-95 transition-opacity"
+                onClick={() => handleImageClick(0)}
               />
             )}
           </div>
@@ -158,15 +195,18 @@ const DestinationDetails = () => {
                 <img
                   src={getImage(offset)}
                   alt={`Detail ${offset}`}
-                  className="w-full h-full object-cover transition-all duration-700 hover:opacity-90"
+                  className="w-full h-full object-cover transition-all duration-700 hover:opacity-90 cursor-pointer hover:scale-105"
+                  onClick={() => handleImageClick(offset)}
                 />
               )}
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start relative">
+          
+          {/* Main Description - order-2 on mobile, order-1 on large screens */}
+          <div className="lg:col-span-2 order-2 lg:order-1">
             <div className="bg-white p-6 md:p-8 rounded-xl border border-gray-100 shadow-sm space-y-12">
               <div className="animate-fade-in space-y-6">
                 <div>
@@ -177,87 +217,170 @@ const DestinationDetails = () => {
                     {destination.description}
                   </p>
                 </div>
-                <div>
-                  <h4 className="font-bold mb-3 text-gray-800">
-                    Trip Highlights
-                  </h4>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {(
-                      destination.highlights || [
-                        "Big Five Game Drives",
-                        "Cultural Village Visits",
-                        "Scenic Sundowners",
-                        "Photography Opportunities",
-                      ]
-                    ).map((point, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start text-gray-600 text-sm bg-gray-50 p-3 rounded-lg"
-                      >
-                        <FaCheck className="text-green-500 mr-2 mt-0.5 text-xs shrink-0" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
+                {destination.topReasons && (
+                  <div className="mt-8">
+                    <h4 className="font-bold mb-4 text-gray-800">
+                      Top Reasons to Visit
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {destination.topReasons.map((reason, i) => (
+                        <div key={i} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                          <h5 className="font-bold text-sm text-gray-900 mb-1 flex items-start gap-2">
+                            <FaCheck className="text-green-500 mt-0.5 text-xs shrink-0" /> 
+                            {reason.title}
+                          </h5>
+                          <p className="text-sm text-gray-600 pl-5">{reason.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {destination.experiences && (
+                  <div className="mt-8">
+                    <h4 className="font-bold mb-4 text-gray-800">
+                      Signature Experiences
+                    </h4>
+                    <div className="space-y-4">
+                      {destination.experiences.map((exp, i) => (
+                        <div key={i} className="flex gap-4 items-start p-4 bg-orange-50/50 rounded-lg border border-orange-100/50">
+                          <div className="bg-white p-2.5 rounded-full shadow-sm shrink-0" style={{ color: THEME.highlight }}>
+                            <FaCompass className="text-lg" />
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-gray-900 mb-1">{exp.title}</h5>
+                            <p className="text-sm text-gray-600 leading-relaxed">{exp.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {!destination.topReasons && !destination.experiences && (
+                  <div>
+                    <h4 className="font-bold mb-3 text-gray-800">
+                      Trip Highlights
+                    </h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {(
+                        destination.highlights || [
+                          "Big Five Game Drives",
+                          "Cultural Village Visits",
+                          "Scenic Sundowners",
+                          "Photography Opportunities",
+                        ]
+                      ).map((point, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start text-gray-600 text-sm bg-gray-50 p-3 rounded-lg"
+                        >
+                          <FaCheck className="text-green-500 mr-2 mt-0.5 text-xs shrink-0" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
-              <div className="animate-fade-in space-y-4">
-                <h3 className="text-xl font-bold mb-4 font-['Playfair_Display'] border-t border-gray-100 pt-8">
-                  Best Time to Visit
-                </h3>
-                <div
-                  className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all"
-                  style={{ borderColor: "transparent" }}
-                  onMouseOver={(e) =>
-                    (e.currentTarget.style.borderColor = THEME.highlight)
-                  }
-                  onMouseOut={(e) =>
-                    (e.currentTarget.style.borderColor = "#e5e7eb")
-                  }
-                >
-                  <div className="bg-blue-50 p-4 rounded-full text-[#0672CD]">
-                    <FaCalendarAlt className="text-2xl" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-gray-900 text-lg">
-                      Dry Season (June - Oct)
-                    </h4>
-                    <p className="text-sm text-gray-500 mt-1">
-                      Best for wildlife viewing. Great migration usually occurs
-                      between July and October.
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all"
-                  style={{ borderColor: "transparent" }}
-                  onMouseOver={(e) =>
-                    (e.currentTarget.style.borderColor = THEME.highlight)
-                  }
-                  onMouseOut={(e) =>
-                    (e.currentTarget.style.borderColor = "#e5e7eb")
-                  }
-                >
-                  <div className="bg-green-50 p-4 rounded-full text-green-600">
-                    <FaCamera className="text-2xl" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-gray-900 text-lg">
-                      Green Season (Nov - May)
-                    </h4>
-                    <p className="text-sm text-gray-500 mt-1">
-                      Excellent for bird watching and lush photography. Fewer
-                      crowds.
-                    </p>
+              {destination.travelerInfo ? (
+                <div className="animate-fade-in space-y-4">
+                  <h3 className="text-xl font-bold mb-4 font-['Playfair_Display'] border-t border-gray-100 pt-8">
+                    Traveler Information
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all">
+                      <div className="bg-blue-50 p-4 rounded-full text-blue-600">
+                        <FaInfoCircle className="text-2xl" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900 text-lg">Accessibility</h4>
+                        <p className="text-sm text-gray-600 mt-1">{destination.travelerInfo.accessibility}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all">
+                      <div className="bg-green-50 p-4 rounded-full text-green-600">
+                        <FaCalendarAlt className="text-2xl" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900 text-lg">Best Time to Visit</h4>
+                        <p className="text-sm text-gray-600 mt-1">{destination.travelerInfo.bestTime}</p>
+                      </div>
+                    </div>
+
+                    <div className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all">
+                      <div className="bg-yellow-50 p-4 rounded-full text-yellow-600">
+                        <FaStar className="text-2xl" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900 text-lg">The Vibe</h4>
+                        <p className="text-sm text-gray-600 mt-1">{destination.travelerInfo.vibe}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="animate-fade-in space-y-4">
+                  <h3 className="text-xl font-bold mb-4 font-['Playfair_Display'] border-t border-gray-100 pt-8">
+                    Best Time to Visit
+                  </h3>
+                  <div
+                    className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all"
+                    style={{ borderColor: "transparent" }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.borderColor = THEME.highlight)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.borderColor = "#e5e7eb")
+                    }
+                  >
+                    <div className="bg-blue-50 p-4 rounded-full text-[#0672CD]">
+                      <FaCalendarAlt className="text-2xl" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-gray-900 text-lg">
+                        Dry Season (June - Oct)
+                      </h4>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Best for wildlife viewing. Great migration usually occurs
+                        between July and October.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="border border-gray-200 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all"
+                    style={{ borderColor: "transparent" }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.borderColor = THEME.highlight)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.borderColor = "#e5e7eb")
+                    }
+                  >
+                    <div className="bg-green-50 p-4 rounded-full text-green-600">
+                      <FaCamera className="text-2xl" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-gray-900 text-lg">
+                        Green Season (Nov - May)
+                      </h4>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Excellent for bird watching and lush photography. Fewer
+                        crowds.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
+          {/* Sticky Card Wrapper - Responsive Sticky: Only sticks on LG screens */}
+          <div className="lg:col-span-1 order-1 lg:order-2 lg:sticky lg:top-[100px] lg:self-start z-20">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
               <div className="text-center mb-6">
                 <p className="text-gray-500 text-sm mb-1">Starting from</p>
                 <h3
@@ -277,7 +400,7 @@ const DestinationDetails = () => {
                     style={{ backgroundColor: THEME.highlight }}
                     onMouseOver={(e) =>
                       (e.currentTarget.style.backgroundColor =
-                        THEME.highlightDark)
+                        THEME.highlightDark || "#e66000")
                     }
                     onMouseOut={(e) =>
                       (e.currentTarget.style.backgroundColor = THEME.highlight)
@@ -297,19 +420,27 @@ const DestinationDetails = () => {
                   Need immediate assistance?
                 </p>
                 <a
-                  href={`tel:${CONTACT_INFO.phone}`}
+                  href={`tel:${CONTACT_INFO?.phone || ""}`}
                   className="text-lg font-bold text-gray-900 transition-colors flex items-center justify-center gap-2 hover:opacity-80"
                   style={{ color: undefined }}
                   onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
                   onMouseOut={(e) => (e.target.style.color = "")}
                 >
-                  <FaPhoneAlt className="text-xs" /> {CONTACT_INFO.phone}
+                  <FaPhoneAlt className="text-xs" /> {CONTACT_INFO?.phone || "Call Us"}
                 </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* --- Lightbox Component --- */}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={lightboxSlides}
+      />
     </div>
   );
 };
