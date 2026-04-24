@@ -15,7 +15,7 @@ export const destinationsData = [
     description: "Diani Beach is a world-renowned tropical paradise on Kenya's south coast, consistently voted Africa's Leading Beach Destination by the World Travel Awards. Spanning approximately 17–25 kilometres, it is famous for its powdery white sands, crystal-clear turquoise waters, and a vibrant coral reef that creates a calm, shallow lagoon perfect for swimming.",
     category: "Beach",
     isFeatured: true,
-    price: 45000,
+    price: 48500,
     topReasons: [
       {
         title: "Award-Winning Beauty",

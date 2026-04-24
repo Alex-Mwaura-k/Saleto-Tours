@@ -93,7 +93,7 @@ const DestinationDetails = () => {
     <div className="bg-gray-50 min-h-screen pb-5 font-sans">
       {/* --- SEO Helmet Tags --- */}
       <Helmet>
-        <title>{destination.title} Tour | Saleto Tours</title>
+        <title>{destination.title} Tour - Saleto</title>
         <meta name="description" content={destination.description} />
         {/* You can also add Open Graph tags here for better social sharing */}
         <meta property="og:title" content={`${destination.title} | Saleto Tours`} />
