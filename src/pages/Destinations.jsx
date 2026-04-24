@@ -122,6 +122,7 @@ const Destinations = () => {
 
             <div className="relative w-full lg:w-64">
               <input
+                id="seachDestination"
                 type="text"
                 placeholder="Search places..."
                 value={searchQuery}
@@ -135,7 +136,7 @@ const Destinations = () => {
       </div>
 
       {/* Grid of Destinations */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDestinations.map((dest) => {
             // FIX: Robust image selector to handle different data structures
