@@ -386,7 +386,7 @@ const Hotels = () => {
                 {filteredHotels.map((hotel) => (
                   <Link
                     key={hotel.id}
-                    to={`/hotels/${hotel.id}`}
+                    to={`/hotels/${hotel.slug}`} // Changed from id to slug
                     className="block group"
                   >
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">

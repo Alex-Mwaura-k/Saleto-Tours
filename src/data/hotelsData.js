@@ -1,8 +1,9 @@
 export const hotelsData = [
   {
     id: 1,
+    slug: "mara-serena-safari-lodge",
     name: "Mara Serena Safari Lodge",
-    location: "Maasai Mara National Reserve",
+    location: "Diani",
     category: "Luxury",
     rating: 5,
     price: 45000,
@@ -59,6 +60,7 @@ export const hotelsData = [
   },
   {
     id: 2,
+    slug: "diani-reef-beach-resort",
     name: "Diani Reef Beach Resort",
     location: "Diani Beach, Ukunda",
     category: "Beach",
@@ -104,9 +106,9 @@ export const hotelsData = [
       pets: "Pets allowed on request.",
     },
   },
-  // ... Add similar detailed fields for other hotels if needed
   {
     id: 3,
+    slug: "sarova-stanley",
     name: "Sarova Stanley",
     location: "Nairobi City",
     category: "City",
@@ -130,6 +132,7 @@ export const hotelsData = [
   },
   {
     id: 4,
+    slug: "amboseli-sopa-lodge",
     name: "Amboseli Sopa Lodge",
     location: "Amboseli National Park",
     category: "Safari",
@@ -153,6 +156,7 @@ export const hotelsData = [
   },
   {
     id: 5,
+    slug: "hemingways-watamu",
     name: "Hemingways Watamu",
     location: "Watamu",
     category: "Luxury",
@@ -176,6 +180,7 @@ export const hotelsData = [
   },
   {
     id: 6,
+    slug: "fairmont-mount-kenya",
     name: "Fairmont Mount Kenya",
     location: "Nanyuki",
     category: "Luxury",

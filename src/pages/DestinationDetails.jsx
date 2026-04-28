@@ -10,9 +10,12 @@ import {
   FaCalendarAlt,
   FaCamera,
   FaInfoCircle,
-  FaCompass
+  FaCompass,
+  FaBed,
+  FaArrowRight
 } from "react-icons/fa";
 import { destinationsData } from "../data/destinationsData";
+import { hotelsData } from "../data/hotelsData"; // Ensure this matches your file path
 import { CONTACT_INFO, THEME } from "../constants";
 
 // 1. Import Helmet for SEO
@@ -36,6 +39,11 @@ const DestinationDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  // --- Logic to filter hotels by destination location ---
+const relatedHotels = hotelsData.filter(
+  (hotel) => hotel.location?.toLowerCase() === destination?.location?.toLowerCase()
+);
 
   // Updated to handle both "image" and "coverImage" just in case
   const mainImage = destination?.image || destination?.coverImage;
@@ -379,7 +387,7 @@ const DestinationDetails = () => {
             </div>
           </div>
 
-          {/* Sticky Card Wrapper - Responsive Sticky: Only sticks on LG screens */}
+          {/* Sticky Card Wrapper */}
           <div className="lg:col-span-1 order-1 lg:order-2 lg:sticky lg:top-[100px] lg:self-start z-20">
             <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
               <div className="text-center mb-6">
@@ -394,32 +402,67 @@ const DestinationDetails = () => {
                 </h3>
                 <p className="text-gray-400 text-xs">per person / sharing</p>
               </div>
+              
               <div className="space-y-4 mb-6">
                 <Link to="/contact" className="block w-full">
                   <button
                     className="w-full text-white py-3.5 rounded-xl font-bold text-lg transition-transform hover:-translate-y-1 shadow-md"
                     style={{ backgroundColor: THEME.highlight }}
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        THEME.highlightDark || "#e66000")
-                    }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = THEME.highlight)
-                    }
                   >
                     Book This Trip
                   </button>
                 </Link>
-                <Link to="/contact" className="block w-full">
-                  <button className="w-full bg-white border-2 border-gray-100 text-gray-700 py-3.5 rounded-xl font-bold hover:border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
-                    <FaEnvelope /> Send Inquiry
-                  </button>
-                </Link>
+
+                {/* --- DYNAMIC HOTELS LIST (Max 5) --- */}
+                <div className="pt-5 border-t border-gray-100">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
+                      <FaBed className="text-orange-500" /> Stays in {destination.title}
+                    </h4>
+                    <Link 
+                      to={`/hotels?location=${encodeURIComponent(destination.title)}`}
+                      className="text-[10px] font-bold text-orange-600 hover:underline flex items-center gap-1"
+                    >
+                      View All <FaArrowRight className="text-[8px]" />
+                    </Link>
+                  </div>
+
+                  <div className="space-y-3">
+                    {relatedHotels.length > 0 ? (
+                      relatedHotels.slice(0, 5).map((hotel, index) => (
+                        <Link 
+                          to={`/hotels/${hotel.slug}`} 
+                          key={index} 
+                          className="flex items-center gap-3 p-2 rounded-xl border border-gray-50 bg-gray-50/50 hover:bg-white hover:border-orange-200 hover:shadow-sm transition-all group"
+                        >
+                          <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-gray-100">
+                            <img 
+                              src={hotel.image} 
+                              alt={hotel.name} 
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="text-[11px] font-bold text-gray-900 truncate group-hover:text-orange-600 transition-colors">
+                              {hotel.name}
+                            </h5>
+                            <p className="text-[10px] font-medium text-orange-600">
+                              KES {hotel.price?.toLocaleString() || "Inquire"}
+                            </p>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <div className="p-4 bg-gray-50 rounded-lg border border-dashed border-gray-200 text-center">
+                        <p className="text-[10px] text-gray-400 italic">No specific hotels listed for this area yet. Contact us for custom lodge requests.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
+
               <div className="border-t border-gray-100 pt-6 text-center">
-                <p className="text-sm text-gray-400 mb-2">
-                  Need immediate assistance?
-                </p>
+                <p className="text-sm text-gray-400 mb-2">Need immediate assistance?</p>
                 <a
                   href={`tel:${CONTACT_INFO?.phone || ""}`}
                   className="text-lg font-bold text-gray-900 transition-colors flex items-center justify-center gap-2 hover:opacity-80"

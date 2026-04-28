@@ -13,13 +13,21 @@ import { hotelsData } from "../data/hotelsData";
 import { CONTACT_INFO, THEME } from "../constants";
 
 const HotelDetails = () => {
-  const { id } = useParams();
-  const hotel = hotelsData.find((h) => h.id === parseInt(id));
+  // We extract 'id' or 'slug' depending on how you named it in your Route definition 
+  // e.g., <Route path="/hotels/:id" /> or <Route path="/hotels/:slug" />
+  const { id, slug } = useParams();
+  const identifier = slug || id;
+
+  // Now we search by slug first, then fallback to checking the ID as a string/number
+  const hotel = hotelsData.find(
+    (h) => h.slug === identifier || h.id?.toString() === identifier
+  );
+  
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [identifier]);
 
   useEffect(() => {
     if (!hotel?.images || hotel.images.length < 2) return;
