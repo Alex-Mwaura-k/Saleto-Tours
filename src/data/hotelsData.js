@@ -61,10 +61,10 @@ export const hotelsData = [
       },
     ],
     policies: {
-      checkIn: "2:00 PM",
-      checkOut: "10:00 AM",
+      checkIn: "Any time",
+      checkOut: "Notified",
       cancellation: "Free cancellation up to 7 days before arrival.",
-      pets: "Pets are not allowed.",
+      pets: "Pets are allowed.",
     },
   },
   {
