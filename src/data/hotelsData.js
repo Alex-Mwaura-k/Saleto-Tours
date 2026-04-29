@@ -73,7 +73,7 @@ export const hotelsData = [
     name: "Southern Palms Beach Resort",
     location: "Diani",
     category: "Beach",
-    rating: 4,
+    rating: 5,
     price: 28500,
     image: "/img/hotels/southern-palms/1.webp",
     images: [
