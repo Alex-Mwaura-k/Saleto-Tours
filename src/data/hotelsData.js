@@ -1,60 +1,69 @@
 export const hotelsData = [
   {
     id: 1,
-    slug: "mara-serena-safari-lodge",
-    name: "Mara Serena Safari Lodge",
+    slug: "papillon-lagoon-reef-beach-resort",
+    name: "Papillon Lagoon Reef Beach Resort",
     location: "Diani",
-    category: "Luxury",
+    category: "Luxury / All-Inclusive",
     rating: 5,
-    price: 45000,
-    image:
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    price: 12500,
+    image: "/img/hotels/papillon/1.webp",
     images: [
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "/img/hotels/papillon/1.webp",
+      "/img/hotels/papillon/2.webp",
+      "/img/hotels/papillon/3.webp",
+      "/img/hotels/papillon/4.webp",
+      "/img/hotels/papillon/5.webp",
+      "/img/hotels/papillon/6.webp",
+      "/img/hotels/papillon/7.webp",
     ],
-    overview:
-      "Perched on a high hill, the Mara Serena Safari Lodge offers a front-row seat to the Great Migration. Designed to mimic a traditional Maasai Manyatta, the lodge blends seamlessly into the landscape while offering 5-star luxury.",
+    overview: "Papillon Lagoon Reef is a charming, all-inclusive beachfront resort located on the famous Diani Beach on Kenya’s south coast. Designed in traditional Swahili style with thatched roofs and lush tropical gardens, it offers a laid-back atmosphere ideal for families, couples, and groups seeking a classic coastal escape.",
     highlights: [
-      "Located in the Mara Triangle (best for migration)",
-      "Private airstrip",
-      "Hippos view from the restaurant",
-      "Guided bush walks available",
+      "Direct Beach Access: Situated right on the white sands of Diani Beach with crystal-clear waters.",
+      "All-Inclusive Experience: Comprehensive package covering all meals, snacks, and local drinks.",
+      "Family-Friendly: Dedicated family rooms, children's pool, and supervised kids' activities.",
+      "Diverse Activities: On-site PADI dive centre, large outdoor pool with swim-up bar, and nightly entertainment.",
     ],
     amenities: [
-      { category: "Internet", items: ["Free WiFi in all areas"] },
-      {
-        category: "Food & Drink",
-        items: ["Restaurant", "Bar", "Breakfast in the room"],
+      { 
+        category: "Dining & Bars", 
+        items: ["Baobab Restaurant (Buffet)", "Poolside Bistro (Al Fresco)", "Swim-Up Pool Bar"] 
       },
-      {
-        category: "Wellness",
-        items: ["Spa", "Fitness Center", "Outdoor Pool"],
+      { 
+        category: "Leisure", 
+        items: ["Outdoor Swimming Pool", "PADI Dive Centre", "Tennis Courts", "Gym"] 
       },
-      {
-        category: "General",
-        items: ["Non-smoking rooms", "Air conditioning", "Gift shop"],
-      },
+      { 
+        category: "General", 
+        items: ["Free WiFi", "Tropical Gardens", "Indoor Play Area", "Evening Entertainment"] 
+      }
     ],
     rooms: [
       {
-        name: "Standard Room",
-        price: 45000,
-        features: ["King Bed", "Savannah View", "En-suite"],
+        name: "Garden Room",
+        price: 12500,
+        features: ["Garden View", "Balcony/Patio", "Air Conditioning", "Swahili Decor"],
       },
       {
-        name: "Suite",
-        price: 65000,
-        features: ["Living Area", "Panoramic View", "Mini Bar"],
+        name: "Family Room",
+        price: 18500,
+        features: ["Separate Kids Sleeping Area", "Two Bathrooms", "Garden View", "Spacious Layout"],
+      },
+      {
+        name: "Beachfront Room",
+        price: 22000,
+        features: ["Ocean View", "Closest to Beach", "Private Balcony", "Traditional Style"],
+      },
+      {
+        name: "Beachfront Suite",
+        price: 28000,
+        features: ["Premium Sea Views", "Separate Lounge Area", "Luxury Amenities", "Prime Location"],
       },
     ],
     policies: {
-      checkIn: "12:00 PM",
+      checkIn: "2:00 PM",
       checkOut: "10:00 AM",
-      cancellation: "Free cancellation up to 48 hours before check-in.",
+      cancellation: "Free cancellation up to 7 days before arrival.",
       pets: "Pets are not allowed.",
     },
   },
@@ -66,38 +75,21 @@ export const hotelsData = [
     category: "Beach",
     rating: 4,
     price: 28500,
-    image:
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1571896349842-68c47e0820df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     ],
-    overview:
-      "Set on the white sands of Diani Beach, this resort features 30 acres of private gardens and two swimming pools. It is a perfect getaway for families and honeymooners alike.",
-    highlights: [
-      "Direct Beach Access",
-      "Award-winning Spa",
-      "3 Restaurants on-site",
-    ],
+    overview: "Set on the white sands of Diani Beach, this resort features 30 acres of private gardens and two swimming pools. It is a perfect getaway for families and honeymooners alike.",
+    highlights: ["Direct Beach Access", "Award-winning Spa", "3 Restaurants on-site"],
     amenities: [
       { category: "Outdoors", items: ["Beachfront", "Garden", "Terrace"] },
-      {
-        category: "Activities",
-        items: ["Tennis court", "Water sports", "Kids club"],
-      },
+      { category: "Activities", items: ["Tennis court", "Water sports", "Kids club"] },
       { category: "Services", items: ["Room service", "24-hour front desk"] },
     ],
     rooms: [
-      {
-        name: "Garden Room",
-        price: 28500,
-        features: ["Garden View", "Balcony", "AC"],
-      },
-      {
-        name: "Ocean Suite",
-        price: 42000,
-        features: ["Ocean View", "Jacuzzi", "Lounge Access"],
-      },
+      { name: "Garden Room", price: 28500, features: ["Garden View", "Balcony", "AC"] },
+      { name: "Ocean Suite", price: 42000, features: ["Ocean View", "Jacuzzi", "Lounge Access"] },
     ],
     policies: {
       checkIn: "2:00 PM",
@@ -114,21 +106,13 @@ export const hotelsData = [
     category: "City",
     rating: 5,
     price: 18000,
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    ],
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    images: ["https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
     overview: "A historic gem in the heart of Nairobi.",
     highlights: ["City Center", "Heated Pool", "Historic"],
     amenities: [{ category: "General", items: ["WiFi", "Gym"] }],
     rooms: [{ name: "Club Room", price: 18000, features: ["City View"] }],
-    policies: {
-      checkIn: "12:00 PM",
-      checkOut: "10:00 AM",
-      cancellation: "Free",
-      pets: "No",
-    },
+    policies: { checkIn: "12:00 PM", checkOut: "10:00 AM", cancellation: "Free", pets: "No" },
   },
   {
     id: 4,
@@ -138,21 +122,13 @@ export const hotelsData = [
     category: "Safari",
     rating: 4,
     price: 32000,
-    image:
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    ],
+    image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    images: ["https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
     overview: "Rustic charm at the foot of Kilimanjaro.",
     highlights: ["Mt Kilimanjaro Views", "Large Gardens"],
     amenities: [{ category: "General", items: ["WiFi", "Pool"] }],
     rooms: [{ name: "Standard", price: 32000, features: ["Mountain View"] }],
-    policies: {
-      checkIn: "12:00 PM",
-      checkOut: "10:00 AM",
-      cancellation: "Free",
-      pets: "No",
-    },
+    policies: { checkIn: "12:00 PM", checkOut: "10:00 AM", cancellation: "Free", pets: "No" },
   },
   {
     id: 5,
@@ -162,21 +138,13 @@ export const hotelsData = [
     category: "Luxury",
     rating: 5,
     price: 55000,
-    image:
-      "https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    ],
+    image: "https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    images: ["https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
     overview: "5-star luxury with breathtaking ocean views.",
     highlights: ["Marine Park", "Spa"],
     amenities: [{ category: "General", items: ["WiFi", "Pool"] }],
     rooms: [{ name: "Ocean Room", price: 55000, features: ["Ocean View"] }],
-    policies: {
-      checkIn: "12:00 PM",
-      checkOut: "10:00 AM",
-      cancellation: "Free",
-      pets: "No",
-    },
+    policies: { checkIn: "12:00 PM", checkOut: "10:00 AM", cancellation: "Free", pets: "No" },
   },
   {
     id: 6,
@@ -186,20 +154,12 @@ export const hotelsData = [
     category: "Luxury",
     rating: 5,
     price: 40000,
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    ],
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    images: ["https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
     overview: "Prestigious club on the slopes of Mount Kenya.",
     highlights: ["Golf Course", "Animal Orphanage"],
     amenities: [{ category: "General", items: ["WiFi", "Golf"] }],
     rooms: [{ name: "Standard", price: 40000, features: ["Garden View"] }],
-    policies: {
-      checkIn: "12:00 PM",
-      checkOut: "10:00 AM",
-      cancellation: "Free",
-      pets: "No",
-    },
+    policies: { checkIn: "12:00 PM", checkOut: "10:00 AM", cancellation: "Free", pets: "No" },
   },
 ];

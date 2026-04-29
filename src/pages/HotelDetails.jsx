@@ -63,7 +63,7 @@ const HotelDetails = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20 font-sans">
+    <div className="bg-gray-50 min-h-screen pb-5 font-sans">
       <div className="bg-[#111827] text-white border-b border-gray-800 w-full shadow-md relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3 text-sm text-gray-300">
@@ -227,12 +227,12 @@ const HotelDetails = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="text-right w-full md:w-auto border-t md:border-t-0 pt-4 md:pt-0 mt-2 md:mt-0 flex flex-row md:flex-col justify-between items-center md:items-end">
-                      <span className="block font-bold text-2xl text-gray-900">
-                        KES {room.price.toLocaleString()}
-                      </span>
-                      <span className="text-xs text-gray-500">per night</span>
-                    </div>
+                    <div className="text-right w-full md:w-auto md:shrink-0 border-t md:border-t-0 pt-4 md:pt-0 mt-2 md:mt-0 flex flex-row md:flex-col justify-between items-center md:items-end">
+  <span className="block font-bold text-2xl text-gray-900 whitespace-nowrap">
+    KES {room.price.toLocaleString()}
+  </span>
+  <span className="text-xs text-gray-500 whitespace-nowrap">per night</span>
+</div>
                   </div>
                 )) || <p>Room details available on request.</p>}
               </div>
