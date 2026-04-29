@@ -12,6 +12,10 @@ import {
 import { hotelsData } from "../data/hotelsData";
 import { CONTACT_INFO, THEME } from "../constants";
 
+// 1. Import Lightbox and its CSS
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 const HotelDetails = () => {
   // We extract 'id' or 'slug' depending on how you named it in your Route definition 
   // e.g., <Route path="/hotels/:id" /> or <Route path="/hotels/:slug" />
@@ -25,19 +29,30 @@ const HotelDetails = () => {
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // 2. State for the Lightbox
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [identifier]);
 
+  // Determine available images
+  const hotelImages = hotel?.images && hotel.images.length > 0 
+    ? hotel.images 
+    : hotel?.image 
+      ? [hotel.image] 
+      : [];
+
   useEffect(() => {
-    if (!hotel?.images || hotel.images.length < 2) return;
+    if (hotelImages.length < 2) return;
 
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % hotel.images.length);
+      setCurrentImageIndex((prev) => (prev + 1) % hotelImages.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [hotel?.images]);
+  }, [hotelImages]);
 
   if (!hotel) {
     return (
@@ -57,10 +72,18 @@ const HotelDetails = () => {
   }
 
   const getImage = (offset) => {
-    const images =
-      hotel.images && hotel.images.length > 0 ? hotel.images : [hotel.image];
-    return images[(currentImageIndex + offset) % images.length];
+    return hotelImages[(currentImageIndex + offset) % hotelImages.length];
   };
+
+  // 3. Helper to open the Lightbox at the specific image clicked
+  const handleImageClick = (offset) => {
+    const actualIndex = (currentImageIndex + offset) % hotelImages.length;
+    setLightboxIndex(actualIndex);
+    setLightboxOpen(true);
+  };
+
+  // 4. Map images for Lightbox
+  const lightboxSlides = hotelImages.map((src) => ({ src }));
 
   return (
     <div className="bg-gray-50 min-h-screen pb-5 font-sans">
@@ -148,19 +171,21 @@ const HotelDetails = () => {
               key={currentImageIndex}
               src={getImage(0)}
               alt="Main View"
-              className="w-full h-full object-cover animate-slide-left"
+              className="w-full h-full object-cover animate-slide-left cursor-pointer hover:opacity-95 transition-opacity"
+              onClick={() => handleImageClick(0)}
             />
           </div>
 
           {[1, 2, 3, 4].map((offset) => (
             <div
               key={offset}
-              className="hidden md:block col-span-1 row-span-1 relative overflow-hidden"
+              className="hidden md:block col-span-1 row-span-1 relative overflow-hidden bg-gray-100"
             >
               <img
                 src={getImage(offset)}
                 alt={`Detail ${offset}`}
-                className="w-full h-full object-cover transition-all duration-700 hover:opacity-90"
+                className="w-full h-full object-cover transition-all duration-700 hover:opacity-90 cursor-pointer hover:scale-105"
+                onClick={() => handleImageClick(offset)}
               />
             </div>
           ))}
@@ -228,11 +253,11 @@ const HotelDetails = () => {
                       </div>
                     </div>
                     <div className="text-right w-full md:w-auto md:shrink-0 border-t md:border-t-0 pt-4 md:pt-0 mt-2 md:mt-0 flex flex-row md:flex-col justify-between items-center md:items-end">
-  <span className="block font-bold text-2xl text-gray-900 whitespace-nowrap">
-    KES {room.price.toLocaleString()}
-  </span>
-  <span className="text-xs text-gray-500 whitespace-nowrap">per night</span>
-</div>
+                      <span className="block font-bold text-2xl text-gray-900 whitespace-nowrap">
+                        KES {room.price.toLocaleString()}
+                      </span>
+                      <span className="text-xs text-gray-500 whitespace-nowrap">per night</span>
+                    </div>
                   </div>
                 )) || <p>Room details available on request.</p>}
               </div>
@@ -318,7 +343,7 @@ const HotelDetails = () => {
                   style={{ backgroundColor: THEME.highlight }}
                   onMouseOver={(e) =>
                     (e.currentTarget.style.backgroundColor =
-                      THEME.highlightDark)
+                      THEME.highlightDark || THEME.highlight)
                   }
                   onMouseOut={(e) =>
                     (e.currentTarget.style.backgroundColor = THEME.highlight)
@@ -341,7 +366,6 @@ const HotelDetails = () => {
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
                   className="text-lg font-bold text-gray-900 transition-colors flex items-center justify-center gap-2"
-                  style={{ color: undefined }}
                   onMouseOver={(e) => (e.target.style.color = THEME.highlight)}
                   onMouseOut={(e) => (e.target.style.color = "")}
                 >
@@ -352,6 +376,14 @@ const HotelDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* --- Lightbox Component --- */}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={lightboxSlides}
+      />
     </div>
   );
 };
